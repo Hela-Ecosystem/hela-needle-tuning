@@ -1,0 +1,38 @@
+{"task": "Tell me the current time in Asia/Jakarta. Do not modify any files.", "tool": "hela_mitosis_get_current_time", "arguments": {"timezone": "Asia/Jakarta"}, "regression": true, "note": "audit: model picked list_directory for a time question"}
+{"task": "Tell me the current time in Asia/Jakarta. Do not modify any files.", "tool": "hela_mitosis_get_current_time", "shortlist": ["hela_mitosis_get_current_time", "hela_membrane_read_file", "hela_membrane_list_directory", "hela_membrane_watch_file"], "regression": true, "note": "exact shortlist the runtime retrieved when the untuned model chose list_directory"}
+{"task": "What time is it in Tokyo right now?", "tool": "hela_mitosis_get_current_time", "arguments": {"timezone": "Asia/Tokyo"}, "regression": true}
+{"task": "Convert 14:30 from Asia/Jakarta to America/New_York.", "tool": "hela_mitosis_convert_time", "arguments": {"source_timezone": "Asia/Jakarta", "time": "14:30", "target_timezone": "America/New_York"}, "regression": true}
+{"task": "List the files in /workspace without changing anything.", "tool": "hela_membrane_list_directory", "arguments": {"path": "/workspace"}, "regression": true}
+{"task": "Show me the contents of /workspace/README.md. Do not modify any files.", "tool": "hela_membrane_read_file", "arguments": {"path": "/workspace/README.md"}, "regression": true}
+{"task": "What is the current time in London?", "tool": "hela_mitosis_get_current_time", "arguments": {"timezone": "Europe/London"}}
+{"task": "Give me the date and time in Sydney.", "tool": "hela_mitosis_get_current_time", "arguments": {"timezone": "Australia/Sydney"}}
+{"task": "What time is 09:00 in Europe/Berlin when it is 18:00 in Asia/Tokyo?", "tool": "hela_mitosis_convert_time", "arguments": {"source_timezone": "Asia/Tokyo", "time": "18:00", "target_timezone": "Europe/Berlin"}}
+{"task": "Read /workspace/package.json.", "tool": "hela_membrane_read_file", "arguments": {"path": "/workspace/package.json"}}
+{"task": "Open the file /workspace/src/index.ts and show me what is in it.", "tool": "hela_membrane_read_file", "arguments": {"path": "/workspace/src/index.ts"}}
+{"task": "What is in the docs folder?", "tool": "hela_membrane_list_directory", "arguments": {"path": "/workspace/docs"}}
+{"task": "Show the directory listing of /workspace/src.", "tool": "hela_membrane_list_directory", "arguments": {"path": "/workspace/src"}}
+{"task": "Create /workspace/notes.txt containing the text 'meeting at 3pm'.", "tool": "hela_membrane_write_file", "arguments": {"path": "/workspace/notes.txt", "content": "meeting at 3pm"}}
+{"task": "Copy /workspace/config.json to /workspace/config.backup.json.", "tool": "hela_membrane_copy_file", "arguments": {"source": "/workspace/config.json", "destination": "/workspace/config.backup.json"}}
+{"task": "How big is /workspace/data.db and when was it last modified?", "tool": "hela_membrane_get_file_info", "arguments": {"path": "/workspace/data.db"}}
+{"task": "Find every .ts file under /workspace/src.", "tool": "hela_membrane_find_files", "arguments": {"pattern": "*.ts", "directory": "/workspace/src"}}
+{"task": "Search the code for the text TODO.", "tool": "hela_membrane_search_in_files", "arguments": {"pattern": "TODO"}}
+{"task": "Delete the file /workspace/tmp/scratch.log.", "tool": "hela_membrane_delete_file", "arguments": {"path": "/workspace/tmp/scratch.log"}}
+{"task": "Check how much disk space is free.", "tool": "hela_nucleus_execute_command", "arguments": {"command": "df -h"}}
+{"task": "Run the test suite.", "tool": "hela_nucleus_execute_command", "arguments": {"command": "npm test"}}
+{"task": "Show the git status of the repository.", "tool": "hela_nucleus_execute_command", "arguments": {"command": "git status"}}
+{"task": "List the files in the current terminal directory /workspace/src with details.", "tool": "hela_nucleus_terminal_ls", "arguments": {"path": "/workspace/src"}}
+{"task": "Which terminal sessions are open?", "tool": "hela_nucleus_terminal_session_list"}
+{"task": "Start an interactive shell session I can keep using.", "tool": "hela_ribosome_session_spawn", "arguments": {"command": "bash"}}
+{"task": "Which PTY sessions are currently running?", "tool": "hela_ribosome_session_list"}
+{"task": "Look up what we already know about the deployment pipeline in memory.", "tool": "hela_genome_search_nodes", "arguments": {"query": "deployment pipeline"}}
+{"task": "Show me the whole knowledge graph.", "tool": "hela_genome_read_graph"}
+{"task": "Read the first 20 rows of the sessions table.", "tool": "hela_genome_query_data", "arguments": {"table": "sessions", "limit": 20}}
+{"task": "Open https://example.com in the browser.", "tool": "hela_cytosol_browser_navigate", "arguments": {"url": "https://example.com"}}
+{"task": "Take a screenshot of the current page.", "tool": "hela_cytosol_browser_screenshot"}
+{"task": "Get the text content of the page that is open.", "tool": "hela_cytosol_browser_get_content"}
+{"task": "Search Wikipedia for the Krebs cycle.", "tool": "hela_enzyme_wikipedia_search", "arguments": {"query": "Krebs cycle"}}
+{"task": "Search Google for the latest Node.js LTS version.", "tool": "hela_enzyme_google_search", "arguments": {"q": "latest Node.js LTS version"}}
+{"task": "Find academic papers about retrieval augmented generation.", "tool": "hela_enzyme_academic_search", "arguments": {"query": "retrieval augmented generation"}}
+{"task": "Thanks, that is everything I needed.", "tool": "done"}
+{"task": "The files were already listed and nothing else was asked.", "tool": "done"}
+{"task": "Tell me a joke about penguins.", "tool": null}

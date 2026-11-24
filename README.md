@@ -1,0 +1,60 @@
+# hela-needle-tuning
+
+Data, evaluation and release gating for the Needle model that the HeLa runtime's native agent (`hela.agent.run`) uses to pick tools. Private on purpose: training data is derived from real sessions and weights ship as release assets, so none of it belongs in the public repos.
+
+The runtime stays unaware of this repo. It loads whatever `NEEDLE_ENGINE_PATH` / `NEEDLE_MODEL_PATH` / `NEEDLE_SYSTEM_PATH` point at, so shipping tuned weights is a configuration change, not a code change.
+
+## Why
+
+The untuned `needle3` is a general single-shot function caller. Against the HeLa catalog it makes selection mistakes, for example choosing `list_directory` for "what time is it in Jakarta". Fine-tuning on the catalog's own tools and prompts is the fix. Cactus reports large gains from this kind of tuning; we measure ours against a frozen eval instead of trusting that.
+
+## Layout
+
+| Path | Purpose |
+|------|---------|
+| `data/seed/*.jsonl` | Hand-written tasks. Each line: `task`, `tool` (qualified name, `done`, or `null`), optional `arguments`, `shortlist` (pin exact candidates), `regression`, `note`. |
+| `src/hela_needle/` | Catalog loader, row builder, scrubber, split, eval runner, gate, CLI. Standard library only. |
+| `eval/baseline.json` | Scores of the shipped, untuned `needle3` on the frozen eval. The gate compares against this. |
+| `docs/TRAINING.md` | The training and export procedure, and what is still unverified. |
+| `tests/` | Unit tests (`python -m unittest discover -s tests`). |
+
+## How rows mirror the runtime
+
+`hela-runtime/src/agent.ts` calls Needle in two stages, and the builder reproduces both prompts exactly, so the model is tuned on the text it will see:
+
+1. **choose**: up to 4 candidate tools with empty parameter schemas plus a `done` tool. Answer: a tool name.
+2. **arguments**: the one chosen tool with its full schema. Answer: the arguments.
+
+If the runtime prompts change, update `examples.py` in the same change, or the tuned model drifts from what runs in production.
+
+## Usage
+
+```bash
+export PYTHONPATH=src
+A=/path/to/chaining-mcp/assets/needle   # engine, weights, system prompt
+
+# build train/eval files (fails on an unknown tool or invalid arguments)
+python -m hela_needle build-data --catalog $A/hela-stack-tools.json \
+  --cells mitosis membrane nucleus genome enzyme cytosol ribosome
+
+# nothing secret may reach a data file
+python -m hela_needle check-secrets data/build/train.jsonl data/build/eval.jsonl
+
+# score weights, then gate them against the baseline
+python -m hela_needle eval --engine $A/needle3 --model $A/needle3.cact \
+  --system $A/hela-system.txt --out eval/candidate.json
+python -m hela_needle gate --candidate eval/candidate.json
+```
+
+The catalog file is the bundled asset (292 entries, including cells the live runtime does not load). `--cells` restricts it to the active profile; prefer a fresh export of the live catalog when the cells change.
+
+## Rules
+
+- **The split is frozen by hash of the task text**, so adding rows never moves an existing one between train and eval. Regression rows are always eval.
+- **Regression rows are real mistakes** and must pass 100% before any release. Add one for every new selection failure seen in production.
+- **Scrub before committing data.** `check-secrets` must be clean. Never commit weights, checkpoints or built data; they are ignored by `.gitignore`.
+- **The gate**: eval set of at least 20 rows, `choose_tool_acc` at least 0.02 above baseline, no drop in `args_valid`, regression rows all passing.
+
+## Status
+
+Scaffold plus a 40-row seed. That is enough to prove the pipeline and fail the gate honestly, not enough to train on. See `docs/TRAINING.md` for the scale-up plan.

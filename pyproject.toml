@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hela-needle-tuning"
+version = "0.1.0"
+description = "Data, evaluation and release gating for the HeLa Needle tool-selection model"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+# Training itself is done with the upstream Cactus CLI (see docs/TRAINING.md).
+train = ["cactus-compute[train]"]
+
+[project.scripts]
+hela-needle = "hela_needle.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

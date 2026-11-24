@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+# Built data and weights never go in git. Weights ship as release assets.
+data/build/
+checkpoints/
+*.safetensors
+*.cact
+*.pkl
+.env
+.env.*
+# Scores are committed only as eval/baseline.json
+eval/candidate*.json
