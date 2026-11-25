@@ -60,4 +60,4 @@ The catalog file is the bundled asset (292 entries, including cells the live run
 
 ## Status
 
-Milestone M0 (scaffold) is done: about 330 train and 120 eval rows, covering 22 tools. That proves the pipeline and gives a real baseline, but the generated phrasings are repetitive and cover a fraction of the catalog, so it is not yet a dataset to ship a model on. Next is M1; see `docs/PLAN.md`.
+M0 (scaffold) is done and the first real training run has been made and gated: it failed, which is how the loop is meant to work (see `docs/PLAN.md`). M1 (data) is in progress: Claude-written samples, multi-step history rows and a frozen hand-written eval are in; a free-model generation covering all tools is running. See `docs/DATA.md` for sources and rules. The next training run happens once the generated data is imported and the baseline refreshed on the frozen eval.

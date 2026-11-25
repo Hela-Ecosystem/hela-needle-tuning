@@ -23,6 +23,8 @@ Builder, scrubber, split, eval runner, gate, tests, untuned baseline, runbook sc
 Acceptance: `python -m unittest discover -s tests` passes; `build-data` builds from `data/catalog/`; baseline committed.
 
 ### M1: dataset worth training on
+
+**Progress (2026-11-25):** builder supports multi-step history; Claude-written core, history and negative seeds added (train rows 331 -> 627); hand-written eval frozen at 211 rows including history cases; free-model generation (6 samples per tool, 231 tools) running; first run's per-row analysis showed membrane look-alike confusion and an over-strict argument metric (fixed with `args_match`). Still open: catalog refresh from the live runtime, profile-aware rows and the `--system` effect test.
 - Grow beyond the generated seed (`scripts/expand_seeds.py`, about 200 lines) to cover **every tool in the active profile**, not just the 22 the generator knows. Target at least 8 phrasings per tool.
 - Add read-only phrasings ("do not modify anything") for every read tool, and the matching negatives.
 - Add multi-step history rows: a prior call succeeded, so the right answer is the next tool or `done`.
