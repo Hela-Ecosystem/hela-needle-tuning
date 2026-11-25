@@ -9,6 +9,7 @@ from pathlib import Path
 from . import evalrun, gate
 from .catalog import load_catalog
 from .examples import build_rows, dedupe
+from .generated import convert
 from .scrub import findings
 
 
@@ -34,6 +35,21 @@ def cmd_build(a: argparse.Namespace) -> int:
     _write_jsonl(out / "train.jsonl", [{k: r[k] for k in ("query", "tools", "answers")} for r in train])
     _write_jsonl(out / "eval.jsonl", held)
     print(f"catalog={len(catalog)} tools, train={len(train)}, eval={len(held)} rows -> {out}")
+    return 0
+
+
+def cmd_import(a: argparse.Namespace) -> int:
+    catalog = load_catalog(a.catalog, a.name_style, a.cells)
+    rows: list[dict] = []
+    for path in a.inputs:
+        rows += _read_jsonl(Path(path))
+    seeds, rejected = convert(rows, catalog)
+    for seed in seeds:
+        seed["note"] = a.source
+    _write_jsonl(Path(a.out), seeds)
+    print(f"read {len(rows)} rows -> kept {len(seeds)} seed lines in {a.out}")
+    for reason, n in rejected.most_common():
+        print(f"  rejected {n}: {reason}")
     return 0
 
 
@@ -81,6 +97,14 @@ def main(argv: list[str] | None = None) -> int:
     b.add_argument("--cells", nargs="*")
     b.add_argument("--seed", type=int, default=7)
     b.set_defaults(fn=cmd_build)
+    i = sub.add_parser("import-generated", help="convert `cactus generate-data` output into validated seed lines")
+    i.add_argument("inputs", nargs="+")
+    i.add_argument("--catalog", required=True)
+    i.add_argument("--cells", nargs="*")
+    i.add_argument("--name-style", default="qualified", choices=["qualified", "bare"])
+    i.add_argument("--source", default="generated", help="provenance label stored on every line")
+    i.add_argument("--out", required=True)
+    i.set_defaults(fn=cmd_import)
     s = sub.add_parser("check-secrets", help="fail if any file contains something that must be scrubbed")
     s.add_argument("files", nargs="+")
     s.set_defaults(fn=cmd_secrets)

@@ -16,6 +16,15 @@ _RULES: list[tuple[str, re.Pattern[str], str]] = [
 ]
 
 
+_CREDENTIAL_RULES = {"github-token", "api-key", "aws-key", "bearer", "private-key"}
+
+
+def credential_findings(text: str) -> list[str]:
+    """Only the rules that mean a real secret. Paths, emails and IPs are redacted by the
+    builder instead of rejecting the whole row."""
+    return [name for name in findings(text) if name in _CREDENTIAL_RULES]
+
+
 def scrub_text(text: str) -> str:
     for _, pattern, replacement in _RULES:
         text = pattern.sub(replacement, text)

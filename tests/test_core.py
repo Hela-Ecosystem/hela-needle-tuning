@@ -105,6 +105,34 @@ class Rows(unittest.TestCase):
             self.assertEqual(load_catalog(p, "bare")[0].name, "read_file")
 
 
+class Generated(unittest.TestCase):
+    def test_convert_keeps_valid_and_counts_rejections(self):
+        from hela_needle.generated import convert
+        ok = {"query": "Show what is in the reports folder", "answers": [{"name": LS.name, "arguments": {"path": "/workspace/reports"}}]}
+        rows = [
+            ok,
+            dict(ok),  # duplicate
+            {"query": "Show what is in the reports folder please", "answers": [{"name": "hela_nope", "arguments": {}}]},
+            {"query": "List the folder with a missing path", "answers": [{"name": LS.name, "arguments": {}}]},
+            {"query": "Do two things at once now", "answers": [{"name": LS.name, "arguments": {"path": "/a"}}, {"name": READ.name, "arguments": {"path": "/b"}}]},
+            {"query": "Tell me a joke about cats", "answers": []},
+            {"query": "hi", "answers": []},
+            {"query": "use token ghp_" + "b" * 30 + " to log in", "answers": []},
+        ]
+        seeds, rejected = convert(rows, CAT)
+        self.assertEqual([s["tool"] for s in seeds], [LS.name, None])
+        self.assertEqual(seeds[0]["arguments"], {"path": "/workspace/reports"})
+        self.assertEqual(rejected["duplicate task"], 1)
+        self.assertEqual(rejected["unknown tool"], 1)
+        self.assertEqual(rejected["invalid arguments"], 1)
+        self.assertEqual(rejected["multiple calls"], 1)
+        self.assertEqual(rejected["task length"], 1)
+        self.assertEqual(rejected["secret-like text in task"], 1)
+        # generic home paths are not secrets; the builder rewrites them later
+        kept, _ = convert([{"query": "Read the file at /home/user/notes.txt", "answers": [{"name": READ.name, "arguments": {"path": "/home/user/notes.txt"}}]}], CAT)
+        self.assertEqual(len(kept), 1)
+
+
 class Scoring(unittest.TestCase):
     def _rows(self):
         meta = lambda stage, reg=False: {"stage": stage, "split": "eval", "regression": reg}
