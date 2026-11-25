@@ -1,0 +1,80 @@
+{"task": "Is there a newer version of HeLa available?", "tool": "hela.update.check", "split": "train", "note": "claude gap fill"}
+{"task": "Check whether an ecosystem update is out", "tool": "hela.update.check", "split": "train", "note": "claude gap fill"}
+{"task": "Cek apakah ada pembaruan HeLa", "tool": "hela.update.check", "split": "train", "note": "claude gap fill"}
+{"task": "Which cells changed in the latest HeLa snapshot?", "tool": "hela.update.check", "split": "train", "note": "claude gap fill"}
+{"task": "Install the latest HeLa update now, I confirm", "tool": "hela.update.apply", "arguments": {"confirm": true}, "split": "train", "note": "claude gap fill"}
+{"task": "Apply the newest verified HeLa snapshot, go ahead", "tool": "hela.update.apply", "arguments": {"confirm": true}, "split": "train", "note": "claude gap fill"}
+{"task": "Update the HeLa ecosystem to the latest version, yes do it", "tool": "hela.update.apply", "arguments": {"confirm": true}, "split": "train", "note": "claude gap fill"}
+{"task": "Silakan terapkan pembaruan HeLa terbaru, saya setuju", "tool": "hela.update.apply", "arguments": {"confirm": true}, "split": "train", "note": "claude gap fill"}
+{"task": "Which Wikipedia pages are in the category Programming languages?", "tool": "hela_enzyme_wikipedia_get_pages_in_category", "arguments": {"category": "Programming languages"}, "split": "train", "note": "claude gap fill"}
+{"task": "List the articles under the Wikipedia category Volcanoes of Indonesia", "tool": "hela_enzyme_wikipedia_get_pages_in_category", "arguments": {"category": "Volcanoes of Indonesia"}, "split": "train", "note": "claude gap fill"}
+{"task": "Show the subcategories of the category Physics on Wikipedia", "tool": "hela_enzyme_wikipedia_get_pages_in_category", "arguments": {"category": "Physics", "type": "subcat"}, "split": "train", "note": "claude gap fill"}
+{"task": "Browse the Wikipedia category Renaissance painters", "tool": "hela_enzyme_wikipedia_get_pages_in_category", "arguments": {"category": "Renaissance painters"}, "split": "train", "note": "claude gap fill"}
+{"task": "Which languages is the Wikipedia article Quantum mechanics available in?", "tool": "hela_enzyme_wikipedia_page_languages", "arguments": {"title": "Quantum mechanics"}, "split": "train", "note": "claude gap fill"}
+{"task": "In what languages can I read the Wikipedia page for Bali?", "tool": "hela_enzyme_wikipedia_page_languages", "arguments": {"title": "Bali"}, "split": "train", "note": "claude gap fill"}
+{"task": "List the translations of the Wikipedia page Jakarta", "tool": "hela_enzyme_wikipedia_page_languages", "arguments": {"title": "Jakarta"}, "split": "train", "note": "claude gap fill"}
+{"task": "Wikipedia page languages for Photosynthesis", "tool": "hela_enzyme_wikipedia_page_languages", "arguments": {"title": "Photosynthesis"}, "split": "train", "note": "claude gap fill"}
+{"task": "Give me a random Wikipedia article", "tool": "hela_enzyme_wikipedia_random", "split": "train", "note": "claude gap fill"}
+{"task": "Surprise me with a random page from Wikipedia", "tool": "hela_enzyme_wikipedia_random", "split": "train", "note": "claude gap fill"}
+{"task": "Ambil artikel acak dari Wikipedia bahasa Indonesia", "tool": "hela_enzyme_wikipedia_random", "arguments": {"lang": "id"}, "split": "train", "note": "claude gap fill"}
+{"task": "Pick any random Wikipedia entry for me to read", "tool": "hela_enzyme_wikipedia_random", "split": "train", "note": "claude gap fill"}
+{"task": "Which AI providers am I logged in to in opencode?", "tool": "hela_ribosome_opencode_auth_list", "split": "train", "note": "claude gap fill"}
+{"task": "List the authenticated opencode providers", "tool": "hela_ribosome_opencode_auth_list", "split": "train", "note": "claude gap fill"}
+{"task": "Show opencode credentials status", "tool": "hela_ribosome_opencode_auth_list", "split": "train", "note": "claude gap fill"}
+{"task": "Provider apa saja yang sudah login di opencode?", "tool": "hela_ribosome_opencode_auth_list", "split": "train", "note": "claude gap fill"}
+{"task": "Run a read-only query on the opencode session database", "tool": "hela_ribosome_opencode_db", "split": "train", "note": "claude gap fill"}
+{"task": "Inspect the opencode database", "tool": "hela_ribosome_opencode_db", "split": "train", "note": "claude gap fill"}
+{"task": "Show opencode DB output as TSV", "tool": "hela_ribosome_opencode_db", "arguments": {"format": "tsv"}, "split": "train", "note": "claude gap fill"}
+{"task": "Query the opencode database and give me JSON", "tool": "hela_ribosome_opencode_db", "arguments": {"format": "json"}, "split": "train", "note": "claude gap fill"}
+{"task": "Export opencode session ses_42 as JSON", "tool": "hela_ribosome_opencode_export", "arguments": {"sessionId": "ses_42"}, "split": "train", "note": "claude gap fill"}
+{"task": "Dump the opencode session ses_7 with secrets removed", "tool": "hela_ribosome_opencode_export", "arguments": {"sessionId": "ses_7", "sanitize": true}, "split": "train", "note": "claude gap fill"}
+{"task": "Save opencode session ses_19 to a JSON export", "tool": "hela_ribosome_opencode_export", "arguments": {"sessionId": "ses_19"}, "split": "train", "note": "claude gap fill"}
+{"task": "Ekspor sesi opencode ses_3", "tool": "hela_ribosome_opencode_export", "arguments": {"sessionId": "ses_3"}, "split": "train", "note": "claude gap fill"}
+{"task": "Import the opencode session from /workspace/exports/session.json", "tool": "hela_ribosome_opencode_import", "arguments": {"file": "/workspace/exports/session.json"}, "split": "train", "note": "claude gap fill"}
+{"task": "Load opencode session data from /workspace/backup/ses.json", "tool": "hela_ribosome_opencode_import", "arguments": {"file": "/workspace/backup/ses.json"}, "split": "train", "note": "claude gap fill"}
+{"task": "Restore an opencode session from the file /workspace/old-session.json", "tool": "hela_ribosome_opencode_import", "arguments": {"file": "/workspace/old-session.json"}, "split": "train", "note": "claude gap fill"}
+{"task": "Impor sesi opencode dari /workspace/sesi.json", "tool": "hela_ribosome_opencode_import", "arguments": {"file": "/workspace/sesi.json"}, "split": "train", "note": "claude gap fill"}
+{"task": "Which MCP servers does opencode have configured?", "tool": "hela_ribosome_opencode_mcp_list", "split": "train", "note": "claude gap fill"}
+{"task": "Show opencode MCP connection status", "tool": "hela_ribosome_opencode_mcp_list", "split": "train", "note": "claude gap fill"}
+{"task": "List the MCP servers known to opencode", "tool": "hela_ribosome_opencode_mcp_list", "split": "train", "note": "claude gap fill"}
+{"task": "Server MCP apa yang terkonfigurasi di opencode?", "tool": "hela_ribosome_opencode_mcp_list", "split": "train", "note": "claude gap fill"}
+{"task": "Which models can opencode use?", "tool": "hela_ribosome_opencode_models", "split": "train", "note": "claude gap fill"}
+{"task": "List opencode models from the anthropic provider", "tool": "hela_ribosome_opencode_models", "arguments": {"provider": "anthropic"}, "split": "train", "note": "claude gap fill"}
+{"task": "Refresh the opencode model list", "tool": "hela_ribosome_opencode_models", "arguments": {"refresh": true}, "split": "train", "note": "claude gap fill"}
+{"task": "Show available opencode models with details", "tool": "hela_ribosome_opencode_models", "arguments": {"verbose": true}, "split": "train", "note": "claude gap fill"}
+{"task": "Start an opencode server", "tool": "hela_ribosome_opencode_server_spawn", "arguments": {"mode": "serve"}, "split": "train", "note": "claude gap fill"}
+{"task": "Launch the opencode web interface", "tool": "hela_ribosome_opencode_server_spawn", "arguments": {"mode": "web"}, "split": "train", "note": "claude gap fill"}
+{"task": "Spawn opencode in ACP mode", "tool": "hela_ribosome_opencode_server_spawn", "arguments": {"mode": "acp"}, "split": "train", "note": "claude gap fill"}
+{"task": "Run an opencode server on port 4096", "tool": "hela_ribosome_opencode_server_spawn", "arguments": {"mode": "serve", "port": 4096}, "split": "train", "note": "claude gap fill"}
+{"task": "Delete the opencode session ses_88", "tool": "hela_ribosome_opencode_session_delete", "arguments": {"sessionId": "ses_88"}, "split": "train", "note": "claude gap fill"}
+{"task": "Remove opencode session ses_5 for good", "tool": "hela_ribosome_opencode_session_delete", "arguments": {"sessionId": "ses_5"}, "split": "train", "note": "claude gap fill"}
+{"task": "Get rid of the opencode session ses_61", "tool": "hela_ribosome_opencode_session_delete", "arguments": {"sessionId": "ses_61"}, "split": "train", "note": "claude gap fill"}
+{"task": "Hapus sesi opencode ses_12", "tool": "hela_ribosome_opencode_session_delete", "arguments": {"sessionId": "ses_12"}, "split": "train", "note": "claude gap fill"}
+{"task": "Show opencode token usage and cost", "tool": "hela_ribosome_opencode_stats", "split": "train", "note": "claude gap fill"}
+{"task": "How much did opencode cost over the last 7 days?", "tool": "hela_ribosome_opencode_stats", "arguments": {"days": 7}, "split": "train", "note": "claude gap fill"}
+{"task": "Which are my top 5 models by usage in opencode?", "tool": "hela_ribosome_opencode_stats", "arguments": {"topModels": 5}, "split": "train", "note": "claude gap fill"}
+{"task": "Statistik penggunaan opencode 30 hari terakhir", "tool": "hela_ribosome_opencode_stats", "arguments": {"days": 30}, "split": "train", "note": "claude gap fill"}
+{"task": "Wait for the text 'Listening on' in session sess-4", "tool": "hela_ribosome_session_hook", "arguments": {"sessionId": "sess-4", "pattern": "Listening on"}, "split": "train", "note": "claude gap fill"}
+{"task": "Watch session sess-9 until it prints 'build complete'", "tool": "hela_ribosome_session_hook", "arguments": {"sessionId": "sess-9", "pattern": "build complete"}, "split": "train", "note": "claude gap fill"}
+{"task": "When session sess-2 shows a password prompt, answer it", "tool": "hela_ribosome_session_hook", "arguments": {"sessionId": "sess-2", "pattern": "[Pp]assword:"}, "split": "train", "note": "claude gap fill"}
+{"task": "Tunggu sampai sesi sess-6 mencetak 'ready'", "tool": "hela_ribosome_session_hook", "arguments": {"sessionId": "sess-6", "pattern": "ready"}, "split": "train", "note": "claude gap fill"}
+{"task": "What is the status of session sess-3?", "tool": "hela_ribosome_session_info", "arguments": {"sessionId": "sess-3"}, "split": "train", "note": "claude gap fill"}
+{"task": "Show metadata for terminal session sess-8", "tool": "hela_ribosome_session_info", "arguments": {"sessionId": "sess-8"}, "split": "train", "note": "claude gap fill"}
+{"task": "Is sess-1 still running?", "tool": "hela_ribosome_session_info", "arguments": {"sessionId": "sess-1"}, "split": "train", "note": "claude gap fill"}
+{"task": "Info sesi sess-5 dong", "tool": "hela_ribosome_session_info", "arguments": {"sessionId": "sess-5"}, "split": "train", "note": "claude gap fill"}
+{"task": "Clean up the finished terminal sessions", "tool": "hela_ribosome_session_prune", "split": "train", "note": "claude gap fill"}
+{"task": "Delete all exited PTY sessions", "tool": "hela_ribosome_session_prune", "arguments": {"status": "exited"}, "split": "train", "note": "claude gap fill"}
+{"task": "Force remove every running session too", "tool": "hela_ribosome_session_prune", "arguments": {"status": "running"}, "split": "train", "note": "claude gap fill"}
+{"task": "Bersihkan sesi terminal yang sudah selesai", "tool": "hela_ribosome_session_prune", "split": "train", "note": "claude gap fill"}
+{"task": "Resize session sess-2 to 120 columns and 40 rows", "tool": "hela_ribosome_session_resize", "arguments": {"sessionId": "sess-2", "cols": 120, "rows": 40}, "split": "train", "note": "claude gap fill"}
+{"task": "Make the terminal sess-7 80 by 24", "tool": "hela_ribosome_session_resize", "arguments": {"sessionId": "sess-7", "cols": 80, "rows": 24}, "split": "train", "note": "claude gap fill"}
+{"task": "Set the PTY size of sess-1 to 200 columns, 50 rows", "tool": "hela_ribosome_session_resize", "arguments": {"sessionId": "sess-1", "cols": 200, "rows": 50}, "split": "train", "note": "claude gap fill"}
+{"task": "Ubah ukuran terminal sess-4 menjadi 100x30", "tool": "hela_ribosome_session_resize", "arguments": {"sessionId": "sess-4", "cols": 100, "rows": 30}, "split": "train", "note": "claude gap fill"}
+{"task": "Send Ctrl+C to session sess-2", "tool": "hela_ribosome_session_signal", "arguments": {"sessionId": "sess-2", "signal": "SIGINT"}, "split": "train", "note": "claude gap fill"}
+{"task": "Terminate the process in session sess-5 politely", "tool": "hela_ribosome_session_signal", "arguments": {"sessionId": "sess-5", "signal": "SIGTERM"}, "split": "train", "note": "claude gap fill"}
+{"task": "Kill session sess-3's process immediately", "tool": "hela_ribosome_session_signal", "arguments": {"sessionId": "sess-3", "signal": "SIGKILL"}, "split": "train", "note": "claude gap fill"}
+{"task": "Interrupt the running command in sess-8", "tool": "hela_ribosome_session_signal", "arguments": {"sessionId": "sess-8", "signal": "SIGINT"}, "split": "train", "note": "claude gap fill"}
+{"task": "Wait for session sess-3 to exit", "tool": "hela_ribosome_session_wait", "arguments": {"sessionId": "sess-3"}, "split": "train", "note": "claude gap fill"}
+{"task": "Block until sess-9 finishes and tell me its exit code", "tool": "hela_ribosome_session_wait", "arguments": {"sessionId": "sess-9"}, "split": "train", "note": "claude gap fill"}
+{"task": "Wait up to 30 seconds for sess-2 to exit", "tool": "hela_ribosome_session_wait", "arguments": {"sessionId": "sess-2", "timeoutMs": 30000}, "split": "train", "note": "claude gap fill"}
+{"task": "Tunggu sesi sess-6 selesai", "tool": "hela_ribosome_session_wait", "arguments": {"sessionId": "sess-6"}, "split": "train", "note": "claude gap fill"}
