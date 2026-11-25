@@ -1,0 +1,5 @@
+{"task": "Can you tell me a joke about programming?", "tool": null, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Show me the last 50 project events, specifically focusing on bugs.", "tool": "hela_genome_get_timeline", "arguments": {"entityType": "bug", "limit": 50}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Analyze all uncommitted changes and include any new untracked files in the report.", "tool": "hela_genome_analyze_git_changes", "note": "openrouter-free-styled", "split": "train"}
+{"task": "What's the weather like in San Francisco today?", "tool": null, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Get the session context from both the project and central memory, but limit it to the 5 most recent items.", "tool": "hela_genome_get_session_context", "note": "openrouter-free-styled", "split": "train"}
