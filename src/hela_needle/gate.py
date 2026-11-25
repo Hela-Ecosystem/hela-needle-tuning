@@ -17,7 +17,7 @@ def check(candidate: dict[str, Any], baseline: dict[str, Any], min_gain: float =
         reasons.append("choose_tool_acc missing")
     elif cand < base + min_gain:
         reasons.append(f"choose_tool_acc {cand} does not beat baseline {base} by {min_gain}")
-    for key in ("args_valid", "regression_tool_acc"):
+    for key in ("args_valid", "args_match", "regression_tool_acc"):
         c, b = candidate.get(key), baseline.get(key)
         if c is not None and b is not None and c < b:
             reasons.append(f"{key} regressed: {c} < {b}")

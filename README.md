@@ -38,7 +38,7 @@ A=/path/to/chaining-mcp/assets/needle   # engine and weights (catalog and system
 
 # build train/eval files (fails on an unknown tool or invalid arguments)
 python -m hela_needle build-data --catalog data/catalog/hela-stack-tools.json \
-  --cells mitosis membrane nucleus genome enzyme cytosol ribosome
+  --cells mitosis membrane nucleus genome enzyme cytosol ribosome phenotype
 
 # nothing secret may reach a data file
 python -m hela_needle check-secrets data/build/train.jsonl data/build/eval.jsonl

@@ -1,0 +1,47 @@
+{"split": "eval", "task": "Is it already tomorrow in Auckland?", "tool": "hela_mitosis_get_current_time", "arguments": {"timezone": "Pacific/Auckland"}}
+{"split": "eval", "task": "my meeting is at 3pm Jakarta time, what is that in Amsterdam?", "tool": "hela_mitosis_convert_time", "arguments": {"source_timezone": "Asia/Jakarta", "time": "15:00", "target_timezone": "Europe/Amsterdam"}}
+{"split": "eval", "task": "What hour is it in Chicago at the moment?", "tool": "hela_mitosis_get_current_time", "arguments": {"timezone": "America/Chicago"}}
+{"split": "eval", "task": "Show the folders and files sitting in /workspace/app", "tool": "hela_membrane_list_directory", "arguments": {"path": "/workspace/app"}}
+{"split": "eval", "task": "Pull up what /workspace/.env.example contains", "tool": "hela_membrane_read_file", "arguments": {"path": "/workspace/.env.example"}}
+{"split": "eval", "task": "Put the sentence 'release notes draft' into /workspace/notes/draft.txt", "tool": "hela_membrane_write_file", "arguments": {"path": "/workspace/notes/draft.txt", "content": "release notes draft"}}
+{"split": "eval", "task": "Make a new empty folder called /workspace/build/output", "tool": "hela_membrane_create_directory"}
+{"split": "eval", "task": "Rename /workspace/old.txt to /workspace/new.txt", "tool": "hela_membrane_move_file"}
+{"split": "eval", "task": "Do these two files differ: /workspace/a.txt and /workspace/b.txt?", "tool": "hela_membrane_compare_files"}
+{"split": "eval", "task": "Make a duplicate of /workspace/schema.sql called /workspace/schema.v2.sql", "tool": "hela_membrane_copy_file", "arguments": {"source": "/workspace/schema.sql", "destination": "/workspace/schema.v2.sql"}}
+{"split": "eval", "task": "Which of the source files contain the word deprecated?", "tool": "hela_membrane_search_in_files", "arguments": {"pattern": "deprecated"}}
+{"split": "eval", "task": "Find all the yaml files in /workspace/deploy", "tool": "hela_membrane_find_files", "arguments": {"pattern": "*.yaml", "directory": "/workspace/deploy"}}
+{"split": "eval", "task": "How much space does /workspace/node_modules take?", "tool": "hela_membrane_get_directory_size"}
+{"split": "eval", "task": "Erase /workspace/tmp/old-export.csv", "tool": "hela_membrane_delete_file", "arguments": {"path": "/workspace/tmp/old-export.csv"}}
+{"split": "eval", "task": "Zip up the /workspace/reports folder", "tool": "hela_membrane_archive_files"}
+{"split": "eval", "task": "Which version of python3 is installed here?", "tool": "hela_nucleus_execute_command", "arguments": {"command": "python3 --version"}}
+{"split": "eval", "task": "Run the linter for me", "tool": "hela_nucleus_execute_command", "arguments": {"command": "npm run lint"}}
+{"split": "eval", "task": "see what is currently listening on the network ports", "tool": "hela_nucleus_execute_command", "arguments": {"command": "ss -tlnp"}}
+{"split": "eval", "task": "ls -la of /workspace/logs through the terminal", "tool": "hela_nucleus_terminal_ls", "arguments": {"path": "/workspace/logs"}}
+{"split": "eval", "task": "Close the shell session I left open earlier", "tool": "hela_nucleus_terminal_session_close"}
+{"split": "eval", "task": "What do my notes say about the payment service outage?", "tool": "hela_genome_search_nodes", "arguments": {"query": "payment service outage"}}
+{"split": "eval", "task": "Give me everything stored in the knowledge graph", "tool": "hela_genome_read_graph"}
+{"split": "eval", "task": "Pull the latest 15 rows out of the events table", "tool": "hela_genome_query_data", "arguments": {"table": "events", "limit": 15}}
+{"split": "eval", "task": "Remind me what I was working on last session", "tool": "hela_genome_get_session_context"}
+{"split": "eval", "task": "What changed in the project over the last few sessions?", "tool": "hela_genome_get_timeline"}
+{"split": "eval", "task": "Load the page at https://example.org/pricing", "tool": "hela_cytosol_browser_navigate", "arguments": {"url": "https://example.org/pricing"}}
+{"split": "eval", "task": "Grab an image of what the browser shows right now", "tool": "hela_cytosol_browser_screenshot"}
+{"split": "eval", "task": "Go back to the previous page in the browser", "tool": "hela_cytosol_browser_back"}
+{"split": "eval", "task": "Read out the text on the open web page", "tool": "hela_cytosol_browser_get_content"}
+{"split": "eval", "task": "Scroll down the page", "tool": "hela_cytosol_browser_scroll"}
+{"split": "eval", "task": "Find the wikipedia entry for Ada Lovelace", "tool": "hela_enzyme_wikipedia_search", "arguments": {"query": "Ada Lovelace"}}
+{"split": "eval", "task": "Do a web search for kubernetes pod disruption budgets", "tool": "hela_enzyme_google_search", "arguments": {"q": "kubernetes pod disruption budgets"}}
+{"split": "eval", "task": "any recent papers on speculative decoding?", "tool": "hela_enzyme_academic_search", "arguments": {"query": "speculative decoding"}}
+{"split": "eval", "task": "Check the news for anything on the EU AI Act", "tool": "hela_enzyme_news_monitor"}
+{"split": "eval", "task": "Open a persistent zsh terminal for me", "tool": "hela_ribosome_session_spawn", "arguments": {"command": "zsh"}}
+{"split": "eval", "task": "What background terminal processes are alive?", "tool": "hela_ribosome_session_list"}
+{"split": "eval", "task": "Please summarise the main points of this article text", "tool": "hela_enzyme_content_summarizer"}
+{"split": "eval", "task": "Okay, that covers it, we're finished", "tool": "done"}
+{"split": "eval", "task": "No further steps are required.", "tool": "done"}
+{"split": "eval", "task": "Everything has been completed already.", "tool": "done"}
+{"split": "eval", "task": "Thank you, goodbye", "tool": "done"}
+{"split": "eval", "task": "What is the capital of Australia?", "tool": null}
+{"split": "eval", "task": "Tell me a bedtime story", "tool": null}
+{"split": "eval", "task": "Tap the Settings icon on the connected Android phone", "tool": null}
+{"split": "eval", "task": "Render the Blender scene to a PNG", "tool": null}
+{"split": "eval", "task": "Swipe left on my phone screen", "tool": null}
+{"split": "eval", "task": "How are you feeling today?", "tool": null}

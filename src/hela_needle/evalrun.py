@@ -52,6 +52,8 @@ def score_row(row: dict[str, Any], envelope: dict[str, Any]) -> dict[str, Any]:
         schema = row["tools"][0].get("parameters", {})
         result["args_valid"] = bool(got) and not validate_args(schema, args)
         result["args_exact"] = bool(got) and args == expected["arguments"]
+        # Every expected key has the expected value; extra optional keys (defaults the model adds) are fine.
+        result["args_match"] = bool(got) and not validate_args(schema, args) and all(args.get(k) == v for k, v in expected["arguments"].items())
     return result
 
 
@@ -69,6 +71,7 @@ def aggregate(scored: list[dict[str, Any]]) -> dict[str, Any]:
         "choose_tool_acc": rate(choose, "tool_ok"),
         "args_valid": rate(args, "args_valid"),
         "args_exact": rate(args, "args_exact"),
+        "args_match": rate(args, "args_match"),
         "regression_n": len(reg),
         "regression_tool_acc": rate(reg, "tool_ok"),
     }
@@ -98,6 +101,7 @@ def evaluate(
                 "got": got.get("name") if got else None,
                 "tool_ok": s["tool_ok"],
                 "args_exact": s.get("args_exact"),
+                "args_match": s.get("args_match"),
                 "expected_args": exp["arguments"] if exp and s["stage"] == "arguments" else None,
                 "got_args": (got or {}).get("arguments") if s["stage"] == "arguments" else None,
                 "error": envelope.get("error"),

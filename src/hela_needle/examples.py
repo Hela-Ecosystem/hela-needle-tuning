@@ -131,6 +131,9 @@ def build_rows(seed_path: str | Path, catalog: list[Tool], seed: int = 7) -> lis
         try:
             task, tool = item["task"], item.get("tool")
             regression = bool(item.get("regression"))
+            forced = item.get("split")
+            if forced not in (None, "train", "eval"):
+                raise ValueError(f"split must be 'train' or 'eval', got {forced!r}")
             stage = [("choose", choose_row(task, tool, catalog, rng, pin=item.get("shortlist")))]
             if item.get("arguments") is not None:
                 stage.append(("arguments", arguments_row(task, tool, item["arguments"], catalog)))
@@ -138,6 +141,6 @@ def build_rows(seed_path: str | Path, catalog: list[Tool], seed: int = 7) -> lis
             raise ValueError(f"{seed_path}:{line_no}: {exc}") from exc
         for kind, row in stage:
             row = scrub_value(row)
-            row["meta"] = {"stage": kind, "split": split_of(task, regression), "regression": regression, "pinned": bool(item.get("shortlist")) and kind == "choose", "source": Path(seed_path).name}
+            row["meta"] = {"stage": kind, "split": forced or split_of(task, regression), "regression": regression, "pinned": bool(item.get("shortlist")) and kind == "choose", "source": Path(seed_path).name}
             rows.append(row)
     return rows

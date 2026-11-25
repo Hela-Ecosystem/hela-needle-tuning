@@ -73,6 +73,16 @@ class Rows(unittest.TestCase):
             with self.assertRaises(ValueError):
                 build_rows(p, CAT)
 
+    def test_seed_can_force_split(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "s.jsonl"
+            p.write_text(json.dumps({"task": "zzz force me", "tool": None, "split": "eval"}) + "\n")
+            self.assertEqual(build_rows(p, CAT)[0]["meta"]["split"], "eval")
+            p.write_text(json.dumps({"task": "x", "tool": None, "split": "dev"}) + "\n")
+            with self.assertRaises(ValueError):
+                build_rows(p, CAT)
+
     def test_dedupe_keeps_first_per_task_and_stage(self):
         a = choose_row("Same task", TIME.name, CAT, random.Random(1))
         b = choose_row("same task", LS.name, CAT, random.Random(2))
@@ -115,6 +125,7 @@ class Scoring(unittest.TestCase):
         self.assertEqual(scores["choose_tool_acc"], 0.5)
         self.assertEqual(scores["args_valid"], 1.0)
         self.assertEqual(scores["args_exact"], 1.0)
+        self.assertEqual(scores["args_match"], 1.0)
         self.assertEqual(scores["regression_tool_acc"], 0.0)
 
     def test_details_record_each_row(self):
