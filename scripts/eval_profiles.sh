@@ -41,6 +41,8 @@ for P in $PROFILES; do
   fi
   python -m hela_needle eval --eval "$OUT/eval.jsonl" --engine "$ENGINE" --model "$DIR/hela-needle3-$P.cact" "${SYSARGS[@]}" --timeout "$TIMEOUT" --out "eval/candidates/$P$TAG.json" >/dev/null
   if python -m hela_needle gate --candidate "eval/candidates/$P$TAG.json" --baseline "eval/baselines/$P$TAG.json" >"eval/candidates/$P$TAG.gate.txt" 2>&1; then v=PASS; else v=FAIL; status=1; fi
+  # Bind these scores to the exact file that was evaluated; publishing refuses a different file.
+  sha256sum "$DIR/hela-needle3-$P.cact" | cut -d' ' -f1 > "eval/candidates/$P$TAG.sha256"
   python3 - "$P$TAG" "$v" <<'PY'
 import json, sys
 p, v = sys.argv[1], sys.argv[2]

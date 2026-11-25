@@ -1,0 +1,20 @@
+HeLa Needle models
+==================
+
+The model files published in this repository's releases (`hela-needle3-<profile>.cact`) are
+modified versions of Needle 3 by Cactus Compute.
+
+  Original work: Needle 3, https://huggingface.co/Cactus-Compute/needle3
+                 revision d6c7d6a2e9655505e0f8e23339356dd1705900eb
+  Licence:       Apache License, Version 2.0 (see models/LICENSE; identical to the LICENSE file
+                 shipped with the original model, sha256 cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30)
+
+Changes made: each published file merges a LoRA adapter, fine-tuned for one HeLa profile on
+synthetic tool-selection data, into the original weights and exports it at 4 bits with the Cactus CLI.
+The confidence head of the original is not included in these builds. Training data, procedure and
+evaluation are described in docs/DATA.md, docs/TRAINING.md and the model card (models/README.md).
+
+The tool-selection data was written by Claude (Anthropic), by free OpenRouter models routed through
+the Cactus data generator, and by hand; see docs/DATA.md. No real user sessions are included.
+
+This repository's source code is licensed separately (see LICENSE, if present).

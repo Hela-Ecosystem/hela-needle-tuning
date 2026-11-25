@@ -48,9 +48,9 @@ Acceptance: gate passes, or the failure reasons are written down and drive M1 da
 Acceptance: a table of local-4-bit vs platform-2-bit vs baseline; pick the shipping route.
 
 ### M5: ship to one runtime, then widen
-- Resolve the weights license question first (not documented upstream).
+- Weights licence: **resolved** (2026-11-25). Needle 3's repository ships the Apache License 2.0 and its model card says `license: apache-2.0`; modified redistribution is allowed with the licence and notice (see `NOTICE`, `models/LICENSE`).
 - Point `NEEDLE_MODEL_PATH` at the tuned file on one runtime, run the end-to-end `hela.agent.run` tasks, then roll out.
-- Publish the `.cact` as a private release asset. Never commit weights.
+- Stage the trained models in the private runs repo, evaluate them with `scripts/eval_profiles.sh`, then publish the ones that pass with `scripts/publish_models.sh` (public release of this repo plus `models/manifest.json`). Weights never go into git.
 Acceptance: end-to-end agent results show the tuned model choosing correctly on the pinned regression tasks, with `ok`, `status` and `failedCalls` as reported by hela-runtime#5.
 
 ### Ongoing
@@ -59,7 +59,7 @@ Acceptance: end-to-end agent results show the tuned model choosing correctly on 
 
 ## Budget and hardware
 
-Not documented upstream, so measure in M2 and replace this section with facts.
+Hardware needs are not documented upstream, so the numbers below are measured from our own runs.
 Expectation (unverified): a small LoRA run on a 16-24 GB card, minutes to a couple of hours. Rent on-demand, one small card, terminate the pod when the run ends, do not leave pods stopped. Use Secure Cloud for anything built from real session data. Set a spend limit in the account before starting, and stop if the first run needs a bigger card than expected.
 
 ## Risks
@@ -70,7 +70,7 @@ Expectation (unverified): a small LoRA run on a 16-24 GB card, minutes to a coup
 | Data leaks into a rented machine | Seeds and catalog only; `check-secrets` before every build; no raw session transcripts. |
 | Prompts drift from the runtime | `examples.py` mirrors `agent.ts`; an end-to-end check in M5 catches drift. |
 | 4-bit local vs 2-bit shipped mismatch | Compare on the same eval; run M4. |
-| Weights license unclear | Block M5 until resolved. |
+| Weights licence | Resolved: Apache-2.0 (see NOTICE). Keep the licence and notice with every release; publish only through `publish_models.sh`. |
 | Single-shot limit | Fine-tuning improves selection and arguments, not planning; multi-step ability stays with the agent loop. |
 
 ## Open questions for the owner

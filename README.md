@@ -1,8 +1,12 @@
 # hela-needle-tuning
 
-Data, evaluation and release gating for the Needle model that the HeLa runtime's native agent (`hela.agent.run`) uses to pick tools. This repo is public and holds code, the hand-written seeds and a snapshot of the public tool catalog. It contains **no model weights and no real session data**. Run results (weights, logs) go to the private repo `Hela-Ecosystem/hela-needle-runs`, and `scripts/upload_release.sh` refuses to publish to any public repo. The Needle weights license is not documented upstream, so nothing derived from them is published here.
+Data, evaluation, training and release gating for the Needle models the HeLa runtime uses to pick tools (the native agent `hela.agent.run` and the Mitosis planners). This repo is public. It holds the code, the hand-written seeds, a snapshot of the public tool catalog and, once a model passes the gate, the **finished per-profile models** as release assets with checksums in [`models/manifest.json`](models/manifest.json). It contains no real session data. Training runs stage their output in a private repo; a model reaches the public release only through `scripts/publish_models.sh`, after passing the gate. Needle 3 is Apache-2.0, so fine-tuned versions may be redistributed with the licence and [`NOTICE`](NOTICE).
 
 The runtime stays unaware of this repo. It loads whatever `NEEDLE_ENGINE_PATH` / `NEEDLE_MODEL_PATH` / `NEEDLE_SYSTEM_PATH` point at, so shipping tuned weights is a configuration change, not a code change.
+
+## Use a finished model
+
+Once published, each profile has a ready-to-use model: find it in [`models/manifest.json`](models/manifest.json) (URL, sha256, scores), verify the checksum, and point `NEEDLE_MODEL_PATH` at it. If anything is missing or fails, keep the shipped `needle3.cact`. Details in [`models/README.md`](models/README.md). **No model is published yet**: the first tuned model did not pass the gate, and nothing is released until it does.
 
 ## Train your own Needle (one line)
 
@@ -20,7 +24,7 @@ Without GitHub: `curl -fsSL https://raw.githubusercontent.com/Hela-Ecosystem/hel
 
 **Then check the model before using it.** On a machine with the Needle engine, `ENGINE=<needle3> BASE_MODEL=<shipped needle3.cact> scripts/eval_profiles.sh <folder with the .cact files>` scores each profile's model against the untuned one on a frozen, hand-written eval and applies the release gate. A model that does not pass the gate should not be used. Needle's answers change with the system text the runtime passes (we measured 16 of 40 answers differing with and without it), while training rows carry none, so also run it with `SYSTEM_MODE=none` and give the installer whichever setting scores better.
 
-Status: the single-profile path ran end to end once (see `docs/TRAINING.md`); the multi-profile loop and `eval_profiles.sh` are new and untested on a GPU. The weights licence is not documented upstream, so check it before sharing any trained model. This repo publishes no weights.
+Status: the single-profile path ran end to end once (see `docs/TRAINING.md`); the multi-profile loop and `eval_profiles.sh` are new and untested on a GPU. Needle 3's repository ships the Apache License 2.0 (`LICENSE` file and `license: apache-2.0` in its model card), which permits modified redistribution with the licence and notice kept; check the details yourself before sharing a model.
 
 ## Why
 
@@ -72,7 +76,7 @@ The catalog file is the bundled asset (292 entries, all 10 organelles). Rows are
 
 - **The split is frozen by hash of the task text**, so adding rows never moves an existing one between train and eval. Regression rows are always eval.
 - **Regression rows are real mistakes** and must pass 100% before any release. Add one for every new selection failure seen in production.
-- **Scrub before committing data.** `check-secrets` must be clean. Never commit weights, checkpoints or built data; they are ignored by `.gitignore`.
+- **Scrub before committing data.** `check-secrets` must be clean. Weights never go into git: they ship as release assets, with checksums in `models/manifest.json`. Checkpoints and built data are ignored by `.gitignore`.
 - **The gate**: eval set of at least 20 rows, `choose_tool_acc` at least 0.02 above baseline, no drop in `args_valid`, regression rows all passing.
 
 ## Status

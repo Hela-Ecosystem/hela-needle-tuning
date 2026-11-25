@@ -10,7 +10,7 @@ export GH_TOKEN=<fine-grained token: hela-needle-runs ONLY, Contents: write, 1-d
 
 The script installs the tools, builds and scrubs the data, checks that JAX sees the GPU, fine-tunes, exports the `.cact`, and uploads model, `meta.json` and logs to a release `run-<id>` in the **private** repo `Hela-Ecosystem/hela-needle-runs` (a failed run uploads its logs as `run-<id>-failed`). This code repo is public and the uploader refuses to publish to any public repo. It does not terminate the pod unless `AUTO_TERMINATE=1` (unverified: needs `runpodctl` and `RUNPOD_POD_ID` on the pod). Terminate the pod yourself once it prints "uploaded".
 
-The eval and gate run afterwards on the machine with the Needle engine: the engine binary is not in git and our copy is ARM, so it cannot run on an x86 pod. Weights are never committed to this repo; the private runs repo is the only place they go.
+The eval and gate run afterwards on the machine with the Needle engine: the engine binary is not in git and our copy is ARM, so it cannot run on an x86 pod. Weights are never committed to git. Training output is staged in the private runs repo; models that pass the gate are published as release assets of this repo with `scripts/publish_models.sh`.
 
 
 Training uses the upstream Cactus CLI (`cactus-compute[train]`). The commands below come from the upstream `llms.txt` in `cactus-compute/cactus`; **none have been run in this repo yet**. Treat them as the plan, and correct this file the first time one behaves differently.
@@ -50,10 +50,10 @@ Official RunPod images (Docker Hub `runpod/base` and `runpod/pytorch`; build fil
 - `cactus build --lora` does not include the confidence head, so `confidence` is absent from engine output. The runtime treats it as optional, but re-check after the first real build.
 - Checkpoints and adapters must be `.safetensors`; pickle is refused.
 
-## Not documented upstream (find out before relying on it)
+## Not documented upstream (check before relying on it)
 
 - Hardware needs for local training (RAM, VRAM, disk).
-- License of the Needle weights. The code repo is Apache 2.0, the weights come from separate Hugging Face repos with no stated license in what we read. **Resolve this before publishing any tuned weights.**
+- ~~License of the Needle weights~~ Resolved 2026-11-25: the Needle 3 model repository ships the Apache License 2.0 (`LICENSE`, sha256 `cfc7749b...`, the same file the installer pins) and its model card says `license: apache-2.0`. Redistributing modified weights is permitted with the licence and notice kept; see `NOTICE`.
 - Defaults for `--lora-rank`, `--lora-alpha`, `--lr`, `--batch-size`, `--epochs`; recommended dataset size; LoRA target modules.
 
 ## Data rules

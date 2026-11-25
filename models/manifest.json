@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "base": {
+    "name": "needle3",
+    "source": "https://huggingface.co/Cactus-Compute/needle3",
+    "revision": "d6c7d6a2e9655505e0f8e23339356dd1705900eb",
+    "license": "Apache-2.0"
+  },
+  "models": {}
+}

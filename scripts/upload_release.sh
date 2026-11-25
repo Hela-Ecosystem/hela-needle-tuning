@@ -3,8 +3,8 @@
 #
 # Usage: GH_TOKEN=... scripts/upload_release.sh <run_dir> <tag>
 # The token needs Contents: write on hela-needle-runs only (fine-grained, short expiry).
-# This code repo is public, so results never go to it: weights and run logs go to
-# the private repo, and this script refuses to publish to any public repository.
+# This is STAGING: raw run output goes to the private repo, and this script refuses any public
+# repository. Models that pass the gate are published separately with scripts/publish_models.sh.
 set -euo pipefail
 
 : "${GH_TOKEN:?set GH_TOKEN (fine-grained, Contents: write, this repo only)}"

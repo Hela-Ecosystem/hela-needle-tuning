@@ -17,7 +17,7 @@ Every training row is built by `python -m hela_needle build-data` from seed file
 - **The eval is frozen.** It is `eval_hand.jsonl` plus the hash portion of `core` and `expanded`. All other sources are forced to `train`, so adding data never changes the eval or invalidates `eval/baseline.json`. If the eval must change, re-run the baseline in the same commit.
 - **No real session data.** Tasks come from the catalog, hand-written seeds and model-generated text. Real usage can be added later only after scrubbing and review.
 - **Free models only for generation.** `scripts/generate_chunks.py` refuses non-free models without `--allow-paid`.
-- **Claude-written rows:** the owner approved Claude writing training samples. Anthropic's terms restrict using outputs to build competing models; the intended use here (a router for the owner's own agent) is believed fine, but the owner should confirm before any weights are distributed.
+- **Claude-written rows:** the owner approved Claude writing training samples. Anthropic's terms restrict using outputs to build competing models; the intended use here (a router for the owner's own agent) is believed fine, but the owner decides this before any model is published, because publishing is what makes the data's provenance matter to others. The provenance is stated in `NOTICE` and the model card.
 - **"Done" and "no tool applies"** currently share the `done` answer. Revisit if the runtime needs them to differ.
 
 ## Coverage tracking and profiles

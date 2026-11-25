@@ -11,6 +11,7 @@ from .catalog import load_catalog
 from .examples import build_all
 from . import coverage as coverage_mod
 from .profiles import load_profiles
+from . import publish as publish_mod
 from .generated import convert
 from .scrub import findings
 
@@ -49,6 +50,27 @@ def cmd_coverage(a: argparse.Namespace) -> int:
     text = coverage_mod.render(coverage_mod.analyse(rows, catalog, profiles), catalog, profiles, sizes)
     Path(a.out).write_text(text, encoding="utf8")
     print(f"wrote {a.out}")
+    return 0
+
+
+def cmd_publish_plan(a: argparse.Namespace) -> int:
+    root = Path(".").resolve()
+    plan, problems = publish_mod.plan(Path(a.models_dir), a.profiles, root, a.tag, a.public_repo, a.system_mode, a.git_sha, a.catalog_sha)
+    if problems:
+        for p in problems:
+            print(f"REFUSED {p}")
+        return 1
+    Path(a.out).write_text(json.dumps(plan, indent=2) + "\n", encoding="utf8")
+    for e in plan["entries"]:
+        s, b = e["scores"]["candidate"], e["scores"]["baseline"]
+        print(f"OK {e['profile']:<16} choose {s['choose_tool_acc']:.3f} (baseline {b['choose_tool_acc']:.3f})  {e['size'] / 1e6:.1f} MB  sha256 {e['sha256'][:12]}")
+    return 0
+
+
+def cmd_manifest_apply(a: argparse.Namespace) -> int:
+    plan = json.loads(Path(a.plan).read_text(encoding="utf8"))
+    manifest = publish_mod.apply_manifest(Path(a.manifest), plan)
+    print(f"manifest now lists {len(manifest['models'])} profile(s): {', '.join(manifest['models'])}")
     return 0
 
 
@@ -131,6 +153,20 @@ def main(argv: list[str] | None = None) -> int:
     i.add_argument("--source", default="generated", help="provenance label stored on every line")
     i.add_argument("--out", required=True)
     i.set_defaults(fn=cmd_import)
+    pp = sub.add_parser("publish-plan", help="check that per-profile models are publishable (hash bound to the evaluation, gate passes)")
+    pp.add_argument("--models-dir", required=True)
+    pp.add_argument("--profiles", nargs="+", required=True)
+    pp.add_argument("--tag", required=True)
+    pp.add_argument("--public-repo", default="Hela-Ecosystem/hela-needle-tuning")
+    pp.add_argument("--system-mode", default="profile", choices=["profile", "none"])
+    pp.add_argument("--git-sha", default="")
+    pp.add_argument("--catalog-sha", default="")
+    pp.add_argument("--out", required=True)
+    pp.set_defaults(fn=cmd_publish_plan)
+    ma = sub.add_parser("manifest-apply", help="record a publish plan in models/manifest.json")
+    ma.add_argument("--plan", required=True)
+    ma.add_argument("--manifest", default="models/manifest.json")
+    ma.set_defaults(fn=cmd_manifest_apply)
     s = sub.add_parser("check-secrets", help="fail if any file contains something that must be scrubbed")
     s.add_argument("files", nargs="+")
     s.set_defaults(fn=cmd_secrets)
