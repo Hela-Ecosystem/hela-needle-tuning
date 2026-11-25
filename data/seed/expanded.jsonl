@@ -186,15 +186,15 @@
 {"task": "Search Wikipedia for Mount Merapi.", "tool": "hela_enzyme_wikipedia_search", "arguments": {"query": "Mount Merapi"}}
 {"task": "Look up Transformer architecture on Wikipedia.", "tool": "hela_enzyme_wikipedia_search", "arguments": {"query": "Transformer architecture"}}
 {"task": "Search Wikipedia for Alan Turing.", "tool": "hela_enzyme_wikipedia_search", "arguments": {"query": "Alan Turing"}}
-{"task": "Google rust vs go for cli tools.", "tool": "hela_enzyme_google_search", "arguments": {"q": "rust vs go for cli tools"}}
-{"task": "Search Google for latest Node.js LTS version.", "tool": "hela_enzyme_google_search", "arguments": {"q": "latest Node.js LTS version"}}
-{"task": "Search the web for best practices for SQLite WAL.", "tool": "hela_enzyme_google_search", "arguments": {"q": "best practices for SQLite WAL"}}
-{"task": "Search Google for best practices for SQLite WAL.", "tool": "hela_enzyme_google_search", "arguments": {"q": "best practices for SQLite WAL"}}
-{"task": "Google best practices for SQLite WAL.", "tool": "hela_enzyme_google_search", "arguments": {"q": "best practices for SQLite WAL"}}
-{"task": "Search the web for latest Node.js LTS version.", "tool": "hela_enzyme_google_search", "arguments": {"q": "latest Node.js LTS version"}}
-{"task": "Search the web for rust vs go for cli tools.", "tool": "hela_enzyme_google_search", "arguments": {"q": "rust vs go for cli tools"}}
-{"task": "Google latest Node.js LTS version.", "tool": "hela_enzyme_google_search", "arguments": {"q": "latest Node.js LTS version"}}
-{"task": "Search Google for rust vs go for cli tools.", "tool": "hela_enzyme_google_search", "arguments": {"q": "rust vs go for cli tools"}}
+{"task": "Google rust vs go for cli tools.", "tool": "hela_enzyme_google_search", "arguments": {"query": "rust vs go for cli tools"}}
+{"task": "Search Google for latest Node.js LTS version.", "tool": "hela_enzyme_google_search", "arguments": {"query": "latest Node.js LTS version"}}
+{"task": "Search the web for best practices for SQLite WAL.", "tool": "hela_enzyme_google_search", "arguments": {"query": "best practices for SQLite WAL"}}
+{"task": "Search Google for best practices for SQLite WAL.", "tool": "hela_enzyme_google_search", "arguments": {"query": "best practices for SQLite WAL"}}
+{"task": "Google best practices for SQLite WAL.", "tool": "hela_enzyme_google_search", "arguments": {"query": "best practices for SQLite WAL"}}
+{"task": "Search the web for latest Node.js LTS version.", "tool": "hela_enzyme_google_search", "arguments": {"query": "latest Node.js LTS version"}}
+{"task": "Search the web for rust vs go for cli tools.", "tool": "hela_enzyme_google_search", "arguments": {"query": "rust vs go for cli tools"}}
+{"task": "Google latest Node.js LTS version.", "tool": "hela_enzyme_google_search", "arguments": {"query": "latest Node.js LTS version"}}
+{"task": "Search Google for rust vs go for cli tools.", "tool": "hela_enzyme_google_search", "arguments": {"query": "rust vs go for cli tools"}}
 {"task": "Find academic papers about LoRA fine-tuning.", "tool": "hela_enzyme_academic_search", "arguments": {"query": "LoRA fine-tuning"}}
 {"task": "Find academic papers about retrieval augmented generation.", "tool": "hela_enzyme_academic_search", "arguments": {"query": "retrieval augmented generation"}}
 {"task": "Search arXiv for tool calling small language models.", "tool": "hela_enzyme_academic_search", "arguments": {"query": "tool calling small language models"}}

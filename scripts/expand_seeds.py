@@ -111,8 +111,8 @@ SPEC: dict[str, tuple[list[str], list[dict]]] = {
         [{"query": "Krebs cycle"}, {"query": "Alan Turing"}, {"query": "Transformer architecture"}, {"query": "Mount Merapi"}],
     ),
     "hela_enzyme_google_search": (
-        ["Search Google for {q}.", "Google {q}.", "Search the web for {q}."],
-        [{"q": "latest Node.js LTS version"}, {"q": "best practices for SQLite WAL"}, {"q": "rust vs go for cli tools"}],
+        ["Search Google for {query}.", "Google {query}.", "Search the web for {query}."],
+        [{"query": "latest Node.js LTS version"}, {"query": "best practices for SQLite WAL"}, {"query": "rust vs go for cli tools"}],
     ),
     "hela_enzyme_academic_search": (
         ["Find academic papers about {query}.", "Search arXiv for {query}.", "Look for research on {query}."],

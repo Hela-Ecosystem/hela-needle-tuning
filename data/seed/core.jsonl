@@ -31,7 +31,7 @@
 {"task": "Take a screenshot of the current page.", "tool": "hela_cytosol_browser_screenshot"}
 {"task": "Get the text content of the page that is open.", "tool": "hela_cytosol_browser_get_content"}
 {"task": "Search Wikipedia for the Krebs cycle.", "tool": "hela_enzyme_wikipedia_search", "arguments": {"query": "Krebs cycle"}}
-{"task": "Search Google for the latest Node.js LTS version.", "tool": "hela_enzyme_google_search", "arguments": {"q": "latest Node.js LTS version"}}
+{"task": "Search Google for the latest Node.js LTS version.", "tool": "hela_enzyme_google_search", "arguments": {"query": "latest Node.js LTS version"}}
 {"task": "Find academic papers about retrieval augmented generation.", "tool": "hela_enzyme_academic_search", "arguments": {"query": "retrieval augmented generation"}}
 {"task": "Thanks, that is everything I needed.", "tool": "done"}
 {"task": "The files were already listed and nothing else was asked.", "tool": "done"}

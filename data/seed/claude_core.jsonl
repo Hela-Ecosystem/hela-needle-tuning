@@ -89,8 +89,8 @@
 {"task": "show me the interactive elements on this page", "tool": "hela_cytosol_browser_observe", "note": "claude", "split": "train"}
 {"task": "look up what Wikipedia says about the Rosetta Stone", "tool": "hela_enzyme_wikipedia_search", "arguments": {"query": "Rosetta Stone"}, "note": "claude", "split": "train"}
 {"task": "cari di wikipedia tentang Candi Borobudur", "tool": "hela_enzyme_wikipedia_search", "arguments": {"query": "Candi Borobudur"}, "note": "claude", "split": "train"}
-{"task": "google: best way to profile a node.js app", "tool": "hela_enzyme_google_search", "arguments": {"q": "best way to profile a node.js app"}, "note": "claude", "split": "train"}
-{"task": "cari di google cara membuat docker compose", "tool": "hela_enzyme_google_search", "arguments": {"q": "cara membuat docker compose"}, "note": "claude", "split": "train"}
+{"task": "google: best way to profile a node.js app", "tool": "hela_enzyme_google_search", "arguments": {"query": "best way to profile a node.js app"}, "note": "claude", "split": "train"}
+{"task": "cari di google cara membuat docker compose", "tool": "hela_enzyme_google_search", "arguments": {"query": "cara membuat docker compose"}, "note": "claude", "split": "train"}
 {"task": "find research papers on diffusion models for audio", "tool": "hela_enzyme_academic_search", "arguments": {"query": "diffusion models for audio"}, "note": "claude", "split": "train"}
 {"task": "latest headlines about electric vehicles", "tool": "hela_enzyme_news_monitor", "arguments": {"topic": "electric vehicles"}, "note": "claude", "split": "train"}
 {"task": "is it true that the Great Wall is visible from space", "tool": "hela_enzyme_fact_checker", "arguments": {"claim": "The Great Wall of China is visible from space"}, "note": "claude", "split": "train"}

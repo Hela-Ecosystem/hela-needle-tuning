@@ -66,7 +66,7 @@
 {"task": "Fetch and clean up the article at https://example.com/post without opening a browser page", "tool": "hela_enzyme_extract_content", "arguments": {"url": "https://example.com/post"}, "split": "train", "note": "pair: extract vs browser"}
 {"task": "Read the text of the page I already have open", "tool": "hela_cytosol_browser_get_content", "split": "train", "note": "pair: extract vs browser"}
 {"task": "Search Wikipedia for photosynthesis", "tool": "hela_enzyme_wikipedia_search", "arguments": {"query": "photosynthesis"}, "split": "train", "note": "pair: search kinds"}
-{"task": "Search the web for photosynthesis experiments for kids", "tool": "hela_enzyme_google_search", "arguments": {"q": "photosynthesis experiments for kids"}, "split": "train", "note": "pair: search kinds"}
+{"task": "Search the web for photosynthesis experiments for kids", "tool": "hela_enzyme_google_search", "arguments": {"query": "photosynthesis experiments for kids"}, "split": "train", "note": "pair: search kinds"}
 {"task": "Find scholarly papers on photosynthesis efficiency", "tool": "hela_enzyme_academic_search", "arguments": {"query": "photosynthesis efficiency"}, "split": "train", "note": "pair: search kinds"}
 {"task": "What is the latest news about solar power subsidies?", "tool": "hela_enzyme_news_monitor", "arguments": {"topic": "solar power subsidies"}, "split": "train", "note": "pair: search kinds"}
 {"task": "Is it true that humans only use 10 percent of their brains?", "tool": "hela_enzyme_fact_checker", "arguments": {"claim": "Humans only use 10 percent of their brains"}, "split": "train", "note": "pair: search kinds"}

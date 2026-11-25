@@ -29,7 +29,7 @@
 {"split": "eval", "task": "Read out the text on the open web page", "tool": "hela_cytosol_browser_get_content"}
 {"split": "eval", "task": "Scroll down the page", "tool": "hela_cytosol_browser_scroll"}
 {"split": "eval", "task": "Find the wikipedia entry for Ada Lovelace", "tool": "hela_enzyme_wikipedia_search", "arguments": {"query": "Ada Lovelace"}}
-{"split": "eval", "task": "Do a web search for kubernetes pod disruption budgets", "tool": "hela_enzyme_google_search", "arguments": {"q": "kubernetes pod disruption budgets"}}
+{"split": "eval", "task": "Do a web search for kubernetes pod disruption budgets", "tool": "hela_enzyme_google_search", "arguments": {"query": "kubernetes pod disruption budgets"}}
 {"split": "eval", "task": "any recent papers on speculative decoding?", "tool": "hela_enzyme_academic_search", "arguments": {"query": "speculative decoding"}}
 {"split": "eval", "task": "Check the news for anything on the EU AI Act", "tool": "hela_enzyme_news_monitor"}
 {"split": "eval", "task": "Open a persistent zsh terminal for me", "tool": "hela_ribosome_session_spawn", "arguments": {"command": "zsh"}}
@@ -58,5 +58,5 @@
 {"task": "Write 'ready' to /workspace/out/flag.txt", "history": [{"tool": "hela_membrane_write_file", "args": {"path": "/workspace/out/flag.txt", "content": "ready"}, "error": "ENOENT: parent directory does not exist"}], "tool": "hela_membrane_create_directory", "arguments": {"path": "/workspace/out"}, "split": "eval"}
 {"task": "Open https://example.com/docs", "history": [{"tool": "hela_cytosol_browser_navigate", "args": {"url": "https://example.com/docs"}, "error": "net::ERR_NAME_NOT_RESOLVED"}], "tool": "hela_enzyme_url_metadata_extractor", "arguments": {"url": "https://example.com/docs"}, "split": "eval"}
 {"task": "Run the build", "history": [{"tool": "hela_nucleus_execute_command", "args": {"command": "npm run build"}, "error": "missing script: build"}], "tool": "hela_membrane_read_file", "arguments": {"path": "/workspace/package.json"}, "split": "eval"}
-{"task": "Search Google for sqlite wal mode", "history": [{"tool": "hela_enzyme_google_search", "args": {"q": "sqlite wal mode"}, "error": "rate limit exceeded"}], "tool": "hela_enzyme_wikipedia_search", "arguments": {"query": "SQLite write-ahead logging"}, "split": "eval"}
+{"task": "Search Google for sqlite wal mode", "history": [{"tool": "hela_enzyme_google_search", "args": {"query": "sqlite wal mode"}, "error": "rate limit exceeded"}], "tool": "hela_enzyme_wikipedia_search", "arguments": {"query": "SQLite write-ahead logging"}, "split": "eval"}
 {"task": "Remove /workspace/cache.lock", "history": [{"tool": "hela_membrane_delete_file", "args": {"path": "/workspace/cache.lock"}, "error": "EACCES: permission denied"}], "tool": "hela_membrane_get_file_info", "arguments": {"path": "/workspace/cache.lock"}, "split": "eval"}
