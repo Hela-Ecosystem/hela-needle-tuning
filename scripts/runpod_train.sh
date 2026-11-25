@@ -41,6 +41,17 @@ python3 -m venv .venv
 pip install --quiet --upgrade pip
 pip install --quiet "cactus-compute[train,gpu]"
 
+# Fail in seconds, not after a billed training run, if JAX cannot see the GPU
+# (usually a driver/CUDA mismatch with the JAX wheels). Cactus trains on JAX,
+# so the pod image's own PyTorch version is irrelevant.
+python - <<'PY'
+import sys, jax
+devices = jax.devices()
+print("python", sys.version.split()[0], "| jax", jax.__version__, "| devices", devices)
+if not any(d.platform in ("gpu", "cuda") for d in devices):
+    sys.exit("JAX sees no GPU: check the driver in nvidia-smi against the JAX CUDA wheel requirements")
+PY
+
 export PYTHONPATH=src
 python -m unittest discover -s tests
 python -m hela_needle build-data --catalog data/catalog/hela-stack-tools.json \

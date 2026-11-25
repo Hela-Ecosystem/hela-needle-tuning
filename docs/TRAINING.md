@@ -19,6 +19,10 @@ python -m hela_needle gate --candidate eval/candidate.json
 
 `train.jsonl` rows use the Cactus format `{"query", "tools", "answers"}`. `eval.jsonl` keeps a `meta` field for scoring.
 
+## Pod image
+
+Cactus trains on JAX, Flax and Optax (`requirements-train.txt`), not PyTorch, so the image's PyTorch version does not matter; any CUDA 12 image with Python 3.10+ works (3.12 is safest). `scripts/runpod_train.sh` installs into a fresh virtualenv and fails fast if JAX cannot see the GPU. An RTX A5000 (24 GB, Ampere) is the planned first card; confirm its fit in the M2 dry run and record the result here.
+
 ## Known facts (upstream docs)
 
 - Fine-tuning is LoRA on the frozen base at the full 20 layers, merged at export. `cactus build --layers N` exports a smaller rung (2 to 20).
