@@ -1,0 +1,14 @@
+{"task": "Is there anything new available for my environment?", "tool": "hela.update.check", "note": "openrouter-free-styled", "split": "train"}
+{"task": "I think my current setup is outdated, can you look into that?", "tool": "hela.update.check", "note": "openrouter-free-styled", "split": "train"}
+{"task": "Can you tell me if any cell configurations have been modified recently?", "tool": "hela.update.check", "note": "openrouter-free-styled", "split": "train"}
+{"task": "I'm seeing some discrepancies in my setup, is there a more recent version?", "tool": "hela.update.check", "note": "openrouter-free-styled", "split": "train"}
+{"task": "I want to see if there are any pending updates for the ecosystem.", "tool": "hela.update.check", "note": "openrouter-free-styled", "split": "train"}
+{"task": "Check for any improvements or patches that haven't been installed yet.", "tool": "hela.update.check", "note": "openrouter-free-styled", "split": "train"}
+{"task": "I'm ready to bring everything up to the latest verified state, go ahead.", "tool": "hela.update.apply", "arguments": {"confirm": true}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Refresh my installation with the newest snapshot and keep a backup.", "tool": "hela.update.apply", "arguments": {"confirm": true}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Go ahead and roll out the latest changes to the managed installation.", "tool": "hela.update.apply", "arguments": {"confirm": true}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "I need to migrate to the most recent stable version now.", "tool": "hela.update.apply", "arguments": {"confirm": true}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Synchronize my environment with the latest verified ecosystem snapshot.", "tool": "hela.update.apply", "arguments": {"confirm": true}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Let's perform the upgrade to the latest snapshot; I authorize the changes.", "tool": "hela.update.apply", "arguments": {"confirm": true}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "What is the weather like in London today?", "tool": null, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Can you write a poem about a lonely robot?", "tool": null, "note": "openrouter-free-styled", "split": "train"}

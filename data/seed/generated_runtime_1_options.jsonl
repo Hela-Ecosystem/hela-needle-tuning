@@ -1,0 +1,14 @@
+{"task": "Is there a newer version of the HeLa ecosystem available right now?", "tool": "hela.update.check", "note": "openrouter-free-styled", "split": "train"}
+{"task": "Scan for any updates to the current HeLa snapshot.", "tool": "hela.update.check", "note": "openrouter-free-styled", "split": "train"}
+{"task": "Check if the ecosystem needs an update.", "tool": "hela.update.check", "note": "openrouter-free-styled", "split": "train"}
+{"task": "Run a read-only check for any pending HeLa snapshots.", "tool": "hela.update.check", "note": "openrouter-free-styled", "split": "train"}
+{"task": "Verify if there are any changes to my current HeLa installation.", "tool": "hela.update.check", "note": "openrouter-free-styled", "split": "train"}
+{"task": "See if a newer snapshot is ready to be pulled.", "tool": "hela.update.check", "note": "openrouter-free-styled", "split": "train"}
+{"task": "Go ahead and apply the latest verified HeLa snapshot, I authorize this.", "tool": "hela.update.apply", "arguments": {"confirm": true}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Update the HeLa ecosystem now. I confirm the changes.", "tool": "hela.update.apply", "arguments": {"confirm": true}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "I'm ready to update. Please apply the new snapshot and confirm the action.", "tool": "hela.update.apply", "arguments": {"confirm": true}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Execute the HeLa ecosystem update and I give my explicit authorization.", "tool": "hela.update.apply", "arguments": {"confirm": true}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Apply the latest updates to the managed installation; yes, I confirm.", "tool": "hela.update.apply", "arguments": {"confirm": true}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Can you update the HeLa ecosystem? I confirm I want to proceed.", "tool": "hela.update.apply", "arguments": {"confirm": true}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "What is the weather like in London today?", "tool": null, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Tell me a joke about robots.", "tool": null, "note": "openrouter-free-styled", "split": "train"}

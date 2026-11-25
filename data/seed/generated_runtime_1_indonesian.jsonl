@@ -1,0 +1,14 @@
+{"task": "Cek dong, ada update baru nggak buat ecosystem HeLa?", "tool": "hela.update.check", "note": "openrouter-free-styled", "split": "train"}
+{"task": "Tolong lakuin update snapshot HeLa sekarang, saya sudah setuju buat ganti instalasinya.", "tool": "hela.update.apply", "arguments": {"confirm": true}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Halo, apa kabar hari ini?", "tool": null, "note": "openrouter-free-styled", "split": "train"}
+{"task": "I need to see if there's a newer snapshot available for HeLa ecosystem.", "tool": "hela.update.check", "note": "openrouter-free-styled", "split": "train"}
+{"task": "Apply the latest verified snapshot, please. I confirm the changes.", "tool": "hela.update.apply", "arguments": {"confirm": true}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Bisa tolong liatin nggak ada perubahan cell di update terbaru?", "tool": "hela.update.check", "note": "openrouter-free-styled", "split": "train"}
+{"task": "Eksekusi update HeLa sekarang, confirm=true ya.", "tool": "hela.update.apply", "arguments": {"confirm": true}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Siapa penemu internet?", "tool": null, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Coba running check dulu, mau tau ada snapshot baru apa nggak.", "tool": "hela.update.check", "note": "openrouter-free-styled", "split": "train"}
+{"task": "Saya mau apply update ecosystemnya, tolong di-authorize ya.", "tool": "hela.update.apply", "arguments": {"confirm": true}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Ada update-an baru nggak di sistem HeLa?", "tool": "hela.update.check", "note": "openrouter-free-styled", "split": "train"}
+{"task": "Update system HeLa ke versi terbaru, saya kasih konfirmasi.", "tool": "hela.update.apply", "arguments": {"confirm": true}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Please perform a read-only check for the HeLa snapshot.", "tool": "hela.update.check", "note": "openrouter-free-styled", "split": "train"}
+{"task": "Lakukan apply snapshot terakhir, saya mengizinkan perubahan managed installation.", "tool": "hela.update.apply", "arguments": {"confirm": true}, "note": "openrouter-free-styled", "split": "train"}

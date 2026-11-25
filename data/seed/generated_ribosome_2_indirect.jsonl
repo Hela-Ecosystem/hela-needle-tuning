@@ -1,0 +1,14 @@
+{"task": "I'm seeing some errors in my terminal, can you show me what happened in the last 20 lines?", "tool": "hela_ribosome_session_read", "arguments": {"sessionId": "sess-99", "tailLines": 20, "mode": "lines"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Can you tell me what's currently running on the server?", "tool": "hela_ribosome_session_list", "note": "openrouter-free-styled", "split": "train"}
+{"task": "I need to start a bash shell in the /workspace directory to run some scripts.", "tool": "hela_ribosome_session_spawn", "arguments": {"command": "bash", "cwd": "/workspace"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "The terminal window is too small, I can't see the full output.", "tool": "hela_ribosome_session_resize", "arguments": {"sessionId": "sess-42", "cols": 120, "rows": 40}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "I've finished my work, please clean up all the sessions that have already finished.", "tool": "hela_ribosome_session_prune", "arguments": {"status": "exited"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "It's stuck and won't respond to my typing, please kill it immediately.", "tool": "hela_ribosome_session_signal", "arguments": {"sessionId": "sess-101", "signal": "SIGKILL"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "I need to type 'mkdir test_dir' into the active session.", "tool": "hela_ribosome_session_write", "arguments": {"sessionId": "sess-55", "payload": "mkdir test_dir", "pressEnter": true}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "What is the current status and metadata for session sess-7?", "tool": "hela_ribosome_session_info", "arguments": {"sessionId": "sess-7"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "I'll wait here until the current process finishes so I can see the exit status.", "tool": "hela_ribosome_session_wait", "arguments": {"sessionId": "sess-88"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Can you show me a screenshot of what the terminal looks like right now?", "tool": "hela_ribosome_session_read", "arguments": {"sessionId": "sess-12", "mode": "screen"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "I want to see only the lines that contain the word 'error' in my session.", "tool": "hela_ribosome_session_read", "arguments": {"sessionId": "sess-33", "grepPattern": "error"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Who won the world cup in 2022?", "tool": null, "note": "openrouter-free-styled", "split": "train"}
+{"task": "How do I bake a chocolate cake?", "tool": null, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Please press the Ctrl+C key in the terminal to interrupt the running command.", "tool": "hela_ribosome_session_write", "arguments": {"sessionId": "sess-202", "payload": "", "pressKey": "Ctrl+C"}, "note": "openrouter-free-styled", "split": "train"}
