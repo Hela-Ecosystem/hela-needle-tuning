@@ -1,0 +1,113 @@
+{"task": "Open a new browser page named 'Research_Tab'.", "tool": "hela_cytosol_browser_agent_create", "arguments": {"name": "Research_Tab"}, "note": "openrouter-free", "split": "train"}
+{"task": "Double click on the button with the text 'Submit Application'.", "tool": "hela_cytosol_browser_click", "arguments": {"text": "Submit Application", "type": "button", "count": 2}, "note": "openrouter-free", "split": "train"}
+{"task": "Check the box for 'I agree to the terms and conditions'.", "tool": "hela_cytosol_browser_check", "arguments": {"selector": "text='I agree to the terms and conditions'"}, "note": "openrouter-free", "split": "train"}
+{"task": "Verify that the current URL contains '/dashboard/settings'.", "tool": "hela_cytosol_browser_assert", "arguments": {"type": "url", "target": "/dashboard/settings"}, "note": "openrouter-free", "split": "train"}
+{"task": "Drag the item with id 'draggable-1' into the zone with id 'drop-zone'.", "tool": "hela_cytosol_browser_drag", "arguments": {"source": "#draggable-1", "target": "#drop-zone"}, "note": "openrouter-free", "split": "train"}
+{"task": "Clear the input field with the class 'search-input' and then type 'coffee beans'.", "tool": "hela_cytosol_browser_clear", "arguments": {"selector": ".search-input"}, "note": "openrouter-free", "split": "train"}
+{"task": "Download the file by clicking on the element with reference ID 5 and save it to '/home/user/downloads/report.pdf'.", "tool": "hela_cytosol_browser_download_click", "arguments": {"ref": 5, "savePath": "/home/user/downloads/report.pdf"}, "note": "openrouter-free", "split": "train"}
+{"task": "Show me all the active agent pages.", "tool": "hela_cytosol_browser_agent_list", "note": "openrouter-free", "split": "train"}
+{"task": "Switch to the 'Automation_Flow' agent.", "tool": "hela_cytosol_browser_agent_switch", "arguments": {"name": "Automation_Flow"}, "note": "openrouter-free", "split": "train"}
+{"task": "When the next alert appears, click 'OK'.", "tool": "hela_cytosol_browser_dialog", "arguments": {"action": "accept"}, "note": "openrouter-free", "split": "train"}
+{"task": "Answer the quiz: Question 1 select option 2, Question 2 select option 1, and Question 3 select options 1 and 3. Then click submit.", "tool": "hela_cytosol_browser_batch_answer_quiz", "arguments": {"answers": [{"q": 1, "option": 2}, {"q": 2, "option": 1}, {"q": 3, "options": [1, 3]}], "submitAfter": true}, "note": "openrouter-free", "split": "train"}
+{"task": "Check for any JavaScript errors in the console.", "tool": "hela_cytosol_browser_console_messages", "arguments": {"type": "error"}, "note": "openrouter-free", "split": "train"}
+{"task": "Remove the agent named 'Temp_Session'.", "tool": "hela_cytosol_browser_agent_remove", "arguments": {"name": "Temp_Session"}, "note": "openrouter-free", "split": "train"}
+{"task": "Dismiss all popups on the page.", "tool": "hela_cytosol_browser_dismiss_popups", "note": "openrouter-free", "split": "train"}
+{"task": "Verify that the element with selector '.success-message' contains the text 'Profile updated successfully'.", "tool": "hela_cytosol_browser_assert", "arguments": {"type": "text", "target": ".success-message", "expected": "Profile updated successfully"}, "note": "openrouter-free", "split": "train"}
+{"task": "Is the element '#loading-spinner' visible?", "tool": "hela_cytosol_browser_assert", "arguments": {"type": "visible", "target": "#loading-spinner"}, "note": "openrouter-free", "split": "train"}
+{"task": "Run a custom JS expression: 'document.readyState === \"complete\"' to see if the page is loaded.", "tool": "hela_cytosol_browser_assert", "arguments": {"type": "js", "target": "document.readyState === \"complete\""}, "note": "openrouter-free", "split": "train"}
+{"task": "Right click on the element at coordinates x=500, y=300.", "tool": "hela_cytosol_browser_click", "arguments": {"x": 500, "y": 300, "button": "right"}, "note": "openrouter-free", "split": "train"}
+{"task": "Clear all network mock routes.", "tool": "hela_cytosol_browser_clear_mocks", "note": "openrouter-free", "split": "train"}
+{"task": "Check the cache statistics.", "tool": "hela_cytosol_browser_cache_stats", "note": "openrouter-free", "split": "train"}
+{"task": "Go back to the previous page.", "tool": "hela_cytosol_browser_back", "note": "openrouter-free", "split": "train"}
+{"task": "Close the browser.", "tool": "hela_cytosol_browser_close", "note": "openrouter-free", "split": "train"}
+{"task": "What is the weather in Tokyo right now?", "tool": null, "note": "openrouter-free", "split": "train"}
+{"task": "Write a poem about a lonely robot.", "tool": null, "note": "openrouter-free", "split": "train"}
+{"task": "Calculate the square root of 144.", "tool": null, "note": "openrouter-free", "split": "train"}
+{"task": "Click on the button that says 'Submit Order'.", "tool": "hela_cytosol_browser_click", "arguments": {"text": "Submit Order", "type": "button"}, "note": "openrouter-free", "split": "train"}
+{"task": "Open a new agent named 'ScraperBot' to run my tasks in parallel.", "tool": "hela_cytosol_browser_agent_create", "arguments": {"name": "ScraperBot"}, "note": "openrouter-free", "split": "train"}
+{"task": "Double click on the second link in the navigation menu.", "tool": "hela_cytosol_browser_click", "arguments": {"selector": "a", "nth": 1, "count": 2, "type": "link"}, "note": "openrouter-free", "split": "train"}
+{"task": "I want to answer the quiz. For question 1, select option 2. For question 2, select options 1 and 3. Then click the 'Next' button.", "tool": "hela_cytosol_browser_batch_answer_quiz", "arguments": {"answers": [{"q": 1, "option": 2}, {"q": 2, "options": [1, 3]}], "nextSelector": ".next-btn"}, "note": "openrouter-free", "split": "train"}
+{"task": "Clear the input field with the class 'search-input' and then type 'laptops' into it.", "tool": "hela_cytosol_browser_clear", "arguments": {"selector": ".search-input"}, "note": "openrouter-free", "split": "train"}
+{"task": "Switch to my active agent named 'ResearchSession'.", "tool": "hela_cytosol_browser_agent_switch", "arguments": {"name": "ResearchSession"}, "note": "openrouter-free", "split": "train"}
+{"task": "Drag the item with selector '.draggable' onto the '.dropzone' area.", "tool": "hela_cytosol_browser_drag", "arguments": {"source": ".draggable", "target": ".dropzone"}, "note": "openrouter-free", "split": "train"}
+{"task": "Download the file by clicking the element with reference ID 5 and save it to '/downloads/report.pdf'.", "tool": "hela_cytosol_browser_download_click", "arguments": {"ref": 5, "savePath": "/downloads/report.pdf"}, "note": "openrouter-free", "split": "train"}
+{"task": "Tell me what's in the console logs, specifically looking for errors.", "tool": "hela_cytosol_browser_console_messages", "arguments": {"type": "error"}, "note": "openrouter-free", "split": "train"}
+{"task": "Right click on the coordinate x=100, y=250.", "tool": "hela_cytosol_browser_click", "arguments": {"x": 100, "y": 250, "button": "right"}, "note": "openrouter-free", "split": "train"}
+{"task": "Remove the agent called 'TempAgent'.", "tool": "hela_cytosol_browser_agent_remove", "arguments": {"name": "TempAgent"}, "note": "openrouter-free", "split": "train"}
+{"task": "When the next popup appears, click the 'Dismiss' button.", "tool": "hela_cytosol_browser_dismiss_popups", "note": "openrouter-free", "split": "train"}
+{"task": "Check the checkbox for 'Terms of Service' using the selector '#tos-check'.", "tool": "hela_cytosol_browser_check", "arguments": {"selector": "#tos-check"}, "note": "openrouter-free", "split": "train"}
+{"task": "Verify that the text in the header element is 'Welcome to the Portal'.", "tool": "hela_cytosol_browser_assert", "arguments": {"type": "text", "target": "header", "expected": "Welcome to the Portal"}, "note": "openrouter-free", "split": "train"}
+{"task": "Set up the browser to automatically accept the next prompt and enter 'John Doe' as the text.", "tool": "hela_cytosol_browser_dialog", "arguments": {"action": "accept", "promptText": "John Doe"}, "note": "openrouter-free", "split": "train"}
+{"task": "List all my current agents and their URLs.", "tool": "hela_cytosol_browser_agent_list", "note": "openrouter-free", "split": "train"}
+{"task": "Run a custom JS expression `window.innerWidth > 500` to check the viewport width.", "tool": "hela_cytosol_browser_assert", "arguments": {"type": "js", "target": "window.innerWidth > 500"}, "note": "openrouter-free", "split": "train"}
+{"task": "Get the current action selector cache statistics.", "tool": "hela_cytosol_browser_cache_stats", "note": "openrouter-free", "split": "train"}
+{"task": "Close the browser session completely.", "tool": "hela_cytosol_browser_close", "note": "openrouter-free", "split": "train"}
+{"task": "What is the capital of France?", "tool": null, "note": "openrouter-free", "split": "train"}
+{"task": "Calculate 15% of 250.", "tool": null, "note": "openrouter-free", "split": "train"}
+{"task": "Can you write a poem about a lonely robot?", "tool": null, "note": "openrouter-free", "split": "train"}
+{"task": "Click on the 'Submit' button.", "tool": "hela_cytosol_browser_click", "arguments": {"text": "Submit"}, "note": "openrouter-free", "split": "train"}
+{"task": "Create a new browser agent named 'research_bot'.", "tool": "hela_cytosol_browser_agent_create", "arguments": {"name": "research_bot"}, "note": "openrouter-free", "split": "train"}
+{"task": "Check if the URL is https://example.com/dashboard.", "tool": "hela_cytosol_browser_assert", "arguments": {"type": "url", "target": "https://example.com/dashboard"}, "note": "openrouter-free", "split": "train"}
+{"task": "Drag the item with id 'draggable' to the container '#dropzone'.", "tool": "hela_cytosol_browser_drag", "arguments": {"source": "#draggable", "target": "#dropzone"}, "note": "openrouter-free", "split": "train"}
+{"task": "Double click on the element with selector '.btn-primary'.", "tool": "hela_cytosol_browser_click", "arguments": {"selector": ".btn-primary", "count": 2}, "note": "openrouter-free", "split": "train"}
+{"task": "Clear the input field at #username-input.", "tool": "hela_cytosol_browser_clear", "arguments": {"selector": "#username-input"}, "note": "openrouter-free", "split": "train"}
+{"task": "I need to download the report. Click on the download link (ref 5) and save it to /tmp/report.pdf.", "tool": "hela_cytosol_browser_download_click", "arguments": {"ref": 5, "savePath": "/tmp/report.pdf"}, "note": "openrouter-free", "split": "train"}
+{"task": "List all the existing agent pages.", "tool": "hela_cytosol_browser_agent_list", "note": "openrouter-free", "split": "train"}
+{"task": "Switch to the agent called 'test-session'.", "tool": "hela_cytosol_browser_agent_switch", "arguments": {"name": "test-session"}, "note": "openrouter-free", "split": "train"}
+{"task": "Answer the quiz: for question 0 pick option 1, for question 1 pick options 0 and 2, and then submit.", "tool": "hela_cytosol_browser_batch_answer_quiz", "arguments": {"answers": [{"q": 0, "option": 1}, {"q": 1, "options": [0, 2]}], "submitAfter": true}, "note": "openrouter-free", "split": "train"}
+{"task": "Check if the text 'Welcome User' is visible in the element '.greeting'.", "tool": "hela_cytosol_browser_assert", "arguments": {"type": "text", "target": ".greeting", "expected": "Welcome User"}, "note": "openrouter-free", "split": "train"}
+{"task": "When the next alert pops up, just click OK.", "tool": "hela_cytosol_browser_dialog", "arguments": {"action": "accept"}, "note": "openrouter-free", "split": "train"}
+{"task": "When the prompt appears, type 'Hello World' and accept it.", "tool": "hela_cytosol_browser_dialog", "arguments": {"action": "accept", "promptText": "Hello World"}, "note": "openrouter-free", "split": "train"}
+{"task": "Remove the agent named 'temp-scraper'.", "tool": "hela_cytosol_browser_agent_remove", "arguments": {"name": "temp-scraper"}, "note": "openrouter-free", "split": "train"}
+{"task": "Check the checkbox with selector '.terms-checkbox'.", "tool": "hela_cytosol_browser_check", "arguments": {"selector": ".terms-checkbox"}, "note": "openrouter-free", "split": "train"}
+{"task": "Show me the last 50 error messages from the console.", "tool": "hela_cytosol_browser_console_messages", "arguments": {"type": "error", "maxLines": 50}, "note": "openrouter-free", "split": "train"}
+{"task": "Dismiss all current popups on the page.", "tool": "hela_cytosol_browser_dismiss_popups", "note": "openrouter-free", "split": "train"}
+{"task": "Right click on the element at coordinates x=100, y=200.", "tool": "hela_cytosol_browser_click", "arguments": {"x": 100, "y": 200, "button": "right"}, "note": "openrouter-free", "split": "train"}
+{"task": "Clear all request intercept rules.", "tool": "hela_cytosol_browser_clear_intercepts", "note": "openrouter-free", "split": "train"}
+{"task": "Run a JS expression: `document.title.length > 0` to verify the page loaded.", "tool": "hela_cytosol_browser_assert", "arguments": {"type": "js", "target": "document.title.length > 0"}, "note": "openrouter-free", "split": "train"}
+{"task": "Write a poem about coding.", "tool": null, "note": "openrouter-free", "split": "train"}
+{"task": "Click the 'Login' button.", "tool": "hela_cytosol_browser_click", "arguments": {"text": "Login", "type": "button"}, "note": "openrouter-free", "split": "train"}
+{"task": "Double click on the element with selector '#main-header'.", "tool": "hela_cytosol_browser_click", "arguments": {"selector": "#main-header", "count": 2}, "note": "openrouter-free", "split": "train"}
+{"task": "Check if the URL contains '/dashboard/settings'.", "tool": "hela_cytosol_browser_assert", "arguments": {"type": "url", "target": "/dashboard/settings"}, "note": "openrouter-free", "split": "train"}
+{"task": "Create a new browser tab named 'research-session' so I can work on this separately.", "tool": "hela_cytosol_browser_agent_create", "arguments": {"name": "research-session"}, "note": "openrouter-free", "split": "train"}
+{"task": "Clear the input field at '.email-input' and type my email.", "tool": "hela_cytosol_browser_clear", "arguments": {"selector": ".email-input"}, "note": "openrouter-free", "split": "train"}
+{"task": "Drag the item with id 'item-1' into the trash bin selector '#trash'.", "tool": "hela_cytosol_browser_drag", "arguments": {"source": "#item-1", "target": "#trash"}, "note": "openrouter-free", "split": "train"}
+{"task": "Answer the quiz: for question 1, select the first option; for question 2, select options 1 and 3; and then hit the 'Submit' button.", "tool": "hela_cytosol_browser_batch_answer_quiz", "arguments": {"answers": [{"q": 0, "option": 0}, {"q": 1, "options": [0, 2]}], "submitAfter": true}, "note": "openrouter-free", "split": "train"}
+{"task": "When the prompt pops up, type 'Hello World' and click OK.", "tool": "hela_cytosol_browser_dialog", "arguments": {"action": "accept", "promptText": "Hello World"}, "note": "openrouter-free", "split": "train"}
+{"task": "Right click on the element at coordinates 500, 300.", "tool": "hela_cytosol_browser_click", "arguments": {"x": 500, "y": 300, "button": "right"}, "note": "openrouter-free", "split": "train"}
+{"task": "Download the file associated with the 3rd element in the list.", "tool": "hela_cytosol_browser_download_click", "arguments": {"ref": 3}, "note": "openrouter-free", "split": "train"}
+{"task": "Switch back to the 'shopping-cart' agent.", "tool": "hela_cytosol_browser_agent_switch", "arguments": {"name": "shopping-cart"}, "note": "openrouter-free", "split": "train"}
+{"task": "Assert that the text inside '.welcome-msg' is 'Welcome back, User!'.", "tool": "hela_cytosol_browser_assert", "arguments": {"type": "text", "target": ".welcome-msg", "expected": "Welcome back, User!"}, "note": "openrouter-free", "split": "train"}
+{"task": "Close the current browser session.", "tool": "hela_cytosol_browser_close", "note": "openrouter-free", "split": "train"}
+{"task": "Get the last 50 error messages from the console.", "tool": "hela_cytosol_browser_console_messages", "arguments": {"type": "error", "maxLines": 50}, "note": "openrouter-free", "split": "train"}
+{"task": "Check if the element '.submit-btn' is visible.", "tool": "hela_cytosol_browser_assert", "arguments": {"type": "visible", "target": ".submit-btn"}, "note": "openrouter-free", "split": "train"}
+{"task": "Dismiss all active popups on the page.", "tool": "hela_cytosol_browser_dismiss_popups", "note": "openrouter-free", "split": "train"}
+{"task": "Remove the agent named 'test-agent'.", "tool": "hela_cytosol_browser_agent_remove", "arguments": {"name": "test-agent"}, "note": "openrouter-free", "split": "train"}
+{"task": "Show me the cache statistics for the action selector.", "tool": "hela_cytosol_browser_cache_stats", "note": "openrouter-free", "split": "train"}
+{"task": "Check the checkbox with selector 'input[type=\"checkbox\"]'.", "tool": "hela_cytosol_browser_check", "arguments": {"selector": "input[type=\"checkbox\"]"}, "note": "openrouter-free", "split": "train"}
+{"task": "List all my currently open agent pages.", "tool": "hela_cytosol_browser_agent_list", "note": "openrouter-free", "split": "train"}
+{"task": "Double click the element with CSS selector '.login-btn'.", "tool": "hela_cytosol_browser_click", "arguments": {"selector": ".login-btn", "count": 2}, "note": "openrouter-free", "split": "train"}
+{"task": "Create a new agent named 'ScraperBot' to run this in parallel.", "tool": "hela_cytosol_browser_agent_create", "arguments": {"name": "ScraperBot"}, "note": "openrouter-free", "split": "train"}
+{"task": "Switch to the 'Research' agent.", "tool": "hela_cytosol_browser_agent_switch", "arguments": {"name": "Research"}, "note": "openrouter-free", "split": "train"}
+{"task": "Drag the item with id 'drag-source' into the box with id 'drop-target'.", "tool": "hela_cytosol_browser_drag", "arguments": {"source": "#drag-source", "target": "#drop-target"}, "note": "openrouter-free", "split": "train"}
+{"task": "Clear the input field at '#email-address' and type 'test@example.com'.", "tool": "hela_cytosol_browser_clear", "arguments": {"selector": "#email-address"}, "note": "openrouter-free", "split": "train"}
+{"task": "Batch answer the quiz: question 1 select option 2, question 2 select options 1 and 3, and then click submit.", "tool": "hela_cytosol_browser_batch_answer_quiz", "arguments": {"answers": [{"q": 1, "option": 2}, {"q": 2, "options": [1, 3]}], "submitAfter": true}, "note": "openrouter-free", "split": "train"}
+{"task": "Download the file by clicking on element reference 5 and save it to '/tmp/data.csv'.", "tool": "hela_cytosol_browser_download_click", "arguments": {"ref": 5, "savePath": "/tmp/data.csv"}, "note": "openrouter-free", "split": "train"}
+{"task": "Check the box for 'Terms and Conditions' using selector 'input[name=\"terms\"]'.", "tool": "hela_cytosol_browser_check", "arguments": {"selector": "input[name=\"terms\"]"}, "note": "openrouter-free", "split": "train"}
+{"task": "Dismiss any popups that appear.", "tool": "hela_cytosol_browser_dismiss_popups", "note": "openrouter-free", "split": "train"}
+{"task": "Right click on the coordinates x=100, y=250.", "tool": "hela_cytosol_browser_click", "arguments": {"x": 100, "y": 250, "button": "right"}, "note": "openrouter-free", "split": "train"}
+{"task": "Set the next dialog to accept the prompt 'Enter your name' and provide 'John Doe'.", "tool": "hela_cytosol_browser_dialog", "arguments": {"action": "accept", "promptText": "John Doe"}, "note": "openrouter-free", "split": "train"}
+{"task": "Show me all the console error messages.", "tool": "hela_cytosol_browser_console_messages", "arguments": {"type": "error"}, "note": "openrouter-free", "split": "train"}
+{"task": "List all active agent pages.", "tool": "hela_cytosol_browser_agent_list", "note": "openrouter-free", "split": "train"}
+{"task": "Remove the agent named 'OldSession'.", "tool": "hela_cytosol_browser_agent_remove", "arguments": {"name": "OldSession"}, "note": "openrouter-free", "split": "train"}
+{"task": "Evaluate the JS expression 'document.body.className === \"dark-mode\"' to check the theme.", "tool": "hela_cytosol_browser_assert", "arguments": {"type": "js", "target": "document.body.className === \"dark-mode\""}, "note": "openrouter-free", "split": "train"}
+{"task": "What is the weather in Tokyo?", "tool": null, "note": "openrouter-free", "split": "train"}
+{"task": "Order a pepperoni pizza from the local shop.", "tool": null, "note": "openrouter-free", "split": "train"}
+{"task": "Write a poem about the ocean.", "tool": null, "note": "openrouter-free", "split": "train"}
+{"task": "Click the 3rd link in the list.", "tool": "hela_cytosol_browser_click", "arguments": {"selector": "a", "nth": 2}, "note": "openrouter-free", "split": "train"}
+{"task": "Get the cache statistics for the selector cache.", "tool": "hela_cytosol_browser_cache_stats", "note": "openrouter-free", "split": "train"}
+{"task": "Click on the 'Login' button.", "tool": "hela_cytosol_browser_click", "arguments": {"text": "Login"}, "note": "openrouter-free", "split": "train"}
+{"task": "Double click the element at coordinates x=150, y=300.", "tool": "hela_cytosol_browser_click", "arguments": {"x": 150, "y": 300, "count": 2}, "note": "openrouter-free", "split": "train"}
+{"task": "Download the file by clicking on element ref 5 and save it to /home/user/downloads/report.pdf.", "tool": "hela_cytosol_browser_download_click", "arguments": {"ref": 5, "savePath": "/home/user/downloads/report.pdf"}, "note": "openrouter-free", "split": "train"}
+{"task": "Clear the text in the input field with selector '.search-input'.", "tool": "hela_cytosol_browser_clear", "arguments": {"selector": ".search-input"}, "note": "openrouter-free", "split": "train"}
+{"task": "Drag the item with selector '.drag-source' to the '.drop-target' zone.", "tool": "hela_cytosol_browser_drag", "arguments": {"source": ".drag-source", "target": ".drop-target"}, "note": "openrouter-free", "split": "train"}
