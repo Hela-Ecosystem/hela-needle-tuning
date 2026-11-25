@@ -32,3 +32,7 @@ Every training row is built by `python -m hela_needle build-data` from seed file
 1. Export the live runtime's tool list (the bundled snapshot predates tools such as `hela_genome_list_missions`) and replace `data/catalog/hela-stack-tools.json`.
 2. `build-data` will fail on any seed naming a missing tool; fix or drop those lines.
 3. Re-run the baseline on the frozen eval.
+
+## Automatic import
+
+`scripts/sync_generated.sh <raw dir>` imports finished generation chunks, rebuilds, and pushes, but only if the frozen eval still hashes to `eval/frozen.sha256`, the secret check is clean and the tests pass. When the eval is changed on purpose, regenerate the baseline and update `eval/frozen.sha256` in the same commit.
