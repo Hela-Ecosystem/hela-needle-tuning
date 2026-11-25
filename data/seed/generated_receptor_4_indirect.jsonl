@@ -1,0 +1,14 @@
+{"task": "I can't seem to find the login button on this screen.", "tool": "hela_receptor_ui_find_element", "arguments": {"text": "Log In", "serial": "device-7788"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "The app seems stuck, can you see what's actually on the screen right now?", "tool": "hela_receptor_ui_get_state", "arguments": {"serial": "sess-9921"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "I need to type 'guest_user_123' into that username field.", "tool": "hela_receptor_ui_smart_fill", "arguments": {"textToType": "guest_user_123", "text": "Username", "serial": "device-7788", "pressEnter": true}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Something is blocking my view, show me the full XML structure of the interface.", "tool": "hela_receptor_ui_dump", "arguments": {"serial": "sess-9921"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "I'm trying to reach the bottom of this long list of settings.", "tool": "hela_receptor_swipe", "arguments": {"x1": 500, "y1": 1500, "x2": 500, "y2": 200, "duration": 500, "serial": "device-7788"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "The screen hasn't updated yet, give it a second to catch up.", "tool": "hela_receptor_wait", "arguments": {"ms": 2000}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "I need to click on the item labeled 'Settings'.", "tool": "hela_receptor_ui_tap_element", "arguments": {"text": "Settings", "serial": "device-7788"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "I'm waiting for the 'Success' message to pop up before I continue.", "tool": "hela_receptor_ui_wait_for_element", "arguments": {"text": "Success", "timeoutMs": 5000, "serial": "sess-9921"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Just tap right in the middle of the screen for me.", "tool": "hela_receptor_tap", "arguments": {"x": 540, "y": 960, "serial": "device-7788"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "What version of the underlying mirroring software is running?", "tool": "hela_receptor_version", "note": "openrouter-free-styled", "split": "train"}
+{"task": "Who won the world series in 1995?", "tool": null, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Can you tell me a joke about robots?", "tool": null, "note": "openrouter-free-styled", "split": "train"}
+{"task": "I need to enter 'example.com' into the URL bar.", "tool": "hela_receptor_ui_smart_fill", "arguments": {"textToType": "example.com", "resourceId": "com.android.chrome:id/url_bar", "serial": "device-7788", "pressEnter": true}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "The element with ID 'submit_btn' hasn't appeared yet, let me know when it does.", "tool": "hela_receptor_ui_wait_for_element", "arguments": {"resourceId": "com.app:id/submit_btn", "serial": "sess-9921"}, "note": "openrouter-free-styled", "split": "train"}

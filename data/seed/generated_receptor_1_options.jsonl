@@ -1,0 +1,14 @@
+{"task": "Show me only the third-party apps installed on the phone.", "tool": "hela_receptor_app_list", "arguments": {"system": false}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Find all the system apps that have 'camera' in their name.", "tool": "hela_receptor_app_list", "arguments": {"filter": "camera", "system": true}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Can you tell me what's currently written in the clipboard?", "tool": "hela_receptor_clipboard_get", "note": "openrouter-free-styled", "split": "train"}
+{"task": "I need to paste 'example.com/login' into the device right away.", "tool": "hela_receptor_clipboard_set", "arguments": {"text": "example.com/login", "paste": true}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Force stop and then relaunch the com.example.media app.", "tool": "hela_receptor_app_start", "arguments": {"packageName": "+com.example.media"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Install the new update from /workspace/updates/app_v2.apk on device serial sess-99.", "tool": "hela_receptor_app_install", "arguments": {"apkPath": "/workspace/updates/app_v2.apk", "serial": "sess-99"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Connect to the device wirelessly using port 8888.", "tool": "hela_receptor_connect_wifi", "arguments": {"port": 8888}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "What kind of device is connected? I need the model and battery info.", "tool": "hela_receptor_device_info", "note": "openrouter-free-styled", "split": "train"}
+{"task": "Uninstall the package com.old.legacy.app on the device sess-12.", "tool": "hela_receptor_app_uninstall", "arguments": {"packageName": "com.old.legacy.app", "serial": "sess-12"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Check which application is currently running on the foreground for device sess-44.", "tool": "hela_receptor_app_current", "arguments": {"serial": "sess-44"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Close all those annoying notification panels and settings windows.", "tool": "hela_receptor_collapse_panels", "note": "openrouter-free-styled", "split": "train"}
+{"task": "List all the devices currently plugged into the computer.", "tool": "hela_receptor_device_list", "note": "openrouter-free-styled", "split": "train"}
+{"task": "Who won the world series in 1995?", "tool": null, "note": "openrouter-free-styled", "split": "train"}
+{"task": "How do I bake a chocolate cake?", "tool": null, "note": "openrouter-free-styled", "split": "train"}

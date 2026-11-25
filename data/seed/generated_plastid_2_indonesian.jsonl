@@ -1,0 +1,14 @@
+{"task": "Tolong dong fokusin ke object 'Cube_Main' di view 3D.", "tool": "hela_plastid_navigation", "arguments": {"action": "focus_object", "name": "Cube_Main"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Save file ini ke /workspace/project_final.blend sebagai copy ya.", "tool": "hela_plastid_save_blend", "arguments": {"filepath": "/workspace/project_final.blend", "as_copy": true}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Render viewport sekarang, saya mau lihat hasilnya.", "tool": "hela_plastid_render_output", "arguments": {"type": "viewport"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Bisa pindah ke tab 'Shading' nggak?", "tool": "hela_plastid_navigation", "arguments": {"action": "jump_to_tab", "name": "Shading"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Simpan file langsung ke /workspace/autosave_01.blend.", "tool": "hela_plastid_save_blend", "arguments": {"filepath": "/workspace/autosave_01.blend", "as_copy": false}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Buatin thumbnail buat scene ini, simpan di /workspace/thumbs/render_01.png.", "tool": "hela_plastid_render_output", "arguments": {"type": "thumbnail", "output_path": "/workspace/thumbs/render_01.png"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Halo, apa kabar hari ini?", "tool": null, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Focus ke data 'Material_Red_01' please.", "tool": "hela_plastid_navigation", "arguments": {"action": "focus_data", "name": "Material_Red_01"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Gimana cara masak nasi goreng yang enak?", "tool": null, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Tolong render output viewnya sekarang juga.", "tool": "hela_plastid_render_output", "arguments": {"type": "viewport"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Jump to tab 'Compositing' dong, mau edit node.", "tool": "hela_plastid_navigation", "arguments": {"action": "jump_to_tab", "name": "Compositing"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Bikin copy file ini ke /workspace/backup/v1.blend.", "tool": "hela_plastid_save_blend", "arguments": {"filepath": "/workspace/backup/v1.blend", "as_copy": true}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Coba fokusin ke object 'Camera_Rig_02'.", "tool": "hela_plastid_navigation", "arguments": {"action": "focus_object", "name": "Camera_Rig_02"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Render thumbnail-nya terus taruh di /workspace/preview.jpg.", "tool": "hela_plastid_render_output", "arguments": {"type": "thumbnail", "output_path": "/workspace/preview.jpg"}, "note": "openrouter-free-styled", "split": "train"}

@@ -1,0 +1,14 @@
+{"task": "Coba cek dong device apa aja yang lagi connected ke PC ini.", "tool": "hela_receptor_device_list", "note": "openrouter-free-styled", "split": "train"}
+{"task": "Tolong install file APK ini ke device serial sess-992: /workspace/apps/game_baru.apk", "tool": "hela_receptor_app_install", "arguments": {"apkPath": "/workspace/apps/game_baru.apk", "serial": "sess-992"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Bisa tolong list semua third-party apps yang terinstall di device sess-123?", "tool": "hela_receptor_app_list", "arguments": {"system": false, "serial": "sess-123"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Saya mau tau info detail device ini, kayak versi Android sama battery levelnya.", "tool": "hela_receptor_device_info", "arguments": {"serial": "sess-456"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Tolong copas text 'Halo Dunia' ke clipboard device sess-789, terus langsung paste aja.", "tool": "hela_receptor_clipboard_set", "arguments": {"text": "Halo Dunia", "paste": true, "serial": "sess-789"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Apa sih fungsi dari algoritma sorting dalam pemrograman?", "tool": null, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Lagi buka aplikasi apa sih sekarang di device sess-001?", "tool": "hela_receptor_app_current", "arguments": {"serial": "sess-001"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Stop paksa aplikasi com.example.socialmedia di device sess-555!", "tool": "hela_receptor_app_stop", "arguments": {"packageName": "com.example.socialmedia", "serial": "sess-555"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Bisa tolong launch aplikasi com.android.settings lewat ADB?", "tool": "hela_receptor_app_start", "arguments": {"packageName": "com.android.settings", "serial": "sess-222"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Coba ambil isi clipboard yang sekarang ada di device sess-333.", "tool": "hela_receptor_clipboard_get", "arguments": {"serial": "sess-333"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Tolong hapus atau uninstall package com.test.dummy dari device sess-444.", "tool": "hela_receptor_app_uninstall", "arguments": {"packageName": "com.test.dummy", "serial": "sess-444"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Eh, tutupin semua panel yang lagi kebuka di screen (notification/settings) dong.", "tool": "hela_receptor_collapse_panels", "arguments": {"serial": "sess-666"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Gimana caranya masak nasi goreng yang enak?", "tool": null, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Aktifin WiFi ADB di device sess-888 pake port 5555 ya.", "tool": "hela_receptor_connect_wifi", "arguments": {"port": 5555, "serial": "sess-888"}, "note": "openrouter-free-styled", "split": "train"}
