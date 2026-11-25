@@ -18,7 +18,7 @@ Without GitHub: `curl -fsSL https://raw.githubusercontent.com/Hela-Ecosystem/hel
 
 `PROFILES` takes one or more profile ids (`PROFILES="dev-workspace minimal"`) or `ALL` for all 8. The script builds each profile's dataset, fine-tunes with the Cactus CLI, exports `hela-needle3-<profile>.cact`, and records timings, coverage and logs. It never terminates the machine for you: do that when it says so.
 
-**Then check the model before using it.** On a machine with the Needle engine, `ENGINE=<needle3> BASE_MODEL=<shipped needle3.cact> scripts/eval_profiles.sh <folder with the .cact files>` scores each profile's model against the untuned one on a frozen, hand-written eval and applies the release gate. A model that does not pass the gate should not be used.
+**Then check the model before using it.** On a machine with the Needle engine, `ENGINE=<needle3> BASE_MODEL=<shipped needle3.cact> scripts/eval_profiles.sh <folder with the .cact files>` scores each profile's model against the untuned one on a frozen, hand-written eval and applies the release gate. A model that does not pass the gate should not be used. Needle's answers change with the system text the runtime passes (we measured 16 of 40 answers differing with and without it), while training rows carry none, so also run it with `SYSTEM_MODE=none` and give the installer whichever setting scores better.
 
 Status: the single-profile path ran end to end once (see `docs/TRAINING.md`); the multi-profile loop and `eval_profiles.sh` are new and untested on a GPU. The weights licence is not documented upstream, so check it before sharing any trained model. This repo publishes no weights.
 

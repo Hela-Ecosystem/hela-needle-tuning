@@ -6,6 +6,9 @@
 # Env:   ENGINE      path to the needle3 engine binary           (required)
 #        BASE_MODEL  path to the shipped needle3.cact             (required, the baseline)
 #        TIMEOUT     seconds per engine call (default 60)
+#        SYSTEM_MODE profile (default) passes the profile's system text like the installer does;
+#                    none passes no system text. Needle's answers change with the system text and the
+#                    training rows have none, so run both and ship whichever scores better.
 #
 # For each profile: build its dataset, score the shipped model once (eval/baselines/<profile>.json,
 # reused later), score the tuned model, and run the gate. The profile's own system text
@@ -30,12 +33,15 @@ for P in $PROFILES; do
   python -m hela_needle build-data --catalog "$CATALOG" --profile "$P" --out "$OUT" >/dev/null
   SYS="data/catalog/profiles/$P.txt"
   [ -f "$SYS" ] || SYS=data/catalog/hela-system.txt
-  if [ ! -f "eval/baselines/$P.json" ]; then
-    python -m hela_needle eval --eval "$OUT/eval.jsonl" --engine "$ENGINE" --model "$BASE_MODEL" --system "$SYS" --timeout "$TIMEOUT" --out "eval/baselines/$P.json" >/dev/null
+  SYSARGS=(--system "$SYS")
+  TAG=""
+  if [ "${SYSTEM_MODE:-profile}" = "none" ]; then SYSARGS=(); TAG=".nosystem"; fi
+  if [ ! -f "eval/baselines/$P$TAG.json" ]; then
+    python -m hela_needle eval --eval "$OUT/eval.jsonl" --engine "$ENGINE" --model "$BASE_MODEL" "${SYSARGS[@]}" --timeout "$TIMEOUT" --out "eval/baselines/$P$TAG.json" >/dev/null
   fi
-  python -m hela_needle eval --eval "$OUT/eval.jsonl" --engine "$ENGINE" --model "$DIR/hela-needle3-$P.cact" --system "$SYS" --timeout "$TIMEOUT" --out "eval/candidates/$P.json" >/dev/null
-  if python -m hela_needle gate --candidate "eval/candidates/$P.json" --baseline "eval/baselines/$P.json" >"eval/candidates/$P.gate.txt" 2>&1; then v=PASS; else v=FAIL; status=1; fi
-  python3 - "$P" "$v" <<'PY'
+  python -m hela_needle eval --eval "$OUT/eval.jsonl" --engine "$ENGINE" --model "$DIR/hela-needle3-$P.cact" "${SYSARGS[@]}" --timeout "$TIMEOUT" --out "eval/candidates/$P$TAG.json" >/dev/null
+  if python -m hela_needle gate --candidate "eval/candidates/$P$TAG.json" --baseline "eval/baselines/$P$TAG.json" >"eval/candidates/$P$TAG.gate.txt" 2>&1; then v=PASS; else v=FAIL; status=1; fi
+  python3 - "$P$TAG" "$v" <<'PY'
 import json, sys
 p, v = sys.argv[1], sys.argv[2]
 c = json.load(open(f"eval/candidates/{p}.json")); b = json.load(open(f"eval/baselines/{p}.json"))
