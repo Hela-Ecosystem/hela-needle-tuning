@@ -5656,6 +5656,7 @@
   "server": "hela-plastid",
   "description": "[R3 Native Execution] Execute arbitrary Python code in Blender. WARNING: Runs with full Blender process privileges; WeakSandboxForLLM is an in-process operator filter, not an OS sandbox. Gated by HELA_PLASTID_ALLOW_CODE.",
   "parameters": {
+   "type": "object",
    "properties": {
     "code": {
      "type": "string"
@@ -5666,8 +5667,7 @@
    },
    "required": [
     "code"
-   ],
-   "type": "object"
+   ]
   }
  },
  {
@@ -5675,16 +5675,16 @@
   "server": "hela-plastid",
   "description": "[R3 Native Execution] Execute a technical Geometric Delta (Python code) provided by the Critic. Use this recursively until the Quality Score reaches 90+. WARNING: Runs with full Blender process privileges. Gated by HELA_PLASTID_ALLOW_CODE.",
   "parameters": {
+   "type": "object",
    "properties": {
     "delta_instructions": {
-     "description": "Technical instructions for refinements.",
-     "type": "string"
+     "type": "string",
+     "description": "Technical instructions for refinements."
     }
    },
    "required": [
     "delta_instructions"
-   ],
-   "type": "object"
+   ]
   }
  },
  {
@@ -5692,6 +5692,7 @@
   "server": "hela-plastid",
   "description": "Generate a multi-component 3D modeling plan with high-fidelity mandates.",
   "parameters": {
+   "type": "object",
    "properties": {
     "prompt": {
      "type": "string"
@@ -5699,8 +5700,7 @@
    },
    "required": [
     "prompt"
-   ],
-   "type": "object"
+   ]
   }
  },
  {
@@ -5708,21 +5708,21 @@
   "server": "hela-plastid",
   "description": "Retrieve specialized persona instructions (planner/writer/debugger/critic).",
   "parameters": {
+   "type": "object",
    "properties": {
     "agent": {
+     "type": "string",
      "enum": [
       "planner",
       "writer",
       "debugger",
       "critic"
-     ],
-     "type": "string"
+     ]
     }
    },
    "required": [
     "agent"
-   ],
-   "type": "object"
+   ]
   }
  },
  {
@@ -5730,16 +5730,16 @@
   "server": "hela-plastid",
   "description": "Advanced Blender Python API RAG: Get precise documentation, examples, and signatures.",
   "parameters": {
+   "type": "object",
    "properties": {
     "identifier": {
-     "description": "fully-qualified name, e.g. 'bpy.types.Scene', or '*' for module list.",
-     "type": "string"
+     "type": "string",
+     "description": "fully-qualified name, e.g. 'bpy.types.Scene', or '*' for module list."
     }
    },
    "required": [
     "identifier"
-   ],
-   "type": "object"
+   ]
   }
  },
  {
@@ -5747,8 +5747,8 @@
   "server": "hela-plastid",
   "description": "Retrieve a list of high-level Python helper functions available in the Blender environment (e.g., setup_pbr, apply_subd).",
   "parameters": {
-   "properties": {},
-   "type": "object"
+   "type": "object",
+   "properties": {}
   }
  },
  {
@@ -5756,22 +5756,22 @@
   "server": "hela-plastid",
   "description": "Detailed summary of the .blend file (datablocks, missing files, linked libraries).",
   "parameters": {
+   "type": "object",
    "properties": {
     "type": {
+     "type": "string",
      "enum": [
       "datablocks",
       "missing_files",
       "linked_libraries",
       "path_info",
       "usage_guess"
-     ],
-     "type": "string"
+     ]
     }
    },
    "required": [
     "type"
-   ],
-   "type": "object"
+   ]
   }
  },
  {
@@ -5779,17 +5779,17 @@
   "server": "hela-plastid",
   "description": "Capture a low-resolution, high-speed Workbench screenshot for agent self-criticism.",
   "parameters": {
+   "type": "object",
    "properties": {
     "output_path": {
      "type": "string"
     },
     "resolution_scale": {
+     "type": "integer",
      "default": 30,
-     "description": "Scale percentage (1-100).",
-     "type": "integer"
+     "description": "Scale percentage (1-100)."
     }
-   },
-   "type": "object"
+   }
   }
  },
  {
@@ -5797,21 +5797,21 @@
   "server": "hela-plastid",
   "description": "Retrieve high-fidelity modeling blueprints (e.g., rounded corners, SubD topology).",
   "parameters": {
+   "type": "object",
    "properties": {
     "category": {
+     "type": "string",
      "enum": [
       "rounded_corners",
       "ergonomic_curves",
       "subd_topology",
       "realistic_materials"
-     ],
-     "type": "string"
+     ]
     }
    },
    "required": [
     "category"
-   ],
-   "type": "object"
+   ]
   }
  },
  {
@@ -5819,6 +5819,7 @@
   "server": "hela-plastid",
   "description": "Deep dive into an object's mesh, materials, modifiers, and animation status.",
   "parameters": {
+   "type": "object",
    "properties": {
     "object_name": {
      "type": "string"
@@ -5826,8 +5827,7 @@
    },
    "required": [
     "object_name"
-   ],
-   "type": "object"
+   ]
   }
  },
  {
@@ -5835,8 +5835,8 @@
   "server": "hela-plastid",
   "description": "Comprehensive scene map: objects, collections, modes, and active selection.",
   "parameters": {
-   "properties": {},
-   "type": "object"
+   "type": "object",
+   "properties": {}
   }
  },
  {
@@ -5844,8 +5844,8 @@
   "server": "hela-plastid",
   "description": "Capture high-speed viewport screenshot (returns base64).",
   "parameters": {
-   "properties": {},
-   "type": "object"
+   "type": "object",
+   "properties": {}
   }
  },
  {
@@ -5853,25 +5853,25 @@
   "server": "hela-plastid",
   "description": "Jump to a specific tab, workspace, or focus an object in the 3D view.",
   "parameters": {
+   "type": "object",
    "properties": {
     "action": {
+     "type": "string",
      "enum": [
       "jump_to_tab",
       "focus_object",
       "focus_data"
-     ],
-     "type": "string"
+     ]
     },
     "name": {
-     "description": "Name of tab/object/data",
-     "type": "string"
+     "type": "string",
+     "description": "Name of tab/object/data"
     }
    },
    "required": [
     "action",
     "name"
-   ],
-   "type": "object"
+   ]
   }
  },
  {
@@ -5879,22 +5879,22 @@
   "server": "hela-plastid",
   "description": "Render the current scene or viewport.",
   "parameters": {
+   "type": "object",
    "properties": {
-    "output_path": {
-     "type": "string"
-    },
     "type": {
+     "type": "string",
      "enum": [
       "viewport",
       "thumbnail"
-     ],
+     ]
+    },
+    "output_path": {
      "type": "string"
     }
    },
    "required": [
     "type"
-   ],
-   "type": "object"
+   ]
   }
  },
  {
@@ -5902,19 +5902,19 @@
   "server": "hela-plastid",
   "description": "Save current Blender file or a copy.",
   "parameters": {
+   "type": "object",
    "properties": {
-    "as_copy": {
-     "default": false,
-     "type": "boolean"
-    },
     "filepath": {
      "type": "string"
+    },
+    "as_copy": {
+     "type": "boolean",
+     "default": false
     }
    },
    "required": [
     "filepath"
-   ],
-   "type": "object"
+   ]
   }
  },
  {
@@ -5922,14 +5922,14 @@
   "server": "hela-receptor",
   "description": "Get the currently foregrounded app package name and activity.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
     "serial": {
      "description": "Device serial number",
      "type": "string"
     }
    },
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -5937,11 +5937,11 @@
   "server": "hela-receptor",
   "description": "Install an APK file on the device from the host machine.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
     "apkPath": {
-     "description": "Absolute path to the APK file on the host machine",
-     "type": "string"
+     "type": "string",
+     "description": "Absolute path to the APK file on the host machine"
     },
     "serial": {
      "description": "Device serial number",
@@ -5951,7 +5951,7 @@
    "required": [
     "apkPath"
    ],
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -5959,22 +5959,22 @@
   "server": "hela-receptor",
   "description": "List installed packages on the device. Optionally filter by name or restrict to system/third-party apps. Use to find package names for app_start.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
     "filter": {
      "description": "Filter packages by name (partial match, case-insensitive)",
      "type": "string"
     },
-    "serial": {
-     "description": "Device serial number",
-     "type": "string"
-    },
     "system": {
      "description": "true = system apps only, false = third-party only, omit = all",
      "type": "boolean"
+    },
+    "serial": {
+     "description": "Device serial number",
+     "type": "string"
     }
    },
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -5982,14 +5982,14 @@
   "server": "hela-receptor",
   "description": "Launch an app by package name. PREFERRED over swiping the app drawer / manual UI navigation. Uses scrcpy START_APP (fast) when session is active, falls back to ADB `am start`. Supports force-stop prefix (+).",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
-    "package": {
-     "description": "Alias for packageName",
-     "type": "string"
-    },
     "packageName": {
      "description": "Package name to launch (e.g., 'com.example.app'). Prefix with '+' to force-stop the app first (e.g., '+com.example.app')",
+     "type": "string"
+    },
+    "package": {
+     "description": "Alias for packageName",
      "type": "string"
     },
     "serial": {
@@ -5997,7 +5997,7 @@
      "type": "string"
     }
    },
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6005,11 +6005,11 @@
   "server": "hela-receptor",
   "description": "Force-stop an app on the device.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
     "packageName": {
-     "description": "Package name to force-stop (e.g., 'com.example.app')",
-     "type": "string"
+     "type": "string",
+     "description": "Package name to force-stop (e.g., 'com.example.app')"
     },
     "serial": {
      "description": "Device serial number",
@@ -6019,7 +6019,7 @@
    "required": [
     "packageName"
    ],
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6027,11 +6027,11 @@
   "server": "hela-receptor",
   "description": "Uninstall an app from the device.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
     "packageName": {
-     "description": "Package name to uninstall (e.g., 'com.example.app')",
-     "type": "string"
+     "type": "string",
+     "description": "Package name to uninstall (e.g., 'com.example.app')"
     },
     "serial": {
      "description": "Device serial number",
@@ -6041,7 +6041,7 @@
    "required": [
     "packageName"
    ],
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6049,14 +6049,14 @@
   "server": "hela-receptor",
   "description": "Get the current clipboard content from the device. Uses scrcpy GET_CLIPBOARD when a session is active (works on Android 10+), falls back to ADB clipboard commands.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
     "serial": {
      "description": "Device serial number",
      "type": "string"
     }
    },
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6064,8 +6064,12 @@
   "server": "hela-receptor",
   "description": "Set the clipboard content on the device. Uses scrcpy SET_CLIPBOARD when a session is active (with optional paste flag), falls back to ADB clipboard commands.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
+    "text": {
+     "type": "string",
+     "description": "Text to set in the clipboard"
+    },
     "paste": {
      "default": false,
      "description": "Also simulate paste action (scrcpy only)",
@@ -6074,16 +6078,12 @@
     "serial": {
      "description": "Device serial number",
      "type": "string"
-    },
-    "text": {
-     "description": "Text to set in the clipboard",
-     "type": "string"
     }
    },
    "required": [
     "text"
    ],
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6091,14 +6091,14 @@
   "server": "hela-receptor",
   "description": "Collapse all open panels (notification, settings) (requires active scrcpy session)",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
     "serial": {
      "description": "Device serial number",
      "type": "string"
     }
    },
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6106,21 +6106,21 @@
   "server": "hela-receptor",
   "description": "Enable WiFi ADB and connect to the device wirelessly. Returns the connection address.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
     "port": {
      "default": 5555,
      "description": "TCP port for ADB connection (default: 5555)",
-     "maximum": 9007199254740991,
+     "type": "integer",
      "minimum": -9007199254740991,
-     "type": "integer"
+     "maximum": 9007199254740991
     },
     "serial": {
      "description": "Device serial number",
      "type": "string"
     }
    },
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6128,14 +6128,14 @@
   "server": "hela-receptor",
   "description": "Get detailed info about a device: model, Android version, screen size, SDK level, battery level",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
     "serial": {
      "description": "Device serial number. If omitted, uses the only connected device.",
      "type": "string"
     }
    },
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6143,9 +6143,9 @@
   "server": "hela-receptor",
   "description": "List all connected Android devices with their serial numbers, state, and model",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {},
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6153,17 +6153,17 @@
   "server": "hela-receptor",
   "description": "Disconnect from a wireless ADB device",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
     "address": {
-     "description": "Device address (e.g., 192.168.1.100:5555)",
-     "type": "string"
+     "type": "string",
+     "description": "Device address (e.g., 192.168.1.100:5555)"
     }
    },
    "required": [
     "address"
    ],
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6171,42 +6171,42 @@
   "server": "hela-receptor",
   "description": "Perform a drag and drop gesture from one point to another. Uses input draganddrop on Android 8.0+ (API 26), falls back to swipe on older versions.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
+    "startX": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 9007199254740991,
+     "description": "Start X coordinate"
+    },
+    "startY": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 9007199254740991,
+     "description": "Start Y coordinate"
+    },
+    "endX": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 9007199254740991,
+     "description": "End X coordinate"
+    },
+    "endY": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 9007199254740991,
+     "description": "End Y coordinate"
+    },
     "duration": {
      "default": 300,
      "description": "Duration in milliseconds",
+     "type": "integer",
      "exclusiveMinimum": 0,
-     "maximum": 9007199254740991,
-     "type": "integer"
-    },
-    "endX": {
-     "description": "End X coordinate",
-     "maximum": 9007199254740991,
-     "minimum": 0,
-     "type": "integer"
-    },
-    "endY": {
-     "description": "End Y coordinate",
-     "maximum": 9007199254740991,
-     "minimum": 0,
-     "type": "integer"
+     "maximum": 9007199254740991
     },
     "serial": {
      "description": "Device serial number",
      "type": "string"
-    },
-    "startX": {
-     "description": "Start X coordinate",
-     "maximum": 9007199254740991,
-     "minimum": 0,
-     "type": "integer"
-    },
-    "startY": {
-     "description": "Start Y coordinate",
-     "maximum": 9007199254740991,
-     "minimum": 0,
-     "type": "integer"
     }
    },
    "required": [
@@ -6215,7 +6215,7 @@
     "endX",
     "endY"
    ],
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6223,14 +6223,14 @@
   "server": "hela-receptor",
   "description": "Expand the notification panel (requires active scrcpy session)",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
     "serial": {
      "description": "Device serial number",
      "type": "string"
     }
    },
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6238,14 +6238,14 @@
   "server": "hela-receptor",
   "description": "Expand the quick settings panel (requires active scrcpy session)",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
     "serial": {
      "description": "Device serial number",
      "type": "string"
     }
    },
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6253,11 +6253,11 @@
   "server": "hela-receptor",
   "description": "List directory contents on the device.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
     "path": {
-     "description": "Absolute path to the directory on the device (e.g., /sdcard/)",
-     "type": "string"
+     "type": "string",
+     "description": "Absolute path to the directory on the device (e.g., /sdcard/)"
     },
     "serial": {
      "description": "Device serial number",
@@ -6267,7 +6267,7 @@
    "required": [
     "path"
    ],
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6275,15 +6275,15 @@
   "server": "hela-receptor",
   "description": "Pull a file from the device to the host machine.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
-    "localPath": {
-     "description": "Destination absolute path on the host machine",
-     "type": "string"
-    },
     "remotePath": {
-     "description": "Path to the file on the device (e.g., /sdcard/myfile.txt)",
-     "type": "string"
+     "type": "string",
+     "description": "Path to the file on the device (e.g., /sdcard/myfile.txt)"
+    },
+    "localPath": {
+     "type": "string",
+     "description": "Destination absolute path on the host machine"
     },
     "serial": {
      "description": "Device serial number",
@@ -6294,7 +6294,7 @@
     "remotePath",
     "localPath"
    ],
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6302,15 +6302,15 @@
   "server": "hela-receptor",
   "description": "Push a file from the host machine to the device.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
     "localPath": {
-     "description": "Absolute path to the file on the host machine",
-     "type": "string"
+     "type": "string",
+     "description": "Absolute path to the file on the host machine"
     },
     "remotePath": {
-     "description": "Destination path on the device (e.g., /sdcard/myfile.txt)",
-     "type": "string"
+     "type": "string",
+     "description": "Destination path on the device (e.g., /sdcard/myfile.txt)"
     },
     "serial": {
      "description": "Device serial number",
@@ -6321,7 +6321,7 @@
     "localPath",
     "remotePath"
    ],
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6329,39 +6329,39 @@
   "server": "hela-receptor",
   "description": "Fill a multi-field form. Provide an array of {label, value} pairs. For each pair, finds the nearest input field to the label text, taps it, and types the value. Handles checkboxes and dropdowns by label matching.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
     "fields": {
-     "description": "Array of form fields to fill",
+     "minItems": 1,
+     "type": "array",
      "items": {
+      "type": "object",
       "properties": {
        "label": {
-        "description": "Label text near the field (e.g. 'Full Name', 'City/Domicile')",
-        "type": "string"
+        "type": "string",
+        "description": "Label text near the field (e.g. 'Full Name', 'City/Domicile')"
+       },
+       "value": {
+        "type": "string",
+        "description": "Value to type or select"
        },
        "type": {
         "default": "text",
         "description": "Field type",
+        "type": "string",
         "enum": [
          "text",
          "checkbox",
          "dropdown"
-        ],
-        "type": "string"
-       },
-       "value": {
-        "description": "Value to type or select",
-        "type": "string"
+        ]
        }
       },
       "required": [
        "label",
        "value"
-      ],
-      "type": "object"
+      ]
      },
-     "minItems": 1,
-     "type": "array"
+     "description": "Array of form fields to fill"
     },
     "serial": {
      "description": "Device serial number",
@@ -6371,7 +6371,7 @@
    "required": [
     "fields"
    ],
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6379,38 +6379,38 @@
   "server": "hela-receptor",
   "description": "Type text into the input field. Reports device context (screen, app, session). When submit=true, auto-detects and taps the send button. Optionally target a specific input field by text label, resource ID, or content description instead of auto-focus.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
-    "elementContentDesc": {
-     "description": "Target a specific input by content description",
-     "type": "string"
-    },
-    "elementId": {
-     "description": "Target a specific input by resource ID",
-     "type": "string"
-    },
-    "elementText": {
-     "description": "Target a specific input by its label text (e.g. 'Full Name', 'City/Domicile')",
-     "type": "string"
-    },
-    "serial": {
-     "description": "Device serial number",
-     "type": "string"
+    "text": {
+     "type": "string",
+     "description": "Text to type"
     },
     "submit": {
      "default": false,
      "description": "Auto-tap send/submit button after typing (for chat/messaging apps)",
      "type": "boolean"
     },
-    "text": {
-     "description": "Text to type",
+    "elementText": {
+     "description": "Target a specific input by its label text (e.g. 'Full Name', 'City/Domicile')",
+     "type": "string"
+    },
+    "elementId": {
+     "description": "Target a specific input by resource ID",
+     "type": "string"
+    },
+    "elementContentDesc": {
+     "description": "Target a specific input by content description",
+     "type": "string"
+    },
+    "serial": {
+     "description": "Device serial number",
      "type": "string"
     }
    },
    "required": [
     "text"
    ],
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6418,36 +6418,28 @@
   "server": "hela-receptor",
   "description": "Send a key event to the device. Supports keycodes like HOME, BACK, ENTER, VOLUME_UP, etc.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
-    "key": {
-     "anyOf": [
-      {
-       "type": "string"
-      },
-      {
-       "type": "number"
-      }
-     ],
-     "description": "Alias for keycode"
-    },
     "keycode": {
-     "anyOf": [
-      {
-       "type": "string"
-      },
-      {
-       "type": "number"
-      }
-     ],
-     "description": "Keycode name (e.g., 'HOME', 'BACK') or numeric value"
+     "description": "Keycode name (e.g., 'HOME', 'BACK') or numeric value",
+     "type": [
+      "string",
+      "number"
+     ]
+    },
+    "key": {
+     "description": "Alias for keycode",
+     "type": [
+      "string",
+      "number"
+     ]
     },
     "serial": {
      "description": "Device serial number",
      "type": "string"
     }
    },
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6455,37 +6447,37 @@
   "server": "hela-receptor",
   "description": "Perform a long press at the specified coordinates",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
+    "x": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 9007199254740991,
+     "description": "X coordinate"
+    },
+    "y": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 9007199254740991,
+     "description": "Y coordinate"
+    },
     "duration": {
      "default": 500,
      "description": "Duration in milliseconds",
+     "type": "integer",
      "exclusiveMinimum": 0,
-     "maximum": 9007199254740991,
-     "type": "integer"
+     "maximum": 9007199254740991
     },
     "serial": {
      "description": "Device serial number",
      "type": "string"
-    },
-    "x": {
-     "description": "X coordinate",
-     "maximum": 9007199254740991,
-     "minimum": 0,
-     "type": "integer"
-    },
-    "y": {
-     "description": "Y coordinate",
-     "maximum": 9007199254740991,
-     "minimum": 0,
-     "type": "integer"
     }
    },
    "required": [
     "x",
     "y"
    ],
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6493,14 +6485,14 @@
   "server": "hela-receptor",
   "description": "Rotate the device screen (requires active scrcpy session)",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
     "serial": {
      "description": "Device serial number",
      "type": "string"
     }
    },
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6508,14 +6500,14 @@
   "server": "hela-receptor",
   "description": "Turn the device screen off",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
     "serial": {
      "description": "Device serial number",
      "type": "string"
     }
    },
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6523,14 +6515,14 @@
   "server": "hela-receptor",
   "description": "Wake the device screen (turn screen on)",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
     "serial": {
      "description": "Device serial number",
      "type": "string"
     }
    },
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6538,23 +6530,23 @@
   "server": "hela-receptor",
   "description": "Start recording the screen. Recording continues until screen_record_stop is called.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
-    "duration": {
-     "description": "Max recording duration in seconds (optional, device limit usually 180s)",
-     "type": "number"
+    "serial": {
+     "description": "Device serial number",
+     "type": "string"
     },
     "remotePath": {
      "default": "/sdcard/scrcpy-mcp-recording.mp4",
      "description": "Path on device to save recording",
      "type": "string"
     },
-    "serial": {
-     "description": "Device serial number",
-     "type": "string"
+    "duration": {
+     "description": "Max recording duration in seconds (optional, device limit usually 180s)",
+     "type": "number"
     }
    },
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6562,10 +6554,10 @@
   "server": "hela-receptor",
   "description": "Stop screen recording and optionally pull the file to the host.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
-    "localPath": {
-     "description": "Local path to save recording (only if pullToHost is true)",
+    "serial": {
+     "description": "Device serial number",
      "type": "string"
     },
     "pullToHost": {
@@ -6573,12 +6565,12 @@
      "description": "Pull the recording to the host machine",
      "type": "boolean"
     },
-    "serial": {
-     "description": "Device serial number",
+    "localPath": {
+     "description": "Local path to save recording (only if pullToHost is true)",
      "type": "string"
     }
    },
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6586,14 +6578,14 @@
   "server": "hela-receptor",
   "description": "Take a screenshot of the Android device screen. Returns the image as base64.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
     "serial": {
      "description": "Device serial number",
      "type": "string"
     }
    },
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6601,31 +6593,31 @@
   "server": "hela-receptor",
   "description": "Scroll at the specified position. dy=negative scrolls UP (reveals content above), dy=positive scrolls DOWN (reveals content below). Use large values (e.g. -400, 500) for meaningful scroll distance.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
+    "x": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 9007199254740991,
+     "description": "X coordinate to scroll at"
+    },
+    "y": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 9007199254740991,
+     "description": "Y coordinate to scroll at"
+    },
     "dx": {
-     "description": "Horizontal scroll amount (negative=left, positive=right)",
-     "type": "number"
+     "type": "number",
+     "description": "Horizontal scroll amount (negative=left, positive=right)"
     },
     "dy": {
-     "description": "Vertical scroll: negative=scroll UP (reveal above), positive=scroll DOWN (reveal below)",
-     "type": "number"
+     "type": "number",
+     "description": "Vertical scroll: negative=scroll UP (reveal above), positive=scroll DOWN (reveal below)"
     },
     "serial": {
      "description": "Device serial number",
      "type": "string"
-    },
-    "x": {
-     "description": "X coordinate to scroll at",
-     "maximum": 9007199254740991,
-     "minimum": 0,
-     "type": "integer"
-    },
-    "y": {
-     "description": "Y coordinate to scroll at",
-     "maximum": 9007199254740991,
-     "minimum": 0,
-     "type": "integer"
     }
    },
    "required": [
@@ -6634,7 +6626,7 @@
     "dx",
     "dy"
    ],
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6642,37 +6634,37 @@
   "server": "hela-receptor",
   "description": "Scroll the page to bring a specific UI element into view. Tries to find the element by text, then swipes up/down until it becomes visible or timeout is reached.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
-    "direction": {
-     "default": "down",
-     "description": "Scroll direction to find the element",
-     "enum": [
-      "down",
-      "up"
-     ],
-     "type": "string"
-    },
-    "maxScrolls": {
-     "default": 10,
-     "description": "Maximum scroll attempts",
-     "maximum": 9007199254740991,
-     "minimum": -9007199254740991,
-     "type": "integer"
+    "text": {
+     "type": "string",
+     "description": "Text content to search for"
     },
     "serial": {
      "description": "Device serial number",
      "type": "string"
     },
-    "text": {
-     "description": "Text content to search for",
-     "type": "string"
+    "maxScrolls": {
+     "default": 10,
+     "description": "Maximum scroll attempts",
+     "type": "integer",
+     "minimum": -9007199254740991,
+     "maximum": 9007199254740991
+    },
+    "direction": {
+     "default": "down",
+     "description": "Scroll direction to find the element",
+     "type": "string",
+     "enum": [
+      "down",
+      "up"
+     ]
     }
    },
    "required": [
     "text"
    ],
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6680,11 +6672,11 @@
   "server": "hela-receptor",
   "description": "Execute an arbitrary ADB shell command on the device and return the output. Use this for any device operation not covered by other tools.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
     "command": {
-     "description": "Shell command to execute on the device",
-     "type": "string"
+     "type": "string",
+     "description": "Shell command to execute on the device"
     },
     "serial": {
      "description": "Device serial number",
@@ -6694,7 +6686,7 @@
    "required": [
     "command"
    ],
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6702,28 +6694,28 @@
   "server": "hela-receptor",
   "description": "Start a scrcpy session for fast input control and screenshots. When a session is active, tap/swipe/text/screenshot are 10-50x faster. Requires scrcpy-server to be installed.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
-    "maxFps": {
-     "default": 30,
-     "description": "Max frames per second (default 30)",
-     "exclusiveMinimum": 0,
-     "maximum": 9007199254740991,
-     "type": "integer"
+    "serial": {
+     "description": "Device serial number",
+     "type": "string"
     },
     "maxSize": {
      "default": 1024,
      "description": "Max screen dimension in pixels (default 1024)",
+     "type": "integer",
      "exclusiveMinimum": 0,
-     "maximum": 9007199254740991,
-     "type": "integer"
+     "maximum": 9007199254740991
     },
-    "serial": {
-     "description": "Device serial number",
-     "type": "string"
+    "maxFps": {
+     "default": 30,
+     "description": "Max frames per second (default 30)",
+     "type": "integer",
+     "exclusiveMinimum": 0,
+     "maximum": 9007199254740991
     }
    },
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6731,21 +6723,21 @@
   "server": "hela-receptor",
   "description": "Start an HTTP MJPEG video stream of the device screen and open a viewer window (ffplay). Starts a scrcpy session automatically if needed.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
-    "port": {
-     "default": 7183,
-     "description": "HTTP port for the MJPEG stream (default 7183)",
-     "maximum": 65535,
-     "minimum": 1024,
-     "type": "integer"
-    },
     "serial": {
      "description": "Device serial number",
      "type": "string"
+    },
+    "port": {
+     "default": 7183,
+     "description": "HTTP port for the MJPEG stream (default 7183)",
+     "type": "integer",
+     "minimum": 1024,
+     "maximum": 65535
     }
    },
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6753,14 +6745,14 @@
   "server": "hela-receptor",
   "description": "Stop the active scrcpy session. Tools will fall back to ADB commands.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
     "serial": {
      "description": "Device serial number",
      "type": "string"
     }
    },
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6768,14 +6760,14 @@
   "server": "hela-receptor",
   "description": "Stop the HTTP MJPEG video stream and close the viewer window for a device.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
     "serial": {
      "description": "Device serial number",
      "type": "string"
     }
    },
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6783,42 +6775,42 @@
   "server": "hela-receptor",
   "description": "Perform a swipe gesture from one point to another",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
+    "x1": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 9007199254740991,
+     "description": "Start X coordinate"
+    },
+    "y1": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 9007199254740991,
+     "description": "Start Y coordinate"
+    },
+    "x2": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 9007199254740991,
+     "description": "End X coordinate"
+    },
+    "y2": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 9007199254740991,
+     "description": "End Y coordinate"
+    },
     "duration": {
      "default": 300,
      "description": "Duration in milliseconds",
+     "type": "integer",
      "exclusiveMinimum": 0,
-     "maximum": 9007199254740991,
-     "type": "integer"
+     "maximum": 9007199254740991
     },
     "serial": {
      "description": "Device serial number",
      "type": "string"
-    },
-    "x1": {
-     "description": "Start X coordinate",
-     "maximum": 9007199254740991,
-     "minimum": 0,
-     "type": "integer"
-    },
-    "x2": {
-     "description": "End X coordinate",
-     "maximum": 9007199254740991,
-     "minimum": 0,
-     "type": "integer"
-    },
-    "y1": {
-     "description": "Start Y coordinate",
-     "maximum": 9007199254740991,
-     "minimum": 0,
-     "type": "integer"
-    },
-    "y2": {
-     "description": "End Y coordinate",
-     "maximum": 9007199254740991,
-     "minimum": 0,
-     "type": "integer"
     }
    },
    "required": [
@@ -6827,7 +6819,7 @@
     "x2",
     "y2"
    ],
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6835,30 +6827,30 @@
   "server": "hela-receptor",
   "description": "Tap at the specified screen coordinates",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
+    "x": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 9007199254740991,
+     "description": "X coordinate"
+    },
+    "y": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 9007199254740991,
+     "description": "Y coordinate"
+    },
     "serial": {
      "description": "Device serial number",
      "type": "string"
-    },
-    "x": {
-     "description": "X coordinate",
-     "maximum": 9007199254740991,
-     "minimum": 0,
-     "type": "integer"
-    },
-    "y": {
-     "description": "Y coordinate",
-     "maximum": 9007199254740991,
-     "minimum": 0,
-     "type": "integer"
     }
    },
    "required": [
     "x",
     "y"
    ],
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6866,14 +6858,14 @@
   "server": "hela-receptor",
   "description": "Dump the full UI hierarchy of the current screen as XML.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
     "serial": {
      "description": "Device serial number",
      "type": "string"
     }
    },
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6881,8 +6873,16 @@
   "server": "hela-receptor",
   "description": "Find UI elements on screen by text, resource ID, class name, or content description. Returns matching elements with their tap coordinates.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
+    "text": {
+     "description": "Text content to search for",
+     "type": "string"
+    },
+    "resourceId": {
+     "description": "Resource ID to match exactly (e.g., 'com.app:id/button')",
+     "type": "string"
+    },
     "className": {
      "description": "Class name to match exactly (e.g., 'android.widget.Button')",
      "type": "string"
@@ -6896,20 +6896,12 @@
      "description": "If true, text and contentDesc require exact matches",
      "type": "boolean"
     },
-    "resourceId": {
-     "description": "Resource ID to match exactly (e.g., 'com.app:id/button')",
-     "type": "string"
-    },
     "serial": {
      "description": "Device serial number",
      "type": "string"
-    },
-    "text": {
-     "description": "Text content to search for",
-     "type": "string"
     }
    },
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6917,14 +6909,14 @@
   "server": "hela-receptor",
   "description": "Dump the UI and return a clean Markdown-like tree of visible and clickable elements with viewport coordinates. NOTE: WebView elements may report identical y-coordinates when scrolled; use scroll_to_element first to bring target fields into view.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
     "serial": {
      "description": "Device serial number",
      "type": "string"
     }
    },
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6932,8 +6924,20 @@
   "server": "hela-receptor",
   "description": "Find a UI element, tap it, inject text, and optionally press ENTER. Smartly finds the nearest input field when targeting a label.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
+    "textToType": {
+     "type": "string",
+     "description": "The text to inject into the field"
+    },
+    "text": {
+     "description": "Text content to search for to find the element",
+     "type": "string"
+    },
+    "resourceId": {
+     "description": "Resource ID to match exactly",
+     "type": "string"
+    },
     "className": {
      "description": "Class name to match exactly",
      "type": "string"
@@ -6947,39 +6951,27 @@
      "description": "If true, text and contentDesc require exact matches",
      "type": "boolean"
     },
+    "serial": {
+     "description": "Device serial number",
+     "type": "string"
+    },
     "index": {
      "default": 0,
      "description": "If multiple elements match, which one to tap (0-indexed)",
-     "maximum": 9007199254740991,
+     "type": "integer",
      "minimum": -9007199254740991,
-     "type": "integer"
+     "maximum": 9007199254740991
     },
     "pressEnter": {
      "default": false,
      "description": "Press ENTER key after typing",
      "type": "boolean"
-    },
-    "resourceId": {
-     "description": "Resource ID to match exactly",
-     "type": "string"
-    },
-    "serial": {
-     "description": "Device serial number",
-     "type": "string"
-    },
-    "text": {
-     "description": "Text content to search for to find the element",
-     "type": "string"
-    },
-    "textToType": {
-     "description": "The text to inject into the field",
-     "type": "string"
     }
    },
    "required": [
     "textToType"
    ],
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -6987,8 +6979,16 @@
   "server": "hela-receptor",
   "description": "Find a UI element by text, resource ID, class name, or content description, and immediately tap it. Smartly finds the nearest input field when targeting a label.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
+    "text": {
+     "description": "Text content to search for",
+     "type": "string"
+    },
+    "resourceId": {
+     "description": "Resource ID to match exactly",
+     "type": "string"
+    },
     "className": {
      "description": "Class name to match exactly",
      "type": "string"
@@ -7002,32 +7002,24 @@
      "description": "If true, text and contentDesc require exact matches",
      "type": "boolean"
     },
+    "serial": {
+     "description": "Device serial number",
+     "type": "string"
+    },
     "index": {
      "default": 0,
      "description": "If multiple elements match, which one to tap (0-indexed)",
-     "maximum": 9007199254740991,
+     "type": "integer",
      "minimum": -9007199254740991,
-     "type": "integer"
+     "maximum": 9007199254740991
     },
     "preferInput": {
      "default": true,
      "description": "If true and matching a label, finds nearest input field instead",
      "type": "boolean"
-    },
-    "resourceId": {
-     "description": "Resource ID to match exactly",
-     "type": "string"
-    },
-    "serial": {
-     "description": "Device serial number",
-     "type": "string"
-    },
-    "text": {
-     "description": "Text content to search for",
-     "type": "string"
     }
    },
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -7035,8 +7027,16 @@
   "server": "hela-receptor",
   "description": "Wait for a UI element to appear on screen. Polls the UI until the element matches criteria or timeout is reached.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
+    "text": {
+     "description": "Text content to search for",
+     "type": "string"
+    },
+    "resourceId": {
+     "description": "Resource ID to match exactly",
+     "type": "string"
+    },
     "className": {
      "description": "Class name to match exactly",
      "type": "string"
@@ -7050,27 +7050,19 @@
      "description": "If true, text and contentDesc require exact matches",
      "type": "boolean"
     },
-    "resourceId": {
-     "description": "Resource ID to match exactly",
-     "type": "string"
-    },
     "serial": {
      "description": "Device serial number",
-     "type": "string"
-    },
-    "text": {
-     "description": "Text content to search for",
      "type": "string"
     },
     "timeoutMs": {
      "default": 15000,
      "description": "Maximum time to wait in milliseconds (default 15000)",
-     "maximum": 9007199254740991,
+     "type": "integer",
      "minimum": -9007199254740991,
-     "type": "integer"
+     "maximum": 9007199254740991
     }
    },
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -7078,9 +7070,9 @@
   "server": "hela-receptor",
   "description": "Report which scrcpy version is being used by the MCP server. The version is detected from the SCRCPY_SERVER_VERSION environment variable, the scrcpy --version binary, or a built-in default.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {},
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {
@@ -7088,19 +7080,19 @@
   "server": "hela-receptor",
   "description": "Wait for a specified number of milliseconds. Use between actions to wait for animations, page loads, or network responses.",
   "parameters": {
-   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
    "properties": {
     "ms": {
-     "description": "Milliseconds to wait",
+     "type": "integer",
      "exclusiveMinimum": 0,
      "maximum": 9007199254740991,
-     "type": "integer"
+     "description": "Milliseconds to wait"
     }
    },
    "required": [
     "ms"
    ],
-   "type": "object"
+   "$schema": "http://json-schema.org/draft-07/schema#"
   }
  },
  {

@@ -25,6 +25,8 @@ def main() -> int:
     ap.add_argument("--live", required=True)
     ap.add_argument("--bundled", default="data/catalog/hela-stack-tools.json")
     ap.add_argument("--out", default="data/catalog/hela-stack-tools.json")
+    ap.add_argument("--cell", action="append", default=[], metavar="CELL=FILE",
+                    help="tools/list export taken straight from one cell's own server (bare tool names), e.g. receptor=live-receptor.json")
     ap.add_argument("--keep-cells", nargs="*", default=["receptor", "plastid"], help="cells to keep from the snapshot")
     a = ap.parse_args()
 
@@ -49,6 +51,14 @@ def main() -> int:
             "description": tool.get("description", ""),
             "parameters": tool.get("parameters") or {"type": "object", "properties": {}},
         })
+    for spec in a.cell:
+        cell, _, path = spec.partition("=")
+        if cell not in ORGANELLES or not path:
+            sys.exit(f"--cell expects <organelle>=<file>, got {spec!r}")
+        for tool in json.loads(Path(path).read_text(encoding="utf8")):
+            live_cells.add(cell)
+            merged.append({"name": tool["name"], "server": f"hela-{cell}", "description": tool.get("description", ""),
+                           "parameters": tool.get("parameters") or {"type": "object", "properties": {}}})
     kept = 0
     for tool in bundled:
         cell = tool["server"].removeprefix("hela-")
