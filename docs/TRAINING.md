@@ -21,7 +21,14 @@ python -m hela_needle gate --candidate eval/candidate.json
 
 ## Pod image
 
-Cactus trains on JAX, Flax and Optax (`requirements-train.txt`), not PyTorch, so the image's PyTorch version does not matter; any CUDA 12 image with Python 3.10+ works (3.12 is safest). `scripts/runpod_train.sh` installs into a fresh virtualenv and fails fast if JAX cannot see the GPU. An RTX A5000 (24 GB, Ampere) is the planned first card; confirm its fit in the M2 dry run and record the result here.
+Cactus trains on JAX, Flax and Optax (`requirements-train.txt`), not PyTorch, so the image's PyTorch version does not matter; any CUDA 12 image with Python 3.10+ works (3.12 is safest).
+
+Official RunPod images (Docker Hub `runpod/base` and `runpod/pytorch`; build files in `github.com/runpod/containers`, read 2026-11-25):
+
+- Tag format: `runpod/pytorch:<release>-cu<CUDA digits>-torch<torch digits>-ubuntu2404`, for example `...-cu1290-torch2130-ubuntu2404` (CUDA 12.9.0, torch 2.13.0). `runpod/base` tags look like `2.1.1-cuda1290-ubuntu2404`.
+- CUDA builds: 12.8.1, 12.9.0, 13.0.0, 13.2.0. Torch builds: 2.6.0 up to 2.15.0, but **torch 2.15.0 exists only on the CUDA 13.0 and 13.2 images**, and the cu132 wheels need a CUDA 13 driver (>= 580).
+- Not stated in the sources: the Python version, devel vs runtime flavour, minimum driver for CUDA 12 images.
+- **First choice: `runpod/base:<release>-cuda1290-ubuntu2404`** (no torch, which we do not use), or the pytorch image with `cu1290` if the template UI only offers those. Avoid the CUDA 13 images until JAX's CUDA 13 support is confirmed; the preflight in `scripts/runpod_train.sh` prints the Python and JAX versions and fails if no GPU is found. `scripts/runpod_train.sh` installs into a fresh virtualenv and fails fast if JAX cannot see the GPU. An RTX A5000 (24 GB, Ampere) is the planned first card; confirm its fit in the M2 dry run and record the result here.
 
 ## Known facts (upstream docs)
 
