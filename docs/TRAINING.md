@@ -1,5 +1,18 @@
 # Training procedure
 
+## One-line run on a rented pod
+
+Deploy a pod with image `runpod/base:2.1.1-cuda1290-ubuntu2404` on one RTX A5000, open the web terminal and paste:
+
+```bash
+export GH_TOKEN=<fine-grained token: this repo only, Contents: write, 1-day expiry>; curl -fsSL -H "Authorization: Bearer $GH_TOKEN" https://raw.githubusercontent.com/Hela-Ecosystem/hela-needle-tuning/main/scripts/runpod_train.sh -o t.sh && bash t.sh
+```
+
+The script installs the tools, builds and scrubs the data, checks that JAX sees the GPU, fine-tunes, exports the `.cact`, and uploads model, `meta.json` and logs to a **private** GitHub release `run-<id>` (a failed run uploads its logs as `run-<id>-failed`). It does not terminate the pod unless `AUTO_TERMINATE=1` (unverified: needs `runpodctl` and `RUNPOD_POD_ID` on the pod). Terminate the pod yourself once it prints "uploaded".
+
+The eval and gate run afterwards on the machine with the Needle engine (servy): the engine binary is not in git and servy's copy is ARM, so it cannot run on an x86 pod. Weights are never committed; the release is the only place they go.
+
+
 Training uses the upstream Cactus CLI (`cactus-compute[train]`). The commands below come from the upstream `llms.txt` in `cactus-compute/cactus`; **none have been run in this repo yet**. Treat them as the plan, and correct this file the first time one behaves differently.
 
 ```bash

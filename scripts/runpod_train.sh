@@ -7,16 +7,19 @@
 # Not yet run. First real use should be a short dry run (EPOCHS=1) to record the
 # true hardware needs and wall time in docs/TRAINING.md.
 #
-# Usage on the pod (CUDA template with python3.10+, git, nvidia-smi):
-#   export GH_TOKEN=<read-only token for Hela-Ecosystem/hela-needle-tuning>
-#   curl -fsSL -H "Authorization: Bearer $GH_TOKEN" \
-#     https://raw.githubusercontent.com/Hela-Ecosystem/hela-needle-tuning/main/scripts/runpod_train.sh -o runpod_train.sh
-#   bash runpod_train.sh
+# One line on a fresh pod (runpod/base cuda12.9 on Ubuntu 24.04 is what we plan to use):
+#   export GH_TOKEN=<fine-grained token, THIS repo only, Contents: write, 1-day expiry>; curl -fsSL -H "Authorization: Bearer $GH_TOKEN" https://raw.githubusercontent.com/Hela-Ecosystem/hela-needle-tuning/main/scripts/runpod_train.sh -o t.sh && bash t.sh
 #
-# Env: EPOCHS (default 3), BRANCH (default main), EXTRA_FINETUNE_ARGS, EXTRA_BUILD_ARGS.
+# The result is uploaded as a PRIVATE GitHub release named run-<id> (model, meta, logs).
+# A failed run uploads its logs as run-<id>-failed so they can be read without pasting.
+# The script only terminates the pod if AUTO_TERMINATE=1, and only after a successful upload.
+#
+# Env: EPOCHS (default 3), BRANCH (default main), AUTO_TERMINATE (default 0),
+#      EXTRA_FINETUNE_ARGS, EXTRA_BUILD_ARGS.
 set -euo pipefail
 
-: "${GH_TOKEN:?set GH_TOKEN to a read-only token for the repo}"
+: "${GH_TOKEN:?set GH_TOKEN (fine-grained token, this repo only, Contents: write)}"
+set +x  # never trace commands that carry the token
 EPOCHS="${EPOCHS:-3}"
 BRANCH="${BRANCH:-main}"
 WORK="${WORK:-/workspace/needle-run}"
@@ -39,6 +42,18 @@ cd repo
 SHA="$(git rev-parse --short HEAD)"
 RUN_DIR="$PWD/runs/$RUN_ID"
 mkdir -p "$RUN_DIR"
+
+# On any failure, upload whatever logs exist so the run can be diagnosed remotely.
+finish() {
+  rc=$?
+  trap - EXIT
+  if [ "$rc" -ne 0 ]; then
+    echo "run failed (exit $rc); uploading logs for diagnosis" >&2
+    bash scripts/upload_release.sh "$RUN_DIR" "run-${RUN_ID}-failed" || true
+  fi
+  exit "$rc"
+}
+trap finish EXIT
 
 python3 -m venv .venv
 # shellcheck disable=SC1091
@@ -91,12 +106,20 @@ cat > "$RUN_DIR/meta.json" <<EOF
 EOF
 cat "$RUN_DIR/meta.json"
 
-cat <<MSG
+trap - EXIT
+if bash scripts/upload_release.sh "$RUN_DIR" "run-${RUN_ID}"; then
+  if [ "${AUTO_TERMINATE:-0}" = "1" ] && command -v runpodctl >/dev/null && [ -n "${RUNPOD_POD_ID:-}" ]; then
+    echo "uploaded; terminating pod ${RUNPOD_POD_ID}"
+    runpodctl remove pod "$RUNPOD_POD_ID"
+  else
+    echo "uploaded. TERMINATE THE POD NOW (billing continues while it exists)."
+  fi
+else
+  cat <<MSG
 
-Done. Copy these back, then TERMINATE the pod:
+Upload failed. The model is still on this pod at:
   $RUN_DIR/hela-needle3.cact
-  $RUN_DIR/meta.json  $RUN_DIR/finetune.log  $RUN_DIR/build.log
-Then on the machine with the Needle engine:
-  python -m hela_needle eval --engine <needle3> --model hela-needle3.cact --system data/catalog/hela-system.txt --out eval/candidate.json
-  python -m hela_needle gate --candidate eval/candidate.json
+Copy it out (runpodctl send / scp) BEFORE terminating the pod.
 MSG
+  exit 1
+fi
