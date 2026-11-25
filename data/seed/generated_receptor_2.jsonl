@@ -1,0 +1,116 @@
+{"task": "Tap on the screen at coordinates 500, 1200 on device emulator-5554.", "tool": "hela_receptor_tap", "arguments": {"x": 500, "y": 1200, "serial": "emulator-5554"}, "note": "openrouter-free", "split": "train"}
+{"task": "Type 'Hello World' into the input field with resource ID 'com.example:id/message_input' and then hit send.", "tool": "hela_receptor_input_text", "arguments": {"text": "Hello World", "elementId": "com.example:id/message_input", "submit": true}, "note": "openrouter-free", "split": "train"}
+{"task": "Press the home button on my device.", "tool": "hela_receptor_key_event", "arguments": {"key": "HOME"}, "note": "openrouter-free", "split": "train"}
+{"task": "Scroll down until you see the 'Settings' button.", "tool": "hela_receptor_scroll_to_element", "arguments": {"text": "Settings", "direction": "down"}, "note": "openrouter-free", "split": "train"}
+{"task": "Take a screenshot of the phone.", "tool": "hela_receptor_screenshot", "note": "openrouter-free", "split": "train"}
+{"task": "Long press at x=300, y=450 for 2 seconds.", "tool": "hela_receptor_long_press", "arguments": {"x": 300, "y": 450, "duration": 2000}, "note": "openrouter-free", "split": "train"}
+{"task": "Wake up the device with serial 12345ABC.", "tool": "hela_receptor_screen_on", "arguments": {"serial": "12345ABC"}, "note": "openrouter-free", "split": "train"}
+{"task": "Start a screen recording on the device for 60 seconds and save it to /sdcard/demo.mp4", "tool": "hela_receptor_screen_record_start", "arguments": {"duration": 60, "remotePath": "/sdcard/demo.mp4"}, "note": "openrouter-free", "split": "train"}
+{"task": "Swipe from (100, 500) to (100, 100) on device xyz.", "tool": "hela_receptor_swipe", "arguments": {"x1": 100, "y1": 500, "x2": 100, "y2": 100, "serial": "xyz"}, "note": "openrouter-free", "split": "train"}
+{"task": "Run 'ls /sdcard' on device emulator-5554.", "tool": "hela_receptor_shell_exec", "arguments": {"command": "ls /sdcard", "serial": "emulator-5554"}, "note": "openrouter-free", "split": "train"}
+{"task": "Rotate the screen.", "tool": "hela_receptor_rotate_device", "note": "openrouter-free", "split": "train"}
+{"task": "Scroll up by 500 pixels at center of screen (540, 1000).", "tool": "hela_receptor_scroll", "arguments": {"x": 540, "y": 1000, "dx": 0, "dy": -500}, "note": "openrouter-free", "split": "train"}
+{"task": "Start a video stream on port 8080 for device 999.", "tool": "hela_receptor_start_video_stream", "arguments": {"port": 8080, "serial": "999"}, "note": "openrouter-free", "split": "train"}
+{"task": "Get the UI XML dump.", "tool": "hela_receptor_ui_dump", "note": "openrouter-free", "split": "train"}
+{"task": "Turn off the screen.", "tool": "hela_receptor_screen_off", "note": "openrouter-free", "split": "train"}
+{"task": "Type 'user@example.com' into the field labeled 'Email'.", "tool": "hela_receptor_input_text", "arguments": {"text": "user@example.com", "elementText": "Email"}, "note": "openrouter-free", "split": "train"}
+{"task": "Stop the screen recording and pull the file to 'C:/videos/rec.mp4'.", "tool": "hela_receptor_screen_record_stop", "arguments": {"pullToHost": true, "localPath": "C:/videos/rec.mp4"}, "note": "openrouter-free", "split": "train"}
+{"task": "Start a scrcpy session with max size 720 on device abc.", "tool": "hela_receptor_start_session", "arguments": {"maxSize": 720, "serial": "abc"}, "note": "openrouter-free", "split": "train"}
+{"task": "Find a button with content description 'Back' and class 'android.widget.Button'.", "tool": "hela_receptor_ui_find_element", "arguments": {"contentDesc": "Back", "className": "android.widget.Button"}, "note": "openrouter-free", "split": "train"}
+{"task": "Press the volume up key.", "tool": "hela_receptor_key_event", "arguments": {"key": "VOLUME_UP"}, "note": "openrouter-free", "split": "train"}
+{"task": "What is the weather in London?", "tool": null, "note": "openrouter-free", "split": "train"}
+{"task": "Search for recipes on Google.", "tool": null, "note": "openrouter-free", "split": "train"}
+{"task": "Order a pizza.", "tool": null, "note": "openrouter-free", "split": "train"}
+{"task": "Stop the video stream for device 123.", "tool": "hela_receptor_stop_video_stream", "arguments": {"serial": "123"}, "note": "openrouter-free", "split": "train"}
+{"task": "Tap the screen at x=500, y=1200 on device ABC-123", "tool": "hela_receptor_tap", "arguments": {"x": 500, "y": 1200, "serial": "ABC-123"}, "note": "openrouter-free", "split": "train"}
+{"task": "Type 'Hello World' into the search box and hit send", "tool": "hela_receptor_input_text", "arguments": {"text": "Hello World", "submit": true}, "note": "openrouter-free", "split": "train"}
+{"task": "Go back to the previous screen", "tool": "hela_receptor_key_event", "arguments": {"keycode": "BACK"}, "note": "openrouter-free", "split": "train"}
+{"task": "Start a screen recording on device serial 998877 for 60 seconds", "tool": "hela_receptor_screen_record_start", "arguments": {"duration": 60, "serial": "998877"}, "note": "openrouter-free", "split": "train"}
+{"task": "Find the button with resource ID 'com.android.settings:id/title' and tap it", "tool": "hela_receptor_ui_find_element", "arguments": {"resourceId": "com.android.settings:id/title"}, "note": "openrouter-free", "split": "train"}
+{"task": "Scroll down until you see 'Settings'", "tool": "hela_receptor_scroll_to_element", "arguments": {"direction": "down", "text": "Settings"}, "note": "openrouter-free", "split": "train"}
+{"task": "Long press at 300, 450 for 2 seconds", "tool": "hela_receptor_long_press", "arguments": {"duration": 2000, "x": 300, "y": 450}, "note": "openrouter-free", "split": "train"}
+{"task": "Swipe from (100, 200) to (500, 800)", "tool": "hela_receptor_swipe", "arguments": {"x1": 100, "y1": 200, "x2": 500, "y2": 800}, "note": "openrouter-free", "split": "train"}
+{"task": "Take a screenshot of the device 12345", "tool": "hela_receptor_screenshot", "arguments": {"serial": "12345"}, "note": "openrouter-free", "split": "train"}
+{"task": "Wipe all data from the device", "tool": null, "note": "openrouter-free", "split": "train"}
+{"task": "Run 'ls /sdcard' on device XYZ_99", "tool": "hela_receptor_shell_exec", "arguments": {"command": "ls /sdcard", "serial": "XYZ_99"}, "note": "openrouter-free", "split": "train"}
+{"task": "Turn off the screen", "tool": "hela_receptor_screen_off", "note": "openrouter-free", "split": "train"}
+{"task": "Type 'John Doe' into the field labeled 'Full Name'", "tool": "hela_receptor_input_text", "arguments": {"elementText": "Full Name", "text": "John Doe"}, "note": "openrouter-free", "split": "train"}
+{"task": "Scroll down at the center of the screen (x=540, y=1000) by 500 pixels", "tool": "hela_receptor_scroll", "arguments": {"dx": 0, "dy": 500, "x": 540, "y": 1000}, "note": "openrouter-free", "split": "train"}
+{"task": "Wake up the phone", "tool": "hela_receptor_screen_on", "note": "openrouter-free", "split": "train"}
+{"task": "What is the weather in Tokyo?", "tool": null, "note": "openrouter-free", "split": "train"}
+{"task": "Rotate the device", "tool": "hela_receptor_rotate_device", "note": "openrouter-free", "split": "train"}
+{"task": "Start a scrcpy session with 60 FPS for serial 8888", "tool": "hela_receptor_start_session", "arguments": {"maxFps": 60, "serial": "8888"}, "note": "openrouter-free", "split": "train"}
+{"task": "Get the UI hierarchy", "tool": "hela_receptor_ui_dump", "note": "openrouter-free", "split": "train"}
+{"task": "Stream the video on port 8080", "tool": "hela_receptor_start_video_stream", "arguments": {"port": 8080}, "note": "openrouter-free", "split": "train"}
+{"task": "Stop the video stream for device 112233", "tool": "hela_receptor_stop_video_stream", "arguments": {"serial": "112233"}, "note": "openrouter-free", "split": "train"}
+{"task": "Stop the recording and save it to '/sdcard/vid.mp4' on the host machine", "tool": "hela_receptor_screen_record_stop", "arguments": {"localPath": "/sdcard/vid.mp4", "pullToHost": true}, "note": "openrouter-free", "split": "train"}
+{"task": "Press the Home button", "tool": "hela_receptor_key_event", "arguments": {"keycode": "HOME"}, "note": "openrouter-free", "split": "train"}
+{"task": "Find any element with content description 'Back' and tap it", "tool": "hela_receptor_ui_find_element", "arguments": {"contentDesc": "Back"}, "note": "openrouter-free", "split": "train"}
+{"task": "How much does a Tesla cost?", "tool": null, "note": "openrouter-free", "split": "train"}
+{"task": "Tap on the screen at x=500, y=1200", "tool": "hela_receptor_tap", "arguments": {"x": 500, "y": 1200}, "note": "openrouter-free", "split": "train"}
+{"task": "Type 'Hello World' into the search bar and press enter", "tool": "hela_receptor_input_text", "arguments": {"text": "Hello World", "submit": true}, "note": "openrouter-free", "split": "train"}
+{"task": "Press the home button on device 12345XYZ", "tool": "hela_receptor_key_event", "arguments": {"keycode": "HOME", "serial": "12345XYZ"}, "note": "openrouter-free", "split": "train"}
+{"task": "Take a screenshot of the current screen", "tool": "hela_receptor_screenshot", "note": "openrouter-free", "split": "train"}
+{"task": "Swipe from 100,200 to 100,800 over 500ms", "tool": "hela_receptor_swipe", "arguments": {"x1": 100, "y1": 200, "x2": 100, "y2": 800, "duration": 500}, "note": "openrouter-free", "split": "train"}
+{"task": "Scroll down to find the element that says 'Terms and Conditions'", "tool": "hela_receptor_scroll_to_element", "arguments": {"direction": "down", "text": "Terms and Conditions"}, "note": "openrouter-free", "split": "train"}
+{"task": "Long press at 300,400 for 2 seconds", "tool": "hela_receptor_long_press", "arguments": {"x": 300, "y": 400, "duration": 2000}, "note": "openrouter-free", "split": "train"}
+{"task": "Run the shell command 'pm list packages' on device ABC123", "tool": "hela_receptor_shell_exec", "arguments": {"command": "pm list packages", "serial": "ABC123"}, "note": "openrouter-free", "split": "train"}
+{"task": "Wake up the screen for device 998877", "tool": "hela_receptor_screen_on", "arguments": {"serial": "998877"}, "note": "openrouter-free", "split": "train"}
+{"task": "Rotate the device screen", "tool": "hela_receptor_rotate_device", "note": "openrouter-free", "split": "train"}
+{"task": "Find all buttons with the text 'Login'", "tool": "hela_receptor_ui_find_element", "arguments": {"text": "Login", "className": "android.widget.Button"}, "note": "openrouter-free", "split": "train"}
+{"task": "Start a scrcpy session for device XYZ789 with max size 720", "tool": "hela_receptor_start_session", "arguments": {"serial": "XYZ789", "maxSize": 720}, "note": "openrouter-free", "split": "train"}
+{"task": "Scroll down 500 pixels at position 500,500", "tool": "hela_receptor_scroll", "arguments": {"x": 500, "y": 500, "dx": 0, "dy": 500}, "note": "openrouter-free", "split": "train"}
+{"task": "Start recording the screen to /sdcard/rec.mp4 for 60 seconds", "tool": "hela_receptor_screen_record_start", "arguments": {"remotePath": "/sdcard/rec.mp4", "duration": 60}, "note": "openrouter-free", "split": "train"}
+{"task": "Stop the recording and pull it to C:/videos/test.mp4", "tool": "hela_receptor_screen_record_stop", "arguments": {"pullToHost": true, "localPath": "C:/videos/test.mp4"}, "note": "openrouter-free", "split": "train"}
+{"task": "Start a video stream on port 8080 for device DEV001", "tool": "hela_receptor_start_video_stream", "arguments": {"port": 8080, "serial": "DEV001"}, "note": "openrouter-free", "split": "train"}
+{"task": "Get the UI dump for the current screen", "tool": "hela_receptor_ui_dump", "note": "openrouter-free", "split": "train"}
+{"task": "Stop the active scrcpy session on device DEV002", "tool": "hela_receptor_stop_session", "arguments": {"serial": "DEV002"}, "note": "openrouter-free", "split": "train"}
+{"task": "Stop the video stream for device DEV003", "tool": "hela_receptor_stop_video_stream", "arguments": {"serial": "DEV003"}, "note": "openrouter-free", "split": "train"}
+{"task": "Type 'my-password-123' into the field with resource ID 'com.app:id/password'", "tool": "hela_receptor_input_text", "arguments": {"text": "my-password-123", "elementId": "com.app:id/password"}, "note": "openrouter-free", "split": "train"}
+{"task": "Press the back button", "tool": "hela_receptor_key_event", "arguments": {"keycode": "BACK"}, "note": "openrouter-free", "split": "train"}
+{"task": "What is the weather in Tokyo today?", "tool": null, "note": "openrouter-free", "split": "train"}
+{"task": "Order a large pepperoni pizza from the nearest shop", "tool": null, "note": "openrouter-free", "split": "train"}
+{"task": "Tell me a joke about robots", "tool": null, "note": "openrouter-free", "split": "train"}
+{"task": "Tap on the screen at x=500, y=1200 on device ABC12345", "tool": "hela_receptor_tap", "arguments": {"x": 500, "y": 1200, "serial": "ABC12345"}, "note": "openrouter-free", "split": "train"}
+{"task": "Take a screenshot of device SN_9988", "tool": "hela_receptor_screenshot", "arguments": {"serial": "SN_9988"}, "note": "openrouter-free", "split": "train"}
+{"task": "On device 123-XYZ, swipe from 100,200 to 100,800 over 500ms", "tool": "hela_receptor_swipe", "arguments": {"x1": 100, "y1": 200, "x2": 100, "y2": 800, "duration": 500, "serial": "123-XYZ"}, "note": "openrouter-free", "split": "train"}
+{"task": "Scroll down on device PX-5 to find the text 'Terms of Service'", "tool": "hela_receptor_scroll_to_element", "arguments": {"direction": "down", "text": "Terms of Service", "serial": "PX-5"}, "note": "openrouter-free", "split": "train"}
+{"task": "Long press at 300, 400 for 2 seconds on device DEV01", "tool": "hela_receptor_long_press", "arguments": {"x": 300, "y": 400, "duration": 2000, "serial": "DEV01"}, "note": "openrouter-free", "split": "train"}
+{"task": "Wake up the screen for device 777-888", "tool": "hela_receptor_screen_on", "arguments": {"serial": "777-888"}, "note": "openrouter-free", "split": "train"}
+{"task": "Find any element with the resource ID 'com.android.settings:id/title' on device ABC", "tool": "hela_receptor_ui_find_element", "arguments": {"resourceId": "com.android.settings:id/title", "serial": "ABC"}, "note": "openrouter-free", "split": "train"}
+{"task": "Execute 'ls -al /sdcard/' on device DEV_02", "tool": "hela_receptor_shell_exec", "arguments": {"command": "ls -al /sdcard/", "serial": "DEV_02"}, "note": "openrouter-free", "split": "train"}
+{"task": "Start a screen recording on device MY-PHONE to /sdcard/rec.mp4 for 60 seconds", "tool": "hela_receptor_screen_record_start", "arguments": {"serial": "MY-PHONE", "remotePath": "/sdcard/rec.mp4", "duration": 60}, "note": "openrouter-free", "split": "train"}
+{"task": "Stop the recording on device MY-PHONE and pull it to /home/user/videos/test.mp4", "tool": "hela_receptor_screen_record_stop", "arguments": {"serial": "MY-PHONE", "pullToHost": true, "localPath": "/home/user/videos/test.mp4"}, "note": "openrouter-free", "split": "train"}
+{"task": "Rotate the screen on device 112233", "tool": "hela_receptor_rotate_device", "arguments": {"serial": "112233"}, "note": "openrouter-free", "split": "train"}
+{"task": "Start a scrcpy session for device X-Y-Z with 60 FPS and max size 1920", "tool": "hela_receptor_start_session", "arguments": {"serial": "X-Y-Z", "maxFps": 60, "maxSize": 1920}, "note": "openrouter-free", "split": "train"}
+{"task": "Open a video stream on port 8080 for device DEV-S1", "tool": "hela_receptor_start_video_stream", "arguments": {"serial": "DEV-S1", "port": 8080}, "note": "openrouter-free", "split": "train"}
+{"task": "Dump the UI hierarchy of device 445566", "tool": "hela_receptor_ui_dump", "arguments": {"serial": "445566"}, "note": "openrouter-free", "split": "train"}
+{"task": "Scroll down by 500 pixels at 500, 500 on device ABC", "tool": "hela_receptor_scroll", "arguments": {"x": 500, "y": 500, "dx": 0, "dy": 500, "serial": "ABC"}, "note": "openrouter-free", "split": "train"}
+{"task": "Type 'Admin123' into the field with ID 'com.app:id/password' on device 001", "tool": "hela_receptor_input_text", "arguments": {"text": "Admin123", "elementId": "com.app:id/password", "serial": "001"}, "note": "openrouter-free", "split": "train"}
+{"task": "Turn off the screen on device DEV-99", "tool": "hela_receptor_screen_off", "arguments": {"serial": "DEV-99"}, "note": "openrouter-free", "split": "train"}
+{"task": "Press the BACK key on device S-10", "tool": "hela_receptor_key_event", "arguments": {"keycode": "BACK", "serial": "S-10"}, "note": "openrouter-free", "split": "train"}
+{"task": "Find all buttons with the text 'Submit' on device 123", "tool": "hela_receptor_ui_find_element", "arguments": {"className": "android.widget.Button", "text": "Submit", "serial": "123"}, "note": "openrouter-free", "split": "train"}
+{"task": "What is the weather in New York today?", "tool": null, "note": "openrouter-free", "split": "train"}
+{"task": "Can you order me a pizza from Dominoes?", "tool": null, "note": "openrouter-free", "split": "train"}
+{"task": "Tell me a joke about Android phones", "tool": null, "note": "openrouter-free", "split": "train"}
+{"task": "Tap the screen at coordinates 500, 1200 on device emulator-5554.", "tool": "hela_receptor_tap", "arguments": {"x": 500, "y": 1200, "serial": "emulator-5554"}, "note": "openrouter-free", "split": "train"}
+{"task": "Type 'Hello World' into the search bar and press enter.", "tool": "hela_receptor_input_text", "arguments": {"text": "Hello World", "submit": true}, "note": "openrouter-free", "split": "train"}
+{"task": "Can you find the button with the text 'Submit' on device 12345?", "tool": "hela_receptor_ui_find_element", "arguments": {"text": "Submit", "serial": "12345"}, "note": "openrouter-free", "split": "train"}
+{"task": "Scroll down until you see the 'Settings' option.", "tool": "hela_receptor_scroll_to_element", "arguments": {"text": "Settings", "direction": "down"}, "note": "openrouter-free", "split": "train"}
+{"task": "Press the home button.", "tool": "hela_receptor_key_event", "arguments": {"keycode": "HOME"}, "note": "openrouter-free", "split": "train"}
+{"task": "Take a screenshot of my phone.", "tool": "hela_receptor_screenshot", "note": "openrouter-free", "split": "train"}
+{"task": "Start a screen recording for 60 seconds on serial 999 and save it to /sdcard/vid.mp4.", "tool": "hela_receptor_screen_record_start", "arguments": {"duration": 60, "remotePath": "/sdcard/vid.mp4", "serial": "999"}, "note": "openrouter-free", "split": "train"}
+{"task": "Swipe from (100, 500) to (100, 1000) on device abc.", "tool": "hela_receptor_swipe", "arguments": {"x1": 100, "y1": 500, "x2": 100, "y2": 1000, "serial": "abc"}, "note": "openrouter-free", "split": "train"}
+{"task": "Wake up the device emulator-5554.", "tool": "hela_receptor_screen_on", "arguments": {"serial": "emulator-5554"}, "note": "openrouter-free", "split": "train"}
+{"task": "Run 'ls /sdcard' on device 123.", "tool": "hela_receptor_shell_exec", "arguments": {"command": "ls /sdcard", "serial": "123"}, "note": "openrouter-free", "split": "train"}
+{"task": "Long press at x=250, y=350 for 2 seconds.", "tool": "hela_receptor_long_press", "arguments": {"duration": 2000, "x": 250, "y": 350}, "note": "openrouter-free", "split": "train"}
+{"task": "Rotate the screen of device serial 888.", "tool": "hela_receptor_rotate_device", "arguments": {"serial": "888"}, "note": "openrouter-free", "split": "train"}
+{"task": "Find the input field with ID 'username_field' and type 'admin'.", "tool": "hela_receptor_input_text", "arguments": {"elementId": "username_field", "text": "admin"}, "note": "openrouter-free", "split": "train"}
+{"task": "Scroll down 500 pixels at position 500, 500.", "tool": "hela_receptor_scroll", "arguments": {"dx": 0, "dy": 500, "x": 500, "y": 500}, "note": "openrouter-free", "split": "train"}
+{"task": "Start a high-speed scrcpy session for device 555 on port 8080.", "tool": "hela_receptor_start_video_stream", "arguments": {"port": 8080, "serial": "555"}, "note": "openrouter-free", "split": "train"}
+{"task": "Get the UI hierarchy for device 1234.", "tool": "hela_receptor_ui_dump", "arguments": {"serial": "1234"}, "note": "openrouter-free", "split": "train"}
+{"task": "Type 'password123' into the field labeled 'Enter Password'.", "tool": "hela_receptor_input_text", "arguments": {"elementText": "Enter Password", "text": "password123"}, "note": "openrouter-free", "split": "train"}
+{"task": "Turn off the screen on device 777.", "tool": "hela_receptor_screen_off", "arguments": {"serial": "777"}, "note": "openrouter-free", "split": "train"}
+{"task": "Stop the screen recording and pull it to '~/downloads/rec.mp4' on device 123.", "tool": "hela_receptor_screen_record_stop", "arguments": {"localPath": "~/downloads/rec.mp4", "pullToHost": true, "serial": "123"}, "note": "openrouter-free", "split": "train"}
+{"task": "Search for an element with class 'android.widget.EditText' and content description 'Search Input'.", "tool": "hela_receptor_ui_find_element", "arguments": {"className": "android.widget.EditText", "contentDesc": "Search Input"}, "note": "openrouter-free", "split": "train"}
+{"task": "What is the weather like in London?", "tool": null, "note": "openrouter-free", "split": "train"}
