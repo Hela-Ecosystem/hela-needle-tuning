@@ -1,0 +1,14 @@
+{"task": "I want to start a new session for my side project so I don't mess up this one.", "tool": "hela_cytosol_browser_agent_create", "arguments": {"name": "side-project-session"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Could you show me all the different browsing sessions I currently have open?", "tool": "hela_cytosol_browser_agent_list", "note": "openrouter-free-styled", "split": "train"}
+{"task": "I'm done with the testing environment, please get rid of it.", "tool": "hela_cytosol_browser_agent_remove", "arguments": {"name": "test-env-123"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "I need to jump back over to my research tab.", "tool": "hela_cytosol_browser_agent_switch", "arguments": {"name": "research-tab"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "I'm not seeing the login button where it's supposed to be.", "tool": "hela_cytosol_browser_assert", "arguments": {"type": "visible", "target": "#login-btn"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "Wait, I went to the wrong page, take me to the previous one.", "tool": "hela_cytosol_browser_back", "note": "openrouter-free-styled", "split": "train"}
+{"task": "Can you quickly finish this whole quiz for me by picking the first option for every question and then turning it in?", "tool": "hela_cytosol_browser_batch_answer_quiz", "arguments": {"answers": [{"q": 0, "option": 0}, {"q": 1, "option": 0}, {"q": 2, "option": 0}], "submitAfter": true}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "I want to see how well the selector cache is performing.", "tool": "hela_cytosol_browser_cache_stats", "note": "openrouter-free-styled", "split": "train"}
+{"task": "The 'Terms of Service' box isn't checked yet.", "tool": "hela_cytosol_browser_check", "arguments": {"selector": "#tos-checkbox"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "There is some old text in the search bar that I need to wipe out.", "tool": "hela_cytosol_browser_clear", "arguments": {"selector": "input[name='q']"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "The network rules I set up earlier are causing issues, please reset them.", "tool": "hela_cytosol_browser_clear_intercepts", "note": "openrouter-free-styled", "split": "train"}
+{"task": "Stop all the fake data responses and let the site load normally again.", "tool": "hela_cytosol_browser_clear_mocks", "note": "openrouter-free-styled", "split": "train"}
+{"task": "Who won the World Cup in 1998?", "tool": null, "note": "openrouter-free-styled", "split": "train"}
+{"task": "What is the capital of France?", "tool": null, "note": "openrouter-free-styled", "split": "train"}
