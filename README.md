@@ -1,6 +1,6 @@
 # hela-needle-tuning
 
-Data, evaluation and release gating for the Needle model that the HeLa runtime's native agent (`hela.agent.run`) uses to pick tools. Private on purpose: training data is derived from real sessions and weights ship as release assets, so none of it belongs in the public repos.
+Data, evaluation and release gating for the Needle model that the HeLa runtime's native agent (`hela.agent.run`) uses to pick tools. This repo is public and holds code, the hand-written seeds and a snapshot of the public tool catalog. It contains **no model weights and no real session data**. Run results (weights, logs) go to the private repo `Hela-Ecosystem/hela-needle-runs`, and `scripts/upload_release.sh` refuses to publish to any public repo. The Needle weights license is not documented upstream, so nothing derived from them is published here.
 
 The runtime stays unaware of this repo. It loads whatever `NEEDLE_ENGINE_PATH` / `NEEDLE_MODEL_PATH` / `NEEDLE_SYSTEM_PATH` point at, so shipping tuned weights is a configuration change, not a code change.
 

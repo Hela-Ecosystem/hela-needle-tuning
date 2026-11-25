@@ -8,7 +8,7 @@ Success is a number, not a feeling: a tuned `.cact` that passes `hela_needle gat
 
 | Decision | Reason |
 |----------|--------|
-| Separate private repo | Training data and weights do not belong in the public MCP repos. |
+| Separate repo, public code and private artifacts | Code, seeds and the catalog snapshot are public here. Weights and run logs go to the private `hela-needle-runs`; the uploader refuses public destinations. |
 | Runtime stays agnostic | It loads `NEEDLE_*` paths, so shipping weights is configuration. |
 | Rows copy the runtime's two prompts | The model is tuned on exactly the text it sees. Update `examples.py` whenever `agent.ts` prompts change. |
 | Frozen hash split | Adding rows never moves an existing row between train and eval. |
@@ -36,7 +36,7 @@ Acceptance: at least 3 train rows per tool, eval at least 150 rows, `check-secre
 Acceptance: a `.cact` that the Needle engine loads and answers with; `meta.json` filled in.
 
 ### M3: first real run and gate
-- Train with the M1 data for 3 epochs, build, evaluate on servy with the real engine, run the gate.
+- Train with the M1 data for 3 epochs, build, evaluate with the real engine, run the gate.
 - Report scores with hardware and quantisation noted (local build is 4-bit; the shipped baseline is 2-bit).
 Acceptance: gate passes, or the failure reasons are written down and drive M1 data fixes. A failed gate is a valid outcome.
 

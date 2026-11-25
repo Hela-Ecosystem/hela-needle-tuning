@@ -1,17 +1,25 @@
 #!/usr/bin/env bash
-# Upload every file in a run directory to a PRIVATE GitHub release of this repo.
+# Upload every file in a run directory to a release of the PRIVATE artifacts repo.
 #
 # Usage: GH_TOKEN=... scripts/upload_release.sh <run_dir> <tag>
-# The token needs Contents: write on the repo only (fine-grained, short expiry).
-# Weights are never committed to git; releases of a private repo are private.
+# The token needs Contents: write on hela-needle-runs only (fine-grained, short expiry).
+# This code repo is public, so results never go to it: weights and run logs go to
+# the private repo, and this script refuses to publish to any public repository.
 set -euo pipefail
 
 : "${GH_TOKEN:?set GH_TOKEN (fine-grained, Contents: write, this repo only)}"
-REPO="${REPO:-Hela-Ecosystem/hela-needle-tuning}"
+REPO="${REPO:-Hela-Ecosystem/hela-needle-runs}"
 DIR="${1:?run directory}"
 TAG="${2:?release tag}"
 
 api() { curl -fsS -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/vnd.github+json" "$@"; }
+
+# Releases of a public repo are public, and the weights license is unresolved.
+PRIVATE="$(api "https://api.github.com/repos/${REPO}" | python3 -c 'import json,sys; print(json.load(sys.stdin).get("private"))')"
+if [ "$PRIVATE" != "True" ] && [ "${ALLOW_PUBLIC_RELEASE:-0}" != "1" ]; then
+  echo "refusing to upload: ${REPO} is not private (set ALLOW_PUBLIC_RELEASE=1 to override)" >&2
+  exit 2
+fi
 
 BODY="$(python3 - "$TAG" <<'PY'
 import json, sys

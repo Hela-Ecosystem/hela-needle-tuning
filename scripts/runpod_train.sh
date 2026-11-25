@@ -8,9 +8,10 @@
 # true hardware needs and wall time in docs/TRAINING.md.
 #
 # One line on a fresh pod (runpod/base cuda12.9 on Ubuntu 24.04 is what we plan to use):
-#   export GH_TOKEN=<fine-grained token, THIS repo only, Contents: write, 1-day expiry>; curl -fsSL -H "Authorization: Bearer $GH_TOKEN" https://raw.githubusercontent.com/Hela-Ecosystem/hela-needle-tuning/main/scripts/runpod_train.sh -o t.sh && bash t.sh
+#   export GH_TOKEN=<fine-grained token: hela-needle-runs ONLY, Contents: write, 1-day expiry>; curl -fsSL https://raw.githubusercontent.com/Hela-Ecosystem/hela-needle-tuning/main/scripts/runpod_train.sh -o t.sh && bash t.sh
 #
-# The result is uploaded as a PRIVATE GitHub release named run-<id> (model, meta, logs).
+# This code repo is public (no token needed to read it). The result is uploaded as a
+# release named run-<id> (model, meta, logs) to the PRIVATE repo Hela-Ecosystem/hela-needle-runs.
 # A failed run uploads its logs as run-<id>-failed so they can be read without pasting.
 # The script only terminates the pod if AUTO_TERMINATE=1, and only after a successful upload.
 #
@@ -18,7 +19,7 @@
 #      EXTRA_FINETUNE_ARGS, EXTRA_BUILD_ARGS.
 set -euo pipefail
 
-: "${GH_TOKEN:?set GH_TOKEN (fine-grained token, this repo only, Contents: write)}"
+: "${GH_TOKEN:?set GH_TOKEN (fine-grained token, hela-needle-runs only, Contents: write)}"
 set +x  # never trace commands that carry the token
 EPOCHS="${EPOCHS:-3}"
 BRANCH="${BRANCH:-main}"
@@ -33,10 +34,9 @@ if ! command -v git >/dev/null || ! python3 -m venv --help >/dev/null 2>&1 || ! 
   apt-get update -qq && apt-get install -y -qq git python3-venv python3-pip
 fi
 
-# The token is only used for this clone and is not written to the remote URL.
+# The code repo is public: clone without credentials so the token is never used for it.
 if [ ! -d repo ]; then
-  git -c "http.extraHeader=Authorization: Bearer ${GH_TOKEN}" clone --depth 1 --branch "$BRANCH" \
-    https://github.com/Hela-Ecosystem/hela-needle-tuning.git repo
+  git clone --depth 1 --branch "$BRANCH" https://github.com/Hela-Ecosystem/hela-needle-tuning.git repo
 fi
 cd repo
 SHA="$(git rev-parse --short HEAD)"
