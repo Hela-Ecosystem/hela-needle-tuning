@@ -51,7 +51,10 @@ def cmd_secrets(a: argparse.Namespace) -> int:
 
 def cmd_eval(a: argparse.Namespace) -> int:
     rows = _read_jsonl(Path(a.eval))
-    scores = evalrun.evaluate(rows, lambda r: evalrun.run_engine(a.engine, a.model, a.system, r, a.timeout))
+    details: list[dict] | None = [] if a.details else None
+    scores = evalrun.evaluate(rows, lambda r: evalrun.run_engine(a.engine, a.model, a.system, r, a.timeout), details)
+    if details is not None:
+        _write_jsonl(Path(a.details), details)
     Path(a.out).write_text(json.dumps(scores, indent=2) + "\n", encoding="utf8")
     print(json.dumps(scores, indent=2))
     return 0
@@ -88,6 +91,7 @@ def main(argv: list[str] | None = None) -> int:
     e.add_argument("--system")
     e.add_argument("--timeout", type=float, default=30.0)
     e.add_argument("--out", required=True)
+    e.add_argument("--details", help="also write one JSON line per row (task, expected, got) for error analysis")
     e.set_defaults(fn=cmd_eval)
     g = sub.add_parser("gate", help="compare candidate scores with the baseline")
     g.add_argument("--candidate", required=True)

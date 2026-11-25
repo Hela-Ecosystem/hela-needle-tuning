@@ -117,6 +117,14 @@ class Scoring(unittest.TestCase):
         self.assertEqual(scores["args_exact"], 1.0)
         self.assertEqual(scores["regression_tool_acc"], 0.0)
 
+    def test_details_record_each_row(self):
+        details = []
+        evalrun.evaluate(self._rows(), lambda r: {"function_calls": [{"name": LS.name, "arguments": {}}]}, details)
+        self.assertEqual(len(details), 3)
+        self.assertEqual(details[0]["expected"], TIME.name)
+        self.assertEqual(details[0]["got"], LS.name)
+        self.assertFalse(details[0]["tool_ok"])
+
 
 class Gate(unittest.TestCase):
     BASE = {"n": 40, "choose_tool_acc": 0.5, "args_valid": 0.8, "regression_n": 5, "regression_tool_acc": 0.2}

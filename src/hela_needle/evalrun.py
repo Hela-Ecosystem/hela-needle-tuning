@@ -74,6 +74,32 @@ def aggregate(scored: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
-def evaluate(rows: list[dict[str, Any]], predict: Callable[[dict[str, Any]], dict[str, Any]]) -> dict[str, Any]:
-    scored = [score_row(r, predict(r)) for r in rows if r["meta"]["split"] == "eval"]
+def evaluate(
+    rows: list[dict[str, Any]],
+    predict: Callable[[dict[str, Any]], dict[str, Any]],
+    details: list[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
+    """Score eval rows. If ``details`` is given, append one record per row (task, expected, got)."""
+    scored = []
+    for r in rows:
+        if r["meta"]["split"] != "eval":
+            continue
+        envelope = predict(r)
+        s = score_row(r, envelope)
+        scored.append(s)
+        if details is not None:
+            got = first_call(envelope)
+            exp = r["answers"][0] if r["answers"] else None
+            details.append({
+                "task": r["query"].split("\n", 1)[0].removeprefix("Task: "),
+                "stage": s["stage"],
+                "regression": s["regression"],
+                "expected": exp["name"] if exp else None,
+                "got": got.get("name") if got else None,
+                "tool_ok": s["tool_ok"],
+                "args_exact": s.get("args_exact"),
+                "expected_args": exp["arguments"] if exp and s["stage"] == "arguments" else None,
+                "got_args": (got or {}).get("arguments") if s["stage"] == "arguments" else None,
+                "error": envelope.get("error"),
+            })
     return aggregate(scored)
