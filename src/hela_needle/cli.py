@@ -8,7 +8,7 @@ from pathlib import Path
 
 from . import evalrun, gate
 from .catalog import load_catalog
-from .examples import build_rows
+from .examples import build_rows, dedupe
 from .scrub import findings
 
 
@@ -26,6 +26,7 @@ def cmd_build(a: argparse.Namespace) -> int:
     rows: list[dict] = []
     for seed in sorted(Path(a.seeds).glob("*.jsonl")):
         rows += build_rows(seed, catalog, a.seed)
+    rows = dedupe(rows)
     out = Path(a.out)
     train = [r for r in rows if r["meta"]["split"] == "train"]
     held = [r for r in rows if r["meta"]["split"] == "eval"]

@@ -1,0 +1,216 @@
+{"task": "Give me the date and time in London.", "tool": "hela_mitosis_get_current_time", "arguments": {"timezone": "Europe/London"}}
+{"task": "What time is it in Los Angeles?", "tool": "hela_mitosis_get_current_time", "arguments": {"timezone": "America/Los_Angeles"}}
+{"task": "Give me the date and time in Los Angeles.", "tool": "hela_mitosis_get_current_time", "arguments": {"timezone": "America/Los_Angeles"}}
+{"task": "Give me the date and time in Jakarta.", "tool": "hela_mitosis_get_current_time", "arguments": {"timezone": "Asia/Jakarta"}}
+{"task": "Give me the date and time in Singapore.", "tool": "hela_mitosis_get_current_time", "arguments": {"timezone": "Asia/Singapore"}}
+{"task": "Give me the date and time in Berlin. Do not modify any files.", "tool": "hela_mitosis_get_current_time", "arguments": {"timezone": "Europe/Berlin"}}
+{"task": "What time is it in Singapore?", "tool": "hela_mitosis_get_current_time", "arguments": {"timezone": "Asia/Singapore"}}
+{"task": "Tell me the current time in London.", "tool": "hela_mitosis_get_current_time", "arguments": {"timezone": "Europe/London"}}
+{"task": "What is the local time in Jakarta right now? Read only, please.", "tool": "hela_mitosis_get_current_time", "arguments": {"timezone": "Asia/Jakarta"}}
+{"task": "What is the local time in London right now? Do not modify any files.", "tool": "hela_mitosis_get_current_time", "arguments": {"timezone": "Europe/London"}}
+{"task": "Current time for Asia/Tokyo, please.", "tool": "hela_mitosis_get_current_time", "arguments": {"timezone": "Asia/Tokyo"}}
+{"task": "Tell me the current time in Los Angeles.", "tool": "hela_mitosis_get_current_time", "arguments": {"timezone": "America/Los_Angeles"}}
+{"task": "What is 09:00 Europe/London in Asia/Tokyo?", "tool": "hela_mitosis_convert_time", "arguments": {"source_timezone": "Europe/London", "time": "09:00", "target_timezone": "Asia/Tokyo"}}
+{"task": "When it is 07:45 in Asia/Singapore, what time is it in Australia/Sydney?", "tool": "hela_mitosis_convert_time", "arguments": {"source_timezone": "Asia/Singapore", "time": "07:45", "target_timezone": "Australia/Sydney"}}
+{"task": "Convert 22:15 from America/Los_Angeles to Europe/Berlin.", "tool": "hela_mitosis_convert_time", "arguments": {"source_timezone": "America/Los_Angeles", "time": "22:15", "target_timezone": "Europe/Berlin"}}
+{"task": "What is 14:30 Asia/Jakarta in America/New_York?", "tool": "hela_mitosis_convert_time", "arguments": {"source_timezone": "Asia/Jakarta", "time": "14:30", "target_timezone": "America/New_York"}}
+{"task": "What is 07:45 Asia/Singapore in Australia/Sydney?", "tool": "hela_mitosis_convert_time", "arguments": {"source_timezone": "Asia/Singapore", "time": "07:45", "target_timezone": "Australia/Sydney"}}
+{"task": "When it is 14:30 in Asia/Jakarta, what time is it in America/New_York?", "tool": "hela_mitosis_convert_time", "arguments": {"source_timezone": "Asia/Jakarta", "time": "14:30", "target_timezone": "America/New_York"}}
+{"task": "When it is 22:15 in America/Los_Angeles, what time is it in Europe/Berlin?", "tool": "hela_mitosis_convert_time", "arguments": {"source_timezone": "America/Los_Angeles", "time": "22:15", "target_timezone": "Europe/Berlin"}}
+{"task": "Convert 07:45 from Asia/Singapore to Australia/Sydney.", "tool": "hela_mitosis_convert_time", "arguments": {"source_timezone": "Asia/Singapore", "time": "07:45", "target_timezone": "Australia/Sydney"}}
+{"task": "When it is 09:00 in Europe/London, what time is it in Asia/Tokyo?", "tool": "hela_mitosis_convert_time", "arguments": {"source_timezone": "Europe/London", "time": "09:00", "target_timezone": "Asia/Tokyo"}}
+{"task": "Convert 14:30 from Asia/Jakarta to America/New_York.", "tool": "hela_mitosis_convert_time", "arguments": {"source_timezone": "Asia/Jakarta", "time": "14:30", "target_timezone": "America/New_York"}}
+{"task": "Convert 09:00 from Europe/London to Asia/Tokyo.", "tool": "hela_mitosis_convert_time", "arguments": {"source_timezone": "Europe/London", "time": "09:00", "target_timezone": "Asia/Tokyo"}}
+{"task": "What is 22:15 America/Los_Angeles in Europe/Berlin?", "tool": "hela_mitosis_convert_time", "arguments": {"source_timezone": "America/Los_Angeles", "time": "22:15", "target_timezone": "Europe/Berlin"}}
+{"task": "List the files in /workspace/scripts.", "tool": "hela_membrane_list_directory", "arguments": {"path": "/workspace/scripts"}}
+{"task": "Show the directory listing of /workspace. Don't change anything.", "tool": "hela_membrane_list_directory", "arguments": {"path": "/workspace"}}
+{"task": "Show the directory listing of /workspace/config.", "tool": "hela_membrane_list_directory", "arguments": {"path": "/workspace/config"}}
+{"task": "Show me what files are inside /workspace/tests.", "tool": "hela_membrane_list_directory", "arguments": {"path": "/workspace/tests"}}
+{"task": "Show the directory listing of /workspace/docs.", "tool": "hela_membrane_list_directory", "arguments": {"path": "/workspace/docs"}}
+{"task": "Show the directory listing of /workspace/tests.", "tool": "hela_membrane_list_directory", "arguments": {"path": "/workspace/tests"}}
+{"task": "What is in /workspace/src? Read only, please.", "tool": "hela_membrane_list_directory", "arguments": {"path": "/workspace/src"}}
+{"task": "Show me what files are inside /workspace/config.", "tool": "hela_membrane_list_directory", "arguments": {"path": "/workspace/config"}}
+{"task": "What is in /workspace/config? Don't change anything.", "tool": "hela_membrane_list_directory", "arguments": {"path": "/workspace/config"}}
+{"task": "List the files in /workspace/tests.", "tool": "hela_membrane_list_directory", "arguments": {"path": "/workspace/tests"}}
+{"task": "Show the directory listing of /workspace/scripts.", "tool": "hela_membrane_list_directory", "arguments": {"path": "/workspace/scripts"}}
+{"task": "List the files in /workspace/src.", "tool": "hela_membrane_list_directory", "arguments": {"path": "/workspace/src"}}
+{"task": "What is written in /workspace/package.json?", "tool": "hela_membrane_read_file", "arguments": {"path": "/workspace/package.json"}}
+{"task": "Show me the contents of /workspace/CHANGELOG.md. Without changing anything.", "tool": "hela_membrane_read_file", "arguments": {"path": "/workspace/CHANGELOG.md"}}
+{"task": "Show me the contents of /workspace/package.json. Don't change anything.", "tool": "hela_membrane_read_file", "arguments": {"path": "/workspace/package.json"}}
+{"task": "What is written in /workspace/README.md?", "tool": "hela_membrane_read_file", "arguments": {"path": "/workspace/README.md"}}
+{"task": "Read /workspace/CHANGELOG.md. Don't change anything.", "tool": "hela_membrane_read_file", "arguments": {"path": "/workspace/CHANGELOG.md"}}
+{"task": "Read /workspace/src/index.ts.", "tool": "hela_membrane_read_file", "arguments": {"path": "/workspace/src/index.ts"}}
+{"task": "What is written in /workspace/config/settings.yaml? Don't change anything.", "tool": "hela_membrane_read_file", "arguments": {"path": "/workspace/config/settings.yaml"}}
+{"task": "Open /workspace/CHANGELOG.md and tell me what it says.", "tool": "hela_membrane_read_file", "arguments": {"path": "/workspace/CHANGELOG.md"}}
+{"task": "Open /workspace/docs/guide.md and tell me what it says.", "tool": "hela_membrane_read_file", "arguments": {"path": "/workspace/docs/guide.md"}}
+{"task": "Open /workspace/config/settings.yaml and tell me what it says.", "tool": "hela_membrane_read_file", "arguments": {"path": "/workspace/config/settings.yaml"}}
+{"task": "What is written in /workspace/CHANGELOG.md? Do not modify any files.", "tool": "hela_membrane_read_file", "arguments": {"path": "/workspace/CHANGELOG.md"}}
+{"task": "Open /workspace/README.md and tell me what it says. Do not modify any files.", "tool": "hela_membrane_read_file", "arguments": {"path": "/workspace/README.md"}}
+{"task": "Create /workspace/todo.md containing '- buy milk'.", "tool": "hela_membrane_write_file", "arguments": {"path": "/workspace/todo.md", "content": "- buy milk"}}
+{"task": "Create /workspace/notes.txt containing 'meeting at 3pm'.", "tool": "hela_membrane_write_file", "arguments": {"path": "/workspace/notes.txt", "content": "meeting at 3pm"}}
+{"task": "Write '- buy milk' to /workspace/todo.md.", "tool": "hela_membrane_write_file", "arguments": {"path": "/workspace/todo.md", "content": "- buy milk"}}
+{"task": "Create /workspace/out/result.txt containing 'done'.", "tool": "hela_membrane_write_file", "arguments": {"path": "/workspace/out/result.txt", "content": "done"}}
+{"task": "Save the text 'hello world' in a new file /workspace/hello.txt.", "tool": "hela_membrane_write_file", "arguments": {"path": "/workspace/hello.txt", "content": "hello world"}}
+{"task": "Write 'hello world' to /workspace/hello.txt.", "tool": "hela_membrane_write_file", "arguments": {"path": "/workspace/hello.txt", "content": "hello world"}}
+{"task": "Save the text '- buy milk' in a new file /workspace/todo.md.", "tool": "hela_membrane_write_file", "arguments": {"path": "/workspace/todo.md", "content": "- buy milk"}}
+{"task": "Save the text 'done' in a new file /workspace/out/result.txt.", "tool": "hela_membrane_write_file", "arguments": {"path": "/workspace/out/result.txt", "content": "done"}}
+{"task": "Write 'done' to /workspace/out/result.txt.", "tool": "hela_membrane_write_file", "arguments": {"path": "/workspace/out/result.txt", "content": "done"}}
+{"task": "Create /workspace/hello.txt containing 'hello world'.", "tool": "hela_membrane_write_file", "arguments": {"path": "/workspace/hello.txt", "content": "hello world"}}
+{"task": "Write 'meeting at 3pm' to /workspace/notes.txt.", "tool": "hela_membrane_write_file", "arguments": {"path": "/workspace/notes.txt", "content": "meeting at 3pm"}}
+{"task": "Save the text 'meeting at 3pm' in a new file /workspace/notes.txt.", "tool": "hela_membrane_write_file", "arguments": {"path": "/workspace/notes.txt", "content": "meeting at 3pm"}}
+{"task": "Duplicate /workspace/src/app.ts into /workspace/src/app.copy.ts.", "tool": "hela_membrane_copy_file", "arguments": {"source": "/workspace/src/app.ts", "destination": "/workspace/src/app.copy.ts"}}
+{"task": "Make a backup of /workspace/data.csv as /workspace/archive/data.csv.", "tool": "hela_membrane_copy_file", "arguments": {"source": "/workspace/data.csv", "destination": "/workspace/archive/data.csv"}}
+{"task": "Duplicate /workspace/config.json into /workspace/config.backup.json.", "tool": "hela_membrane_copy_file", "arguments": {"source": "/workspace/config.json", "destination": "/workspace/config.backup.json"}}
+{"task": "Copy /workspace/config.json to /workspace/config.backup.json.", "tool": "hela_membrane_copy_file", "arguments": {"source": "/workspace/config.json", "destination": "/workspace/config.backup.json"}}
+{"task": "Make a backup of /workspace/src/app.ts as /workspace/src/app.copy.ts.", "tool": "hela_membrane_copy_file", "arguments": {"source": "/workspace/src/app.ts", "destination": "/workspace/src/app.copy.ts"}}
+{"task": "Make a backup of /workspace/config.json as /workspace/config.backup.json.", "tool": "hela_membrane_copy_file", "arguments": {"source": "/workspace/config.json", "destination": "/workspace/config.backup.json"}}
+{"task": "Duplicate /workspace/data.csv into /workspace/archive/data.csv.", "tool": "hela_membrane_copy_file", "arguments": {"source": "/workspace/data.csv", "destination": "/workspace/archive/data.csv"}}
+{"task": "Copy /workspace/data.csv to /workspace/archive/data.csv.", "tool": "hela_membrane_copy_file", "arguments": {"source": "/workspace/data.csv", "destination": "/workspace/archive/data.csv"}}
+{"task": "Copy /workspace/src/app.ts to /workspace/src/app.copy.ts.", "tool": "hela_membrane_copy_file", "arguments": {"source": "/workspace/src/app.ts", "destination": "/workspace/src/app.copy.ts"}}
+{"task": "How big is /workspace/build/app.js? Read only, please.", "tool": "hela_membrane_get_file_info", "arguments": {"path": "/workspace/build/app.js"}}
+{"task": "When was /workspace/README.md last modified?", "tool": "hela_membrane_get_file_info", "arguments": {"path": "/workspace/README.md"}}
+{"task": "Give me the size and permissions of /workspace/data.db.", "tool": "hela_membrane_get_file_info", "arguments": {"path": "/workspace/data.db"}}
+{"task": "When was /workspace/build/app.js last modified? Read only, please.", "tool": "hela_membrane_get_file_info", "arguments": {"path": "/workspace/build/app.js"}}
+{"task": "Give me the size and permissions of /workspace/README.md. Without changing anything.", "tool": "hela_membrane_get_file_info", "arguments": {"path": "/workspace/README.md"}}
+{"task": "How big is /workspace/README.md?", "tool": "hela_membrane_get_file_info", "arguments": {"path": "/workspace/README.md"}}
+{"task": "Give me the size and permissions of /workspace/build/app.js.", "tool": "hela_membrane_get_file_info", "arguments": {"path": "/workspace/build/app.js"}}
+{"task": "How big is /workspace/data.db?", "tool": "hela_membrane_get_file_info", "arguments": {"path": "/workspace/data.db"}}
+{"task": "When was /workspace/data.db last modified?", "tool": "hela_membrane_get_file_info", "arguments": {"path": "/workspace/data.db"}}
+{"task": "Locate all JSON files in /workspace/config.", "tool": "hela_membrane_find_files", "arguments": {"pattern": "*.json", "directory": "/workspace/config"}}
+{"task": "Locate all test files in /workspace/tests. Do not modify any files.", "tool": "hela_membrane_find_files", "arguments": {"pattern": "*.test.*", "directory": "/workspace/tests"}}
+{"task": "Find every markdown file under /workspace.", "tool": "hela_membrane_find_files", "arguments": {"pattern": "*.md", "directory": "/workspace"}}
+{"task": "Find every test file under /workspace/tests.", "tool": "hela_membrane_find_files", "arguments": {"pattern": "*.test.*", "directory": "/workspace/tests"}}
+{"task": "Locate all markdown files in /workspace.", "tool": "hela_membrane_find_files", "arguments": {"pattern": "*.md", "directory": "/workspace"}}
+{"task": "Find every TypeScript file under /workspace/src.", "tool": "hela_membrane_find_files", "arguments": {"pattern": "*.ts", "directory": "/workspace/src"}}
+{"task": "Locate all TypeScript files in /workspace/src. Read only, please.", "tool": "hela_membrane_find_files", "arguments": {"pattern": "*.ts", "directory": "/workspace/src"}}
+{"task": "Find every JSON file under /workspace/config.", "tool": "hela_membrane_find_files", "arguments": {"pattern": "*.json", "directory": "/workspace/config"}}
+{"task": "grep for deprecated in the project.", "tool": "hela_membrane_search_in_files", "arguments": {"pattern": "deprecated"}}
+{"task": "Which files mention console.log?", "tool": "hela_membrane_search_in_files", "arguments": {"pattern": "console.log"}}
+{"task": "Which files mention TODO?", "tool": "hela_membrane_search_in_files", "arguments": {"pattern": "TODO"}}
+{"task": "Which files mention deprecated?", "tool": "hela_membrane_search_in_files", "arguments": {"pattern": "deprecated"}}
+{"task": "Search the code for the text TODO.", "tool": "hela_membrane_search_in_files", "arguments": {"pattern": "TODO"}}
+{"task": "Search the code for the text console.log. Do not modify any files.", "tool": "hela_membrane_search_in_files", "arguments": {"pattern": "console.log"}}
+{"task": "grep for TODO in the project.", "tool": "hela_membrane_search_in_files", "arguments": {"pattern": "TODO"}}
+{"task": "Search the code for the text FIXME.", "tool": "hela_membrane_search_in_files", "arguments": {"pattern": "FIXME"}}
+{"task": "grep for FIXME in the project.", "tool": "hela_membrane_search_in_files", "arguments": {"pattern": "FIXME"}}
+{"task": "Which files mention FIXME?", "tool": "hela_membrane_search_in_files", "arguments": {"pattern": "FIXME"}}
+{"task": "Search the code for the text deprecated.", "tool": "hela_membrane_search_in_files", "arguments": {"pattern": "deprecated"}}
+{"task": "grep for console.log in the project.", "tool": "hela_membrane_search_in_files", "arguments": {"pattern": "console.log"}}
+{"task": "Delete /workspace/build/cache.tmp.", "tool": "hela_membrane_delete_file", "arguments": {"path": "/workspace/build/cache.tmp"}}
+{"task": "Remove the file /workspace/tmp/scratch.log.", "tool": "hela_membrane_delete_file", "arguments": {"path": "/workspace/tmp/scratch.log"}}
+{"task": "Delete /workspace/old/notes.bak.", "tool": "hela_membrane_delete_file", "arguments": {"path": "/workspace/old/notes.bak"}}
+{"task": "Remove the file /workspace/build/cache.tmp.", "tool": "hela_membrane_delete_file", "arguments": {"path": "/workspace/build/cache.tmp"}}
+{"task": "Delete /workspace/tmp/scratch.log.", "tool": "hela_membrane_delete_file", "arguments": {"path": "/workspace/tmp/scratch.log"}}
+{"task": "Remove the file /workspace/old/notes.bak.", "tool": "hela_membrane_delete_file", "arguments": {"path": "/workspace/old/notes.bak"}}
+{"task": "Get rid of /workspace/tmp/scratch.log.", "tool": "hela_membrane_delete_file", "arguments": {"path": "/workspace/tmp/scratch.log"}}
+{"task": "Get rid of /workspace/build/cache.tmp.", "tool": "hela_membrane_delete_file", "arguments": {"path": "/workspace/build/cache.tmp"}}
+{"task": "Get rid of /workspace/old/notes.bak.", "tool": "hela_membrane_delete_file", "arguments": {"path": "/workspace/old/notes.bak"}}
+{"task": "Show memory usage.", "tool": "hela_nucleus_execute_command", "arguments": {"command": "free -m"}}
+{"task": "Show the git status of the repository. Use the shell.", "tool": "hela_nucleus_execute_command", "arguments": {"command": "git status"}}
+{"task": "Which version of Node is installed? Use the shell.", "tool": "hela_nucleus_execute_command", "arguments": {"command": "node --version"}}
+{"task": "Show the git status of the repository.", "tool": "hela_nucleus_execute_command", "arguments": {"command": "git status"}}
+{"task": "Show the last five commits. Use the shell.", "tool": "hela_nucleus_execute_command", "arguments": {"command": "git log --oneline -5"}}
+{"task": "Which version of Node is installed?", "tool": "hela_nucleus_execute_command", "arguments": {"command": "node --version"}}
+{"task": "Check how much disk space is free. Use the shell.", "tool": "hela_nucleus_execute_command", "arguments": {"command": "df -h"}}
+{"task": "Show memory usage. Use the shell.", "tool": "hela_nucleus_execute_command", "arguments": {"command": "free -m"}}
+{"task": "Run the test suite.", "tool": "hela_nucleus_execute_command", "arguments": {"command": "npm test"}}
+{"task": "Show the last five commits.", "tool": "hela_nucleus_execute_command", "arguments": {"command": "git log --oneline -5"}}
+{"task": "Check how much disk space is free.", "tool": "hela_nucleus_execute_command", "arguments": {"command": "df -h"}}
+{"task": "Run the test suite. Use the shell.", "tool": "hela_nucleus_execute_command", "arguments": {"command": "npm test"}}
+{"task": "Run ls on /workspace/src.", "tool": "hela_nucleus_terminal_ls", "arguments": {"path": "/workspace/src"}}
+{"task": "List /workspace/src in the terminal with details.", "tool": "hela_nucleus_terminal_ls", "arguments": {"path": "/workspace/src"}}
+{"task": "Run ls on /workspace/logs.", "tool": "hela_nucleus_terminal_ls", "arguments": {"path": "/workspace/logs"}}
+{"task": "Run ls on /workspace.", "tool": "hela_nucleus_terminal_ls", "arguments": {"path": "/workspace"}}
+{"task": "List /workspace in the terminal with details.", "tool": "hela_nucleus_terminal_ls", "arguments": {"path": "/workspace"}}
+{"task": "List /workspace/logs in the terminal with details.", "tool": "hela_nucleus_terminal_ls", "arguments": {"path": "/workspace/logs"}}
+{"task": "Which terminal sessions are open?", "tool": "hela_nucleus_terminal_session_list"}
+{"task": "Show the active shell sessions.", "tool": "hela_nucleus_terminal_session_list"}
+{"task": "List my terminal sessions.", "tool": "hela_nucleus_terminal_session_list"}
+{"task": "Start an interactive bash session I can keep using.", "tool": "hela_ribosome_session_spawn", "arguments": {"command": "bash"}}
+{"task": "Open a persistent node PTY.", "tool": "hela_ribosome_session_spawn", "arguments": {"command": "node"}}
+{"task": "Open a persistent python3 PTY.", "tool": "hela_ribosome_session_spawn", "arguments": {"command": "python3"}}
+{"task": "Start an interactive node session I can keep using.", "tool": "hela_ribosome_session_spawn", "arguments": {"command": "node"}}
+{"task": "Start an interactive python3 session I can keep using.", "tool": "hela_ribosome_session_spawn", "arguments": {"command": "python3"}}
+{"task": "Open a persistent bash PTY.", "tool": "hela_ribosome_session_spawn", "arguments": {"command": "bash"}}
+{"task": "Show all managed terminal processes.", "tool": "hela_ribosome_session_list"}
+{"task": "List the running PTY sessions.", "tool": "hela_ribosome_session_list"}
+{"task": "Which PTY sessions are currently running?", "tool": "hela_ribosome_session_list"}
+{"task": "Look up what we know about release process in memory.", "tool": "hela_genome_search_nodes", "arguments": {"query": "release process"}}
+{"task": "Look up what we know about deployment pipeline in memory.", "tool": "hela_genome_search_nodes", "arguments": {"query": "deployment pipeline"}}
+{"task": "Search the knowledge graph for deployment pipeline. Don't change anything.", "tool": "hela_genome_search_nodes", "arguments": {"query": "deployment pipeline"}}
+{"task": "Do we have any notes on deployment pipeline? Without changing anything.", "tool": "hela_genome_search_nodes", "arguments": {"query": "deployment pipeline"}}
+{"task": "Search the knowledge graph for database schema. Don't change anything.", "tool": "hela_genome_search_nodes", "arguments": {"query": "database schema"}}
+{"task": "Do we have any notes on auth service?", "tool": "hela_genome_search_nodes", "arguments": {"query": "auth service"}}
+{"task": "Look up what we know about auth service in memory.", "tool": "hela_genome_search_nodes", "arguments": {"query": "auth service"}}
+{"task": "Search the knowledge graph for auth service.", "tool": "hela_genome_search_nodes", "arguments": {"query": "auth service"}}
+{"task": "Do we have any notes on release process?", "tool": "hela_genome_search_nodes", "arguments": {"query": "release process"}}
+{"task": "Search the knowledge graph for release process.", "tool": "hela_genome_search_nodes", "arguments": {"query": "release process"}}
+{"task": "Do we have any notes on database schema?", "tool": "hela_genome_search_nodes", "arguments": {"query": "database schema"}}
+{"task": "Look up what we know about database schema in memory.", "tool": "hela_genome_search_nodes", "arguments": {"query": "database schema"}}
+{"task": "Read the entire knowledge graph.", "tool": "hela_genome_read_graph"}
+{"task": "Show me the whole knowledge graph. Do not modify any files.", "tool": "hela_genome_read_graph"}
+{"task": "Dump the memory graph.", "tool": "hela_genome_read_graph"}
+{"task": "Show 20 records from sessions.", "tool": "hela_genome_query_data", "arguments": {"table": "sessions", "limit": 20}}
+{"task": "Read the first 20 rows of the sessions table.", "tool": "hela_genome_query_data", "arguments": {"table": "sessions", "limit": 20}}
+{"task": "Read the first 10 rows of the missions table.", "tool": "hela_genome_query_data", "arguments": {"table": "missions", "limit": 10}}
+{"task": "Show 50 records from events.", "tool": "hela_genome_query_data", "arguments": {"table": "events", "limit": 50}}
+{"task": "Show 10 records from missions.", "tool": "hela_genome_query_data", "arguments": {"table": "missions", "limit": 10}}
+{"task": "Read the first 50 rows of the events table.", "tool": "hela_genome_query_data", "arguments": {"table": "events", "limit": 50}}
+{"task": "Navigate the browser to https://example.com.", "tool": "hela_cytosol_browser_navigate", "arguments": {"url": "https://example.com"}}
+{"task": "Go to https://news.ycombinator.com.", "tool": "hela_cytosol_browser_navigate", "arguments": {"url": "https://news.ycombinator.com"}}
+{"task": "Navigate the browser to https://news.ycombinator.com.", "tool": "hela_cytosol_browser_navigate", "arguments": {"url": "https://news.ycombinator.com"}}
+{"task": "Go to https://example.com.", "tool": "hela_cytosol_browser_navigate", "arguments": {"url": "https://example.com"}}
+{"task": "Open https://news.ycombinator.com in the browser.", "tool": "hela_cytosol_browser_navigate", "arguments": {"url": "https://news.ycombinator.com"}}
+{"task": "Navigate the browser to https://github.com.", "tool": "hela_cytosol_browser_navigate", "arguments": {"url": "https://github.com"}}
+{"task": "Open https://example.com in the browser.", "tool": "hela_cytosol_browser_navigate", "arguments": {"url": "https://example.com"}}
+{"task": "Open https://github.com in the browser.", "tool": "hela_cytosol_browser_navigate", "arguments": {"url": "https://github.com"}}
+{"task": "Go to https://github.com.", "tool": "hela_cytosol_browser_navigate", "arguments": {"url": "https://github.com"}}
+{"task": "Go to https://docs.python.org/3/.", "tool": "hela_cytosol_browser_navigate", "arguments": {"url": "https://docs.python.org/3/"}}
+{"task": "Open https://docs.python.org/3/ in the browser.", "tool": "hela_cytosol_browser_navigate", "arguments": {"url": "https://docs.python.org/3/"}}
+{"task": "Navigate the browser to https://docs.python.org/3/.", "tool": "hela_cytosol_browser_navigate", "arguments": {"url": "https://docs.python.org/3/"}}
+{"task": "Screenshot what the browser is showing.", "tool": "hela_cytosol_browser_screenshot"}
+{"task": "Take a screenshot of the current page.", "tool": "hela_cytosol_browser_screenshot"}
+{"task": "Capture the page as an image.", "tool": "hela_cytosol_browser_screenshot"}
+{"task": "Get the text content of the page that is open.", "tool": "hela_cytosol_browser_get_content"}
+{"task": "Read the text of the current web page.", "tool": "hela_cytosol_browser_get_content"}
+{"task": "Extract the content of the open page.", "tool": "hela_cytosol_browser_get_content"}
+{"task": "Find the Wikipedia article about Alan Turing.", "tool": "hela_enzyme_wikipedia_search", "arguments": {"query": "Alan Turing"}}
+{"task": "Find the Wikipedia article about Krebs cycle.", "tool": "hela_enzyme_wikipedia_search", "arguments": {"query": "Krebs cycle"}}
+{"task": "Find the Wikipedia article about Transformer architecture.", "tool": "hela_enzyme_wikipedia_search", "arguments": {"query": "Transformer architecture"}}
+{"task": "Look up Krebs cycle on Wikipedia.", "tool": "hela_enzyme_wikipedia_search", "arguments": {"query": "Krebs cycle"}}
+{"task": "Search Wikipedia for Krebs cycle.", "tool": "hela_enzyme_wikipedia_search", "arguments": {"query": "Krebs cycle"}}
+{"task": "Look up Mount Merapi on Wikipedia.", "tool": "hela_enzyme_wikipedia_search", "arguments": {"query": "Mount Merapi"}}
+{"task": "Search Wikipedia for Transformer architecture.", "tool": "hela_enzyme_wikipedia_search", "arguments": {"query": "Transformer architecture"}}
+{"task": "Find the Wikipedia article about Mount Merapi.", "tool": "hela_enzyme_wikipedia_search", "arguments": {"query": "Mount Merapi"}}
+{"task": "Look up Alan Turing on Wikipedia.", "tool": "hela_enzyme_wikipedia_search", "arguments": {"query": "Alan Turing"}}
+{"task": "Search Wikipedia for Mount Merapi.", "tool": "hela_enzyme_wikipedia_search", "arguments": {"query": "Mount Merapi"}}
+{"task": "Look up Transformer architecture on Wikipedia.", "tool": "hela_enzyme_wikipedia_search", "arguments": {"query": "Transformer architecture"}}
+{"task": "Search Wikipedia for Alan Turing.", "tool": "hela_enzyme_wikipedia_search", "arguments": {"query": "Alan Turing"}}
+{"task": "Google rust vs go for cli tools.", "tool": "hela_enzyme_google_search", "arguments": {"q": "rust vs go for cli tools"}}
+{"task": "Search Google for latest Node.js LTS version.", "tool": "hela_enzyme_google_search", "arguments": {"q": "latest Node.js LTS version"}}
+{"task": "Search the web for best practices for SQLite WAL.", "tool": "hela_enzyme_google_search", "arguments": {"q": "best practices for SQLite WAL"}}
+{"task": "Search Google for best practices for SQLite WAL.", "tool": "hela_enzyme_google_search", "arguments": {"q": "best practices for SQLite WAL"}}
+{"task": "Google best practices for SQLite WAL.", "tool": "hela_enzyme_google_search", "arguments": {"q": "best practices for SQLite WAL"}}
+{"task": "Search the web for latest Node.js LTS version.", "tool": "hela_enzyme_google_search", "arguments": {"q": "latest Node.js LTS version"}}
+{"task": "Search the web for rust vs go for cli tools.", "tool": "hela_enzyme_google_search", "arguments": {"q": "rust vs go for cli tools"}}
+{"task": "Google latest Node.js LTS version.", "tool": "hela_enzyme_google_search", "arguments": {"q": "latest Node.js LTS version"}}
+{"task": "Search Google for rust vs go for cli tools.", "tool": "hela_enzyme_google_search", "arguments": {"q": "rust vs go for cli tools"}}
+{"task": "Find academic papers about LoRA fine-tuning.", "tool": "hela_enzyme_academic_search", "arguments": {"query": "LoRA fine-tuning"}}
+{"task": "Find academic papers about retrieval augmented generation.", "tool": "hela_enzyme_academic_search", "arguments": {"query": "retrieval augmented generation"}}
+{"task": "Search arXiv for tool calling small language models.", "tool": "hela_enzyme_academic_search", "arguments": {"query": "tool calling small language models"}}
+{"task": "Look for research on tool calling small language models.", "tool": "hela_enzyme_academic_search", "arguments": {"query": "tool calling small language models"}}
+{"task": "Look for research on LoRA fine-tuning.", "tool": "hela_enzyme_academic_search", "arguments": {"query": "LoRA fine-tuning"}}
+{"task": "Search arXiv for retrieval augmented generation.", "tool": "hela_enzyme_academic_search", "arguments": {"query": "retrieval augmented generation"}}
+{"task": "Search arXiv for LoRA fine-tuning.", "tool": "hela_enzyme_academic_search", "arguments": {"query": "LoRA fine-tuning"}}
+{"task": "Look for research on retrieval augmented generation.", "tool": "hela_enzyme_academic_search", "arguments": {"query": "retrieval augmented generation"}}
+{"task": "Find academic papers about tool calling small language models.", "tool": "hela_enzyme_academic_search", "arguments": {"query": "tool calling small language models"}}
+{"task": "Thanks, that is everything I needed.", "tool": "done"}
+{"task": "That's all, thank you.", "tool": "done"}
+{"task": "Nothing else is needed, we are finished.", "tool": "done"}
+{"task": "Everything you were asked has already been completed.", "tool": "done"}
+{"task": "All done here, no further action.", "tool": "done"}
+{"task": "Tell me a joke about penguins.", "tool": null}
+{"task": "What is the meaning of life?", "tool": null}
+{"task": "Write me a poem about autumn.", "tool": null}
+{"task": "How are you today?", "tool": null}
+{"task": "Who won the world cup in 2010?", "tool": null}

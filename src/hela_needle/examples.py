@@ -100,6 +100,20 @@ def arguments_row(task: str, target: str, arguments: dict[str, Any], catalog: li
     }
 
 
+def dedupe(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Keep the first row for each (task, stage); earlier seed files win."""
+    seen: set[tuple[str, str, bool]] = set()
+    out: list[dict[str, Any]] = []
+    for row in rows:
+        task = row["query"].split("\n", 1)[0].lower()
+        # A pinned shortlist replays a specific failure, so it is never a duplicate of an unpinned row.
+        key = (task, row["meta"]["stage"], bool(row["meta"].get("pinned")))
+        if key not in seen:
+            seen.add(key)
+            out.append(row)
+    return out
+
+
 def build_rows(seed_path: str | Path, catalog: list[Tool], seed: int = 7) -> list[dict[str, Any]]:
     """Expand a seed file (one JSON object per line) into rows with split labels.
 
@@ -124,6 +138,6 @@ def build_rows(seed_path: str | Path, catalog: list[Tool], seed: int = 7) -> lis
             raise ValueError(f"{seed_path}:{line_no}: {exc}") from exc
         for kind, row in stage:
             row = scrub_value(row)
-            row["meta"] = {"stage": kind, "split": split_of(task, regression), "regression": regression, "source": Path(seed_path).name}
+            row["meta"] = {"stage": kind, "split": split_of(task, regression), "regression": regression, "pinned": bool(item.get("shortlist")) and kind == "choose", "source": Path(seed_path).name}
             rows.append(row)
     return rows

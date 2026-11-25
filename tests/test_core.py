@@ -5,7 +5,7 @@ from pathlib import Path
 
 from hela_needle import evalrun, gate
 from hela_needle.catalog import Tool, load_catalog
-from hela_needle.examples import arguments_row, build_rows, choose_row
+from hela_needle.examples import arguments_row, build_rows, choose_row, dedupe
 from hela_needle.schema import validate_args
 from hela_needle.scrub import findings, scrub_text
 from hela_needle.splits import split_of
@@ -72,6 +72,19 @@ class Rows(unittest.TestCase):
             p.write_text(json.dumps({"task": "x", "tool": LS.name, "arguments": {}}) + "\n")
             with self.assertRaises(ValueError):
                 build_rows(p, CAT)
+
+    def test_dedupe_keeps_first_per_task_and_stage(self):
+        a = choose_row("Same task", TIME.name, CAT, random.Random(1))
+        b = choose_row("same task", LS.name, CAT, random.Random(2))
+        c = arguments_row("Same task", TIME.name, {"timezone": "UTC"}, CAT)
+        for r, st in ((a, "choose"), (b, "choose"), (c, "arguments")):
+            r["meta"] = {"stage": st}
+        kept = dedupe([a, b, c])
+        self.assertEqual(len(kept), 2)
+        self.assertIs(kept[0], a)
+        pinned = choose_row("Same task", TIME.name, CAT, random.Random(3), pin=[TIME.name, LS.name])
+        pinned["meta"] = {"stage": "choose", "pinned": True}
+        self.assertEqual(len(dedupe([a, pinned])), 2)
 
     def test_catalog_qualifies_names(self):
         import tempfile
