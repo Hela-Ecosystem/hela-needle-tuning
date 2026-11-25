@@ -25,6 +25,11 @@ RUN_ID="$(date -u +%Y%m%dT%H%M%SZ)"
 command -v nvidia-smi >/dev/null || { echo "no GPU visible (nvidia-smi missing)" >&2; exit 1; }
 mkdir -p "$WORK" && cd "$WORK"
 
+# runpod/base is a minimal Ubuntu image: make sure git, pip and venv exist.
+if ! command -v git >/dev/null || ! python3 -m venv --help >/dev/null 2>&1 || ! python3 -m pip --version >/dev/null 2>&1; then
+  apt-get update -qq && apt-get install -y -qq git python3-venv python3-pip
+fi
+
 # The token is only used for this clone and is not written to the remote URL.
 if [ ! -d repo ]; then
   git -c "http.extraHeader=Authorization: Bearer ${GH_TOKEN}" clone --depth 1 --branch "$BRANCH" \
