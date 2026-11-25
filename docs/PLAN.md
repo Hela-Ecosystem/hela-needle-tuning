@@ -2,7 +2,7 @@
 
 Goal: the runtime's native agent (`hela.agent.run`) picks the right tool and fills valid arguments for HeLa's catalog, measurably better than the shipped `needle3`, without any change to the public runtime code.
 
-Success is a number, not a feeling: a tuned `.cact` that passes `hela_needle gate` against `eval/baseline.json`.
+Success is a number, not a feeling: a tuned `.cact` that passes `hela_needle gate` against its profile's baseline in `eval/baselines/`.
 
 ## Decisions so far
 

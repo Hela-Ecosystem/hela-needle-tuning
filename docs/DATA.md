@@ -14,7 +14,7 @@ Every training row is built by `python -m hela_needle build-data` from seed file
 
 ## Rules
 
-- **The eval is frozen.** It is `eval_hand.jsonl` plus the hash portion of `core` and `expanded`. All other sources are forced to `train`, so adding data never changes the eval or invalidates `eval/baseline.json`. If the eval must change, re-run the baseline in the same commit.
+- **The eval is frozen.** It is `eval_hand.jsonl` plus the hash portion of `core` and `expanded`. All other sources are forced to `train`, so adding data never changes the eval or invalidates the per-profile baselines in `eval/baselines/`. If the eval must change, re-run the baseline in the same commit.
 - **No real session data.** Tasks come from the catalog, hand-written seeds and model-generated text. Real usage can be added later only after scrubbing and review.
 - **Free models only for generation.** `scripts/generate_chunks.py` refuses non-free models without `--allow-paid`.
 - **Claude-written rows:** the owner approved Claude writing training samples and, on 2026-11-25, confirmed that the resulting models are not competing with Claude: Needle is a tiny single-purpose model (tens of millions of parameters) that picks a tool and fills its arguments for the owner's own agent, not a general-purpose assistant. The provenance of the data is stated in `NOTICE` and the model card.
