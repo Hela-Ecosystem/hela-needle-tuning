@@ -1,7 +1,9 @@
 #!/bin/sh
 # Import finished `cactus generate-data` chunks, validate, and push - only when it is safe.
 #
-# Usage: scripts/sync_generated.sh <dir with raw_*.jsonl>
+# Usage: scripts/sync_generated.sh <dir with raw_*.jsonl> [more dirs ...]
+# A directory whose name starts with "gen2" holds output of scripts/generate_styled.py and is
+# labelled openrouter-free-styled; any other directory is labelled openrouter-free.
 #
 # Safety gates (any failure aborts without committing):
 #   - the frozen eval must hash to eval/frozen.sha256 (generated rows are train-only);
@@ -10,16 +12,19 @@
 # Nothing is committed when nothing changed. Raw chunks stay outside the repo.
 set -eu
 cd "$(dirname "$0")/.."
-RAW="${1:?directory with raw_*.jsonl}"
+[ "$#" -ge 1 ] || { echo "usage: sync_generated.sh <dir> [dir ...]" >&2; exit 2; }
 export PYTHONPATH=src PYTHONDONTWRITEBYTECODE=1
 CAT=data/catalog/hela-stack-tools.json
 
 git pull --rebase -q origin main
 
-for f in "$RAW"/raw_*.jsonl; do
-  [ -s "$f" ] || continue
-  n="$(basename "$f" .jsonl | sed 's/^raw_//')"
-  python3 -m hela_needle import-generated "$f" --catalog "$CAT" --source openrouter-free --out "data/seed/generated_$n.jsonl" >/dev/null
+for RAW in "$@"; do
+  case "$(basename "$RAW")" in gen2*) SRC=openrouter-free-styled ;; *) SRC=openrouter-free ;; esac
+  for f in "$RAW"/raw_*.jsonl; do
+    [ -s "$f" ] || continue
+    n="$(basename "$f" .jsonl | sed 's/^raw_//')"
+    python3 -m hela_needle import-generated "$f" --catalog "$CAT" --source "$SRC" --out "data/seed/generated_$n.jsonl" >/dev/null
+  done
 done
 
 python3 -m hela_needle build-data --catalog "$CAT" >/dev/null
