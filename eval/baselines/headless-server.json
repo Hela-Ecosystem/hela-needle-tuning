@@ -1,0 +1,9 @@
+{
+  "n": 194,
+  "choose_tool_acc": 0.4414,
+  "args_valid": 0.9639,
+  "args_exact": 0.1566,
+  "args_match": 0.4096,
+  "regression_n": 6,
+  "regression_tool_acc": 0.5
+}
