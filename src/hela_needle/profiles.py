@@ -36,6 +36,14 @@ def load_profiles(path: str | Path) -> dict[str, list[str]]:
     return data
 
 
+# The runtime's own tools (hela.update.check / hela.update.apply) are offered under every profile.
+ALWAYS_ACTIVE = {"runtime"}
+
+
+def cell_active(cell: str, cells: "list[str] | set[str]") -> bool:
+    return cell in ALWAYS_ACTIVE or cell in cells
+
+
 def profile_catalog(catalog: list[Tool], cells: list[str]) -> list[Tool]:
     active = set(cells)
-    return [t for t in catalog if t.cell in active]
+    return [t for t in catalog if cell_active(t.cell, active)]

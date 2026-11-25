@@ -1,0 +1,33 @@
+{
+  "source": "hela-runtime dist/daemon.js, agentCatalog(): excludedAgentCatalogToolNames and excludedAgentCatalogToolPatterns (read 2026-11-25). A tool is excluded when its real name, or its exposed name hela_<cell>_<name>, matches. The agent offers Needle every other cell tool plus hela.update.check and hela.update.apply.",
+  "names": [
+    "agent_run",
+    "hela.agent.run",
+    "hela.agent.plan",
+    "hela.catalog.list",
+    "hela.catalog.search",
+    "hela.pipe",
+    "workflow_orchestrator",
+    "workflow_status",
+    "workflow_cancel",
+    "validate_tool_chain",
+    "analyze_tool_chain_performance",
+    "analyze_tools",
+    "generate_route_suggestions",
+    "get_tool_chain_analysis",
+    "suggest_skill_chain",
+    "brainstorming",
+    "sequentialthinking",
+    "list_mcp_servers",
+    "search_instructions",
+    "load_instruction",
+    "get_prompt",
+    "search_prompts",
+    "get_resource_set",
+    "search_resource_sets"
+  ],
+  "patterns": [
+    "^llm_.*$",
+    "^agent_(spawn|send|fork|list|info|close|create)$"
+  ]
+}

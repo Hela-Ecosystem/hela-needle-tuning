@@ -38,12 +38,20 @@ def plan(
     system_mode: str = "profile",
     git_sha: str = "",
     catalog_sha: str = "",
+    gaps: dict[str, tuple[list[str], list[str]]] | None = None,
+    allow_uncovered: bool = False,
 ) -> tuple[dict[str, Any] | None, list[str]]:
     """Return (plan, problems). A plan exists only when every requested profile is publishable."""
     suffix = ".nosystem" if system_mode == "none" else ""
     problems: list[str] = []
     entries: list[dict[str, Any]] = []
     for p in profiles:
+        if gaps is not None and not allow_uncovered:
+            no_choose = gaps.get(p, ([], []))[0]
+            if no_choose:
+                short = [n.replace("hela_", "", 1) for n in no_choose]
+                problems.append(f"{p}: {len(no_choose)} tool(s) have no training row: " + ", ".join(short[:12]) + (" ..." if len(short) > 12 else ""))
+                continue
         cact = models_dir / f"hela-needle3-{p}.cact"
         cand = root / "eval" / "candidates" / f"{p}{suffix}.json"
         cand_sha = root / "eval" / "candidates" / f"{p}{suffix}.sha256"
@@ -80,6 +88,7 @@ def plan(
                 "train_rows": meta.get("train_rows"),
                 "eval_rows": meta.get("eval_rows"),
                 "epochs": meta.get("epochs"),
+                "uncovered_tools": len(gaps.get(p, ([], []))[0]) if gaps is not None else None,
             },
             "scores": {"candidate": scores, "baseline": baseline},
             "release": tag,

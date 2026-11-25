@@ -23,6 +23,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+from hela_needle.agentcat import visible_names  # noqa: E402
 from hela_needle.catalog import load_catalog  # noqa: E402
 
 
@@ -54,6 +55,8 @@ def main() -> int:
     ap.add_argument("--workers", type=int, default=2)
     ap.add_argument("--timeout", type=int, default=1800)
     ap.add_argument("--allow-paid", action="store_true")
+    ap.add_argument("--exclusions", default=str(Path(__file__).resolve().parent.parent / "data/catalog/agent-exclusions.json"),
+                    help="tools the agent never offers to Needle are skipped")
     a = ap.parse_args()
 
     if not a.allow_paid and "free" not in a.model:
@@ -62,6 +65,11 @@ def main() -> int:
     out = Path(a.out_dir).expanduser()
     out.mkdir(parents=True, exist_ok=True)
     catalog = load_catalog(a.catalog, "qualified", a.cells)
+    visible = visible_names(catalog, a.exclusions)
+    if visible is not None:
+        skipped = len(catalog) - sum(1 for t in catalog if t.name in visible)
+        catalog = [t for t in catalog if t.name in visible]
+        print(f"skipping {skipped} tool(s) the agent never offers to Needle", flush=True)
     by_cell: dict[str, list] = {}
     for tool in catalog:
         by_cell.setdefault(tool.cell, []).append(tool)

@@ -8705,5 +8705,32 @@
     "workflowId"
    ]
   }
+ },
+ {
+  "name": "hela.update.apply",
+  "server": "hela-runtime",
+  "description": "Apply the latest verified HeLa ecosystem snapshot. Requires confirm=true, preserves a rollback record, and requires a runtime/client restart afterward.",
+  "parameters": {
+   "type": "object",
+   "properties": {
+    "confirm": {
+     "type": "boolean",
+     "description": "Explicitly authorize changing the managed installation."
+    }
+   },
+   "required": [
+    "confirm"
+   ],
+   "additionalProperties": false
+  }
+ },
+ {
+  "name": "hela.update.check",
+  "server": "hela-runtime",
+  "description": "Read-only check for a newer HeLa ecosystem snapshot. Reports changed cells and never modifies the installation.",
+  "parameters": {
+   "type": "object",
+   "properties": {}
+  }
  }
 ]

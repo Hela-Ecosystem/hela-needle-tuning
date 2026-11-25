@@ -13,13 +13,14 @@ off-topic row has ``answers: []``.
 """
 from __future__ import annotations
 
+import collections
 import json
 import random
 from pathlib import Path
 from typing import Any
 
 from .catalog import DONE_NAME, Tool, done_tool
-from .profiles import profile_catalog
+from .profiles import cell_active, profile_catalog
 from .schema import validate_args
 from .scrub import scrub_value
 from .splits import split_of
@@ -140,7 +141,7 @@ def pick_profile(item: dict[str, Any], tool: Tool | None, profiles: dict[str, li
     if explicit:
         if explicit not in profiles:
             raise ValueError(f"unknown profile {explicit!r}")
-        if tool is not None and tool.cell not in profiles[explicit]:
+        if tool is not None and not cell_active(tool.cell, profiles[explicit]):
             raise ValueError(f"{tool.name} is not active in profile {explicit!r}")
         return explicit
     names = sorted(profiles)
@@ -148,7 +149,7 @@ def pick_profile(item: dict[str, Any], tool: Tool | None, profiles: dict[str, li
     if inactive:
         names = [n for n in names if inactive not in profiles[n]]
     elif tool is not None:
-        names = [n for n in names if tool.cell in profiles[n]]
+        names = [n for n in names if cell_active(tool.cell, profiles[n])]
     if not names:
         raise ValueError("no profile fits this example")
     return names[rng.randrange(len(names))]
@@ -166,7 +167,7 @@ def applies_to_profile(item: dict[str, Any], by_name: dict[str, Tool], cells: se
     names += [h.get("tool") for h in item.get("history") or []] + list(item.get("shortlist") or [])
     for n in names:
         t = by_name.get(n)
-        if t is not None and t.cell not in cells:
+        if t is not None and not cell_active(t.cell, cells):
             return False
     if item.get("profile") and item["profile"] != name:
         return False
@@ -175,7 +176,15 @@ def applies_to_profile(item: dict[str, Any], by_name: dict[str, Tool], cells: se
     return True
 
 
-def build_rows(seed_path: str | Path, catalog: list[Tool], seed: int = 7, profiles: dict[str, list[str]] | None = None, only_profile: str | None = None) -> list[dict[str, Any]]:
+def build_rows(
+    seed_path: str | Path,
+    catalog: list[Tool],
+    seed: int = 7,
+    profiles: dict[str, list[str]] | None = None,
+    only_profile: str | None = None,
+    visible: set[str] | None = None,
+    stats: "collections.Counter | None" = None,
+) -> list[dict[str, Any]]:
     """Expand a seed file (one JSON object per line) into rows with split labels.
 
     Seed fields: ``task``, ``tool`` (qualified name, or ``done``/null for no
@@ -190,6 +199,13 @@ def build_rows(seed_path: str | Path, catalog: list[Tool], seed: int = 7, profil
         item = json.loads(line)
         try:
             task, tool = item["task"], item.get("tool")
+            if visible is not None:
+                known = {t.name for t in catalog}
+                used = ([tool] if tool and tool != "done" else []) + [h.get("tool") for h in item.get("history") or []] + list(item.get("shortlist") or [])
+                if any(n in known and n not in visible for n in used):
+                    if stats is not None:
+                        stats["not offered to Needle"] += 1
+                    continue
             if only_profile and not applies_to_profile(item, {t.name: t for t in catalog}, set(profiles[only_profile]), only_profile):
                 continue
             # Each row has its own randomness, so adding or reordering other seeds never
@@ -206,6 +222,8 @@ def build_rows(seed_path: str | Path, catalog: list[Tool], seed: int = 7, profil
                 target = by_name.get(tool) if tool and tool != "done" else None
                 profile = only_profile or pick_profile(item, target, profiles, rng)
                 pool = profile_catalog(catalog, profiles[profile])
+                if visible is not None:
+                    pool = [t for t in pool if t.name in visible]
             hist_choose = format_history(item.get("history"), by_name, 300)
             hist_args = format_history(item.get("history"), by_name, 400)
             stage = [("choose", choose_row(task, tool, pool, rng, pin=item.get("shortlist"), **({"history": hist_choose} if hist_choose else {})))]
@@ -220,7 +238,15 @@ def build_rows(seed_path: str | Path, catalog: list[Tool], seed: int = 7, profil
     return rows
 
 
-def build_all(seeds_dir: str | Path, catalog: list[Tool], seed: int = 7, profiles: dict[str, list[str]] | None = None, only_profile: str | None = None) -> list[dict[str, Any]]:
+def build_all(
+    seeds_dir: str | Path,
+    catalog: list[Tool],
+    seed: int = 7,
+    profiles: dict[str, list[str]] | None = None,
+    only_profile: str | None = None,
+    visible: set[str] | None = None,
+    stats: "collections.Counter | None" = None,
+) -> list[dict[str, Any]]:
     """Every seed file in a directory (sorted), expanded and de-duplicated.
 
     ``only_profile`` builds the dataset for a model dedicated to that profile: only lines that
@@ -230,5 +256,5 @@ def build_all(seeds_dir: str | Path, catalog: list[Tool], seed: int = 7, profile
         raise ValueError(f"unknown profile {only_profile!r}")
     rows: list[dict[str, Any]] = []
     for path in sorted(Path(seeds_dir).glob("*.jsonl")):
-        rows += build_rows(path, catalog, seed, profiles, only_profile)
+        rows += build_rows(path, catalog, seed, profiles, only_profile, visible, stats)
     return dedupe(rows)

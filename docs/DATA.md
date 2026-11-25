@@ -20,6 +20,12 @@ Every training row is built by `python -m hela_needle build-data` from seed file
 - **Claude-written rows:** the owner approved Claude writing training samples and, on 2026-11-25, confirmed that the resulting models are not competing with Claude: Needle is a tiny single-purpose model (tens of millions of parameters) that picks a tool and fills its arguments for the owner's own agent, not a general-purpose assistant. The provenance of the data is stated in `NOTICE` and the model card.
 - **"Done" and "no tool applies"** currently share the `done` answer. Revisit if the runtime needs them to differ.
 
+## What "all tools" means: the agent catalog
+
+Needle is not offered every MCP tool. The runtime builds the agent's catalog from the cell tools minus an exclusion list (`llm_*`, `workflow_*`, `agent_spawn` and friends, planner and orchestration tools), plus `hela.update.check` and `hela.update.apply`. Training and coverage use exactly that catalog: `data/catalog/agent-exclusions.json` is copied from the runtime source, seed lines for excluded tools are skipped at build time (reported as "not offered to Needle"), and candidate shortlists never contain them. The runtime's own two update tools live in the catalog under the `runtime` cell and are active in every profile.
+
+`docs/COVERAGE.md` counts and names every tool of the agent catalog that still has no training row. **`publish_models.sh` refuses a profile while any tool active in it has none** (override with `--allow-uncovered`, which the manifest records). When the runtime's exclusion list changes, re-copy it and re-run the coverage report.
+
 ## Coverage tracking and profiles
 
 - `docs/COVERAGE.md` (generated, committed) lists, per cell, profile and source file, how many tools have training rows, and names every tool with none or fewer than 3. Regenerate it with `python -m hela_needle coverage` whenever seeds or the catalog change, and read it before each training run. Each pod run also stores its own `coverage.md` next to the model.

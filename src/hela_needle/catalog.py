@@ -61,7 +61,7 @@ def load_catalog(
         if wanted is not None and cell not in wanted:
             continue
         name = item["name"]
-        if name_style == "qualified" and cell and not name.startswith("hela_"):
+        if name_style == "qualified" and cell and not name.startswith(("hela_", "hela.")):
             name = f"hela_{cell}_{name}"
         if name in seen:
             continue

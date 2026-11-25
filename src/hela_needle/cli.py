@@ -11,6 +11,8 @@ from .catalog import load_catalog
 from .examples import build_all
 from . import coverage as coverage_mod
 from .profiles import load_profiles
+from .agentcat import visible_names, is_visible, load_exclusions
+import collections
 from . import publish as publish_mod
 from .generated import convert
 from .scrub import findings
@@ -28,7 +30,11 @@ def _read_jsonl(path: Path) -> list[dict]:
 def cmd_build(a: argparse.Namespace) -> int:
     catalog = load_catalog(a.catalog, a.name_style, a.cells)
     profiles = load_profiles(a.profiles) if a.profiles and Path(a.profiles).exists() else None
-    rows = build_all(a.seeds, catalog, a.seed, profiles, a.profile)
+    visible = visible_names(catalog, a.exclusions)
+    stats: collections.Counter = collections.Counter()
+    rows = build_all(a.seeds, catalog, a.seed, profiles, a.profile, visible, stats)
+    for reason, n in stats.items():
+        print(f"  skipped {n} seed line(s): {reason}")
     out = Path(a.out)
     train = [r for r in rows if r["meta"]["split"] == "train"]
     held = [r for r in rows if r["meta"]["split"] == "eval"]
@@ -40,14 +46,17 @@ def cmd_build(a: argparse.Namespace) -> int:
 
 
 def cmd_coverage(a: argparse.Namespace) -> int:
-    catalog = load_catalog(a.catalog, a.name_style, a.cells)
+    full = load_catalog(a.catalog, a.name_style, a.cells)
     profiles = load_profiles(a.profiles)
-    rows = build_all(a.seeds, catalog, a.seed, profiles)
+    visible = visible_names(full, a.exclusions)
+    catalog = [t for t in full if visible is None or t.name in visible]
+    excluded = sorted(t.name.replace("hela_", "", 1) for t in full if visible is not None and t.name not in visible)
+    rows = build_all(a.seeds, full, a.seed, profiles, None, visible)
     sizes = {}
     for name in profiles:
-        sub_rows = build_all(a.seeds, catalog, a.seed, profiles, name)
+        sub_rows = build_all(a.seeds, full, a.seed, profiles, name, visible)
         sizes[name] = (sum(1 for r in sub_rows if r["meta"]["split"] == "train"), sum(1 for r in sub_rows if r["meta"]["split"] == "eval"))
-    text = coverage_mod.render(coverage_mod.analyse(rows, catalog, profiles), catalog, profiles, sizes)
+    text = coverage_mod.render(coverage_mod.analyse(rows, catalog, profiles), catalog, profiles, sizes, excluded)
     Path(a.out).write_text(text, encoding="utf8")
     print(f"wrote {a.out}")
     return 0
@@ -55,7 +64,15 @@ def cmd_coverage(a: argparse.Namespace) -> int:
 
 def cmd_publish_plan(a: argparse.Namespace) -> int:
     root = Path(".").resolve()
-    plan, problems = publish_mod.plan(Path(a.models_dir), a.profiles, root, a.tag, a.public_repo, a.system_mode, a.git_sha, a.catalog_sha)
+    full = load_catalog(a.catalog, "qualified", None)
+    profiles = load_profiles(a.profiles_file)
+    visible = visible_names(full, a.exclusions)
+    catalog = [t for t in full if visible is None or t.name in visible]
+    gaps = {}
+    for name in a.profiles:
+        rows = build_all(a.seeds, full, 7, profiles, name, visible)
+        gaps[name] = coverage_mod.gaps(rows, catalog, profiles[name])
+    plan, problems = publish_mod.plan(Path(a.models_dir), a.profiles, root, a.tag, a.public_repo, a.system_mode, a.git_sha, a.catalog_sha, gaps, a.allow_uncovered)
     if problems:
         for p in problems:
             print(f"REFUSED {p}")
@@ -134,6 +151,7 @@ def main(argv: list[str] | None = None) -> int:
     b.add_argument("--cells", nargs="*")
     b.add_argument("--seed", type=int, default=7)
     b.add_argument("--profiles", default="data/catalog/profiles.json", help="profile -> active cells; rows draw their shortlist from one profile")
+    b.add_argument("--exclusions", default="data/catalog/agent-exclusions.json", help="tools the agent never offers to Needle (not trained)")
     b.add_argument("--profile", help="build the dataset for a model dedicated to this profile (see data/catalog/profiles.json)")
     b.set_defaults(fn=cmd_build)
     cv = sub.add_parser("coverage", help="write docs/COVERAGE.md: tools, cells and profiles vs what the data teaches")
@@ -144,6 +162,7 @@ def main(argv: list[str] | None = None) -> int:
     cv.add_argument("--profiles", default="data/catalog/profiles.json")
     cv.add_argument("--seed", type=int, default=7)
     cv.add_argument("--out", default="docs/COVERAGE.md")
+    cv.add_argument("--exclusions", default="data/catalog/agent-exclusions.json")
     cv.set_defaults(fn=cmd_coverage)
     i = sub.add_parser("import-generated", help="convert `cactus generate-data` output into validated seed lines")
     i.add_argument("inputs", nargs="+")
@@ -162,6 +181,11 @@ def main(argv: list[str] | None = None) -> int:
     pp.add_argument("--git-sha", default="")
     pp.add_argument("--catalog-sha", default="")
     pp.add_argument("--out", required=True)
+    pp.add_argument("--catalog", default="data/catalog/hela-stack-tools.json")
+    pp.add_argument("--seeds", default="data/seed")
+    pp.add_argument("--profiles-file", default="data/catalog/profiles.json")
+    pp.add_argument("--exclusions", default="data/catalog/agent-exclusions.json")
+    pp.add_argument("--allow-uncovered", action="store_true", help="publish even if some tools of the profile have no training row")
     pp.set_defaults(fn=cmd_publish_plan)
     ma = sub.add_parser("manifest-apply", help="record a publish plan in models/manifest.json")
     ma.add_argument("--plan", required=True)

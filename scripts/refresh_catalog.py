@@ -33,6 +33,12 @@ def main() -> int:
     merged: list[dict] = []
     live_cells: set[str] = set()
     for tool in live:
+        if tool["name"] in ("hela.update.check", "hela.update.apply"):
+            # The runtime's own tools: offered to Needle under every profile.
+            live_cells.add("runtime")
+            merged.append({"name": tool["name"], "server": "hela-runtime", "description": tool.get("description", ""),
+                           "parameters": tool.get("parameters") or {"type": "object", "properties": {}}})
+            continue
         parts = tool["name"].split("_", 2)
         if len(parts) != 3 or parts[0] != "hela" or parts[1] not in ORGANELLES:
             continue
@@ -49,7 +55,7 @@ def main() -> int:
         if cell in a.keep_cells and cell not in live_cells:
             merged.append(tool)
             kept += 1
-    order = {c: i for i, c in enumerate(ORGANELLES)}
+    order = {c: i for i, c in enumerate(ORGANELLES + ["runtime"])}
     merged.sort(key=lambda t: (order.get(t["server"].removeprefix("hela-"), 99), t["name"]))
     Path(a.out).write_text(json.dumps(merged, indent=1) + "\n", encoding="utf8")
     old = {(t["server"], t["name"]) for t in bundled}
