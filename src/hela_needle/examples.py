@@ -19,6 +19,7 @@ from pathlib import Path
 from typing import Any
 
 from .catalog import DONE_NAME, Tool, done_tool
+from .profiles import profile_catalog
 from .schema import validate_args
 from .scrub import scrub_value
 from .splits import split_of
@@ -128,7 +129,32 @@ def dedupe(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return out
 
 
-def build_rows(seed_path: str | Path, catalog: list[Tool], seed: int = 7) -> list[dict[str, Any]]:
+def pick_profile(item: dict[str, Any], tool: Tool | None, profiles: dict[str, list[str]], rng: random.Random) -> str:
+    """Choose the profile whose active cells the example is drawn from.
+
+    An explicit ``profile`` wins. A tool row picks among profiles where the tool's cell is
+    active. A row marked ``inactive_cell`` (the task needs a cell some profiles lack) picks a
+    profile where that cell is inactive, so the right answer really is "none".
+    """
+    explicit = item.get("profile")
+    if explicit:
+        if explicit not in profiles:
+            raise ValueError(f"unknown profile {explicit!r}")
+        if tool is not None and tool.cell not in profiles[explicit]:
+            raise ValueError(f"{tool.name} is not active in profile {explicit!r}")
+        return explicit
+    names = sorted(profiles)
+    inactive = item.get("inactive_cell")
+    if inactive:
+        names = [n for n in names if inactive not in profiles[n]]
+    elif tool is not None:
+        names = [n for n in names if tool.cell in profiles[n]]
+    if not names:
+        raise ValueError("no profile fits this example")
+    return names[rng.randrange(len(names))]
+
+
+def build_rows(seed_path: str | Path, catalog: list[Tool], seed: int = 7, profiles: dict[str, list[str]] | None = None) -> list[dict[str, Any]]:
     """Expand a seed file (one JSON object per line) into rows with split labels.
 
     Seed fields: ``task``, ``tool`` (qualified name, or ``done``/null for no
@@ -136,7 +162,6 @@ def build_rows(seed_path: str | Path, catalog: list[Tool], seed: int = 7) -> lis
     (always eval), ``note``. Any unknown tool or invalid arguments raise, so a
     stale seed fails the build instead of silently teaching the wrong thing.
     """
-    rng = random.Random(seed)
     rows: list[dict[str, Any]] = []
     for line_no, line in enumerate(Path(seed_path).read_text(encoding="utf8").splitlines(), 1):
         if not line.strip() or line.lstrip().startswith("#"):
@@ -144,20 +169,37 @@ def build_rows(seed_path: str | Path, catalog: list[Tool], seed: int = 7) -> lis
         item = json.loads(line)
         try:
             task, tool = item["task"], item.get("tool")
+            # Each row has its own randomness, so adding or reordering other seeds never
+            # changes this row's shortlist (the eval stays frozen).
+            rng = random.Random(f"{seed}:{task}:{json.dumps(item.get('history'), sort_keys=True)}")
             regression = bool(item.get("regression"))
             forced = item.get("split")
             if forced not in (None, "train", "eval"):
                 raise ValueError(f"split must be 'train' or 'eval', got {forced!r}")
             by_name = {t.name: t for t in catalog}
+            profile = None
+            pool = catalog
+            if profiles:
+                target = by_name.get(tool) if tool and tool != "done" else None
+                profile = pick_profile(item, target, profiles, rng)
+                pool = profile_catalog(catalog, profiles[profile])
             hist_choose = format_history(item.get("history"), by_name, 300)
             hist_args = format_history(item.get("history"), by_name, 400)
-            stage = [("choose", choose_row(task, tool, catalog, rng, pin=item.get("shortlist"), **({"history": hist_choose} if hist_choose else {})))]
+            stage = [("choose", choose_row(task, tool, pool, rng, pin=item.get("shortlist"), **({"history": hist_choose} if hist_choose else {})))]
             if item.get("arguments") is not None:
                 stage.append(("arguments", arguments_row(task, tool, item["arguments"], catalog, **({"history": hist_args} if hist_args else {}))))
         except (KeyError, ValueError) as exc:
             raise ValueError(f"{seed_path}:{line_no}: {exc}") from exc
         for kind, row in stage:
             row = scrub_value(row)
-            row["meta"] = {"stage": kind, "split": forced or split_of(task, regression), "regression": regression, "pinned": bool(item.get("shortlist")) and kind == "choose", "history": bool(item.get("history")), "source": Path(seed_path).name}
+            row["meta"] = {"stage": kind, "split": forced or split_of(task, regression), "regression": regression, "pinned": bool(item.get("shortlist")) and kind == "choose", "history": bool(item.get("history")), "profile": profile, "kind": ("none" if tool is None else "done" if tool == "done" else "tool"), "source": Path(seed_path).name}
             rows.append(row)
     return rows
+
+
+def build_all(seeds_dir: str | Path, catalog: list[Tool], seed: int = 7, profiles: dict[str, list[str]] | None = None) -> list[dict[str, Any]]:
+    """Every seed file in a directory (sorted), expanded and de-duplicated."""
+    rows: list[dict[str, Any]] = []
+    for path in sorted(Path(seeds_dir).glob("*.jsonl")):
+        rows += build_rows(path, catalog, seed, profiles)
+    return dedupe(rows)

@@ -41,9 +41,9 @@
 {"split": "eval", "task": "Thank you, goodbye", "tool": "done"}
 {"split": "eval", "task": "What is the capital of Australia?", "tool": null}
 {"split": "eval", "task": "Tell me a bedtime story", "tool": null}
-{"split": "eval", "task": "Tap the Settings icon on the connected Android phone", "tool": null}
-{"split": "eval", "task": "Render the Blender scene to a PNG", "tool": null}
-{"split": "eval", "task": "Swipe left on my phone screen", "tool": null}
+{"split": "eval", "task": "Tap the Settings icon on the connected Android phone", "tool": null, "inactive_cell": "receptor"}
+{"split": "eval", "task": "Render the Blender scene to a PNG", "tool": null, "inactive_cell": "plastid"}
+{"split": "eval", "task": "Swipe left on my phone screen", "tool": null, "inactive_cell": "receptor"}
 {"split": "eval", "task": "How are you feeling today?", "tool": null}
 {"task": "Show me the files in /workspace/api and then open the main one", "history": [{"tool": "hela_membrane_list_directory", "args": {"path": "/workspace/api"}, "result": "success: true, 2 items: main.py, utils.py"}], "tool": "hela_membrane_read_file", "arguments": {"path": "/workspace/api/main.py"}, "split": "eval"}
 {"task": "Go to https://example.net/login and then take a picture of the page", "history": [{"tool": "hela_cytosol_browser_navigate", "args": {"url": "https://example.net/login"}, "result": "success: true, navigated to https://example.net/login"}], "tool": "hela_cytosol_browser_screenshot", "split": "eval"}

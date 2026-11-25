@@ -99,6 +99,44 @@ class Rows(unittest.TestCase):
             r["meta"] = {"stage": "choose"}
         self.assertEqual(len(dedupe([a, b])), 2)
 
+    def test_profiles_restrict_the_shortlist_and_inactive_cells_get_none(self):
+        import tempfile
+        from hela_needle.profiles import profile_catalog
+        phone = Tool("hela_receptor_tap", "Tap the screen", {"type": "object", "properties": {}}, "receptor")
+        cat = CAT + [phone]
+        profiles = {"dev": ["membrane", "mitosis", "nucleus"], "android": ["receptor", "nucleus"]}
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "s.jsonl"
+            lines = [
+                {"task": "tap the screen", "tool": phone.name},
+                {"task": "tap the home icon on the phone", "tool": None, "inactive_cell": "receptor"},
+                {"task": "list /x", "tool": LS.name, "profile": "dev"},
+            ]
+            p.write_text("\n".join(json.dumps(x) for x in lines) + "\n")
+            rows = build_rows(p, cat, profiles=profiles)
+            by_task = {r["query"].split("\n")[0]: r for r in rows}
+            tap = by_task["Task: tap the screen"]
+            self.assertEqual(tap["meta"]["profile"], "android")  # only profile with receptor
+            self.assertTrue(all(t["name"] != LS.name for t in tap["tools"]))  # membrane is inactive there
+            neg = by_task["Task: tap the home icon on the phone"]
+            self.assertEqual(neg["meta"]["profile"], "dev")  # receptor inactive
+            self.assertEqual(neg["meta"]["kind"], "none")
+            self.assertTrue(all(t["name"] != phone.name for t in neg["tools"]))
+            p.write_text(json.dumps({"task": "x", "tool": phone.name, "profile": "dev"}) + "\n")
+            with self.assertRaises(ValueError):
+                build_rows(p, cat, profiles=profiles)
+
+    def test_row_randomness_is_independent_of_other_rows(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            a = Path(d) / "a.jsonl"
+            b = Path(d) / "b.jsonl"
+            a.write_text(json.dumps({"task": "show the folder", "tool": LS.name}) + "\n")
+            b.write_text(json.dumps({"task": "something else", "tool": RUN.name}) + "\n" + json.dumps({"task": "show the folder", "tool": LS.name}) + "\n")
+            only = build_rows(a, CAT)[0]
+            after = [r for r in build_rows(b, CAT) if r["query"].startswith("Task: show the folder")][0]
+            self.assertEqual(only["tools"], after["tools"])
+
     def test_seed_can_force_split(self):
         import tempfile
         with tempfile.TemporaryDirectory() as d:

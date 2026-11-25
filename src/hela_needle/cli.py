@@ -8,7 +8,9 @@ from pathlib import Path
 
 from . import evalrun, gate
 from .catalog import load_catalog
-from .examples import build_rows, dedupe
+from .examples import build_all
+from . import coverage as coverage_mod
+from .profiles import load_profiles
 from .generated import convert
 from .scrub import findings
 
@@ -24,10 +26,8 @@ def _read_jsonl(path: Path) -> list[dict]:
 
 def cmd_build(a: argparse.Namespace) -> int:
     catalog = load_catalog(a.catalog, a.name_style, a.cells)
-    rows: list[dict] = []
-    for seed in sorted(Path(a.seeds).glob("*.jsonl")):
-        rows += build_rows(seed, catalog, a.seed)
-    rows = dedupe(rows)
+    profiles = load_profiles(a.profiles) if a.profiles and Path(a.profiles).exists() else None
+    rows = build_all(a.seeds, catalog, a.seed, profiles)
     out = Path(a.out)
     train = [r for r in rows if r["meta"]["split"] == "train"]
     held = [r for r in rows if r["meta"]["split"] == "eval"]
@@ -35,6 +35,16 @@ def cmd_build(a: argparse.Namespace) -> int:
     _write_jsonl(out / "train.jsonl", [{k: r[k] for k in ("query", "tools", "answers")} for r in train])
     _write_jsonl(out / "eval.jsonl", held)
     print(f"catalog={len(catalog)} tools, train={len(train)}, eval={len(held)} rows -> {out}")
+    return 0
+
+
+def cmd_coverage(a: argparse.Namespace) -> int:
+    catalog = load_catalog(a.catalog, a.name_style, a.cells)
+    profiles = load_profiles(a.profiles)
+    rows = build_all(a.seeds, catalog, a.seed, profiles)
+    text = coverage_mod.render(coverage_mod.analyse(rows, catalog, profiles), catalog, profiles)
+    Path(a.out).write_text(text, encoding="utf8")
+    print(f"wrote {a.out}")
     return 0
 
 
@@ -97,7 +107,17 @@ def main(argv: list[str] | None = None) -> int:
     b.add_argument("--name-style", default="qualified", choices=["qualified", "bare"])
     b.add_argument("--cells", nargs="*")
     b.add_argument("--seed", type=int, default=7)
+    b.add_argument("--profiles", default="data/catalog/profiles.json", help="profile -> active cells; rows draw their shortlist from one profile")
     b.set_defaults(fn=cmd_build)
+    cv = sub.add_parser("coverage", help="write docs/COVERAGE.md: tools, cells and profiles vs what the data teaches")
+    cv.add_argument("--catalog", required=True)
+    cv.add_argument("--cells", nargs="*")
+    cv.add_argument("--name-style", default="qualified", choices=["qualified", "bare"])
+    cv.add_argument("--seeds", default="data/seed")
+    cv.add_argument("--profiles", default="data/catalog/profiles.json")
+    cv.add_argument("--seed", type=int, default=7)
+    cv.add_argument("--out", default="docs/COVERAGE.md")
+    cv.set_defaults(fn=cmd_coverage)
     i = sub.add_parser("import-generated", help="convert `cactus generate-data` output into validated seed lines")
     i.add_argument("inputs", nargs="+")
     i.add_argument("--catalog", required=True)

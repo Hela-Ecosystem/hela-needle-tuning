@@ -20,6 +20,13 @@ Every training row is built by `python -m hela_needle build-data` from seed file
 - **Claude-written rows:** the owner approved Claude writing training samples. Anthropic's terms restrict using outputs to build competing models; the intended use here (a router for the owner's own agent) is believed fine, but the owner should confirm before any weights are distributed.
 - **"Done" and "no tool applies"** currently share the `done` answer. Revisit if the runtime needs them to differ.
 
+## Coverage tracking and profiles
+
+- `docs/COVERAGE.md` (generated, committed) lists, per cell, profile and source file, how many tools have training rows, and names every tool with none or fewer than 3. Regenerate it with `python -m hela_needle coverage` whenever seeds or the catalog change, and read it before each training run. Each pod run also stores its own `coverage.md` next to the model.
+- **Profile awareness.** `data/catalog/profiles.json` is parsed from the runtime's profile texts. Each row picks one profile whose cells include the target tool, and its candidate shortlist is drawn only from that profile's cells. Tasks that need a cell some profiles lack (`"inactive_cell": "receptor"`) pick a profile where it is inactive and are answered with "none". Seed lines may pin a `profile`.
+- **Frozen shortlists.** Each row's randomness is seeded from its own task and history, so adding or reordering other seeds never changes an existing row.
+- The profile text itself reaches the engine through `--system` at run time but is not part of Cactus training rows; whether that matters is an open experiment (see `docs/PLAN.md`).
+
 ## Refreshing
 
 1. Export the live runtime's tool list (the bundled snapshot predates tools such as `hela_genome_list_missions`) and replace `data/catalog/hela-stack-tools.json`.

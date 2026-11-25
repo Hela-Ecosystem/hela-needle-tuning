@@ -37,8 +37,7 @@ export PYTHONPATH=src
 A=/path/to/chaining-mcp/assets/needle   # engine and weights (catalog and system prompt are in data/catalog)
 
 # build train/eval files (fails on an unknown tool or invalid arguments)
-python -m hela_needle build-data --catalog data/catalog/hela-stack-tools.json \
-  --cells mitosis membrane nucleus genome enzyme cytosol ribosome phenotype
+python -m hela_needle build-data --catalog data/catalog/hela-stack-tools.json
 
 # nothing secret may reach a data file
 python -m hela_needle check-secrets data/build/train.jsonl data/build/eval.jsonl
@@ -49,7 +48,7 @@ python -m hela_needle eval --engine $A/needle3 --model $A/needle3.cact \
 python -m hela_needle gate --candidate eval/candidate.json
 ```
 
-The catalog file is the bundled asset (292 entries, including cells the live runtime does not load). `--cells` restricts it to the active profile; prefer a fresh export of the live catalog when the cells change.
+The catalog file is the bundled asset (292 entries, all 10 organelles). Rows are drawn per profile (`data/catalog/profiles.json`: which cells each runtime profile activates), so the candidate tools match what the runtime would shortlist. `python -m hela_needle coverage --catalog data/catalog/hela-stack-tools.json` regenerates `docs/COVERAGE.md`, the tracker of what the data teaches per tool, cell and profile. Prefer a fresh export of the live catalog when cells change.
 
 ## Rules
 

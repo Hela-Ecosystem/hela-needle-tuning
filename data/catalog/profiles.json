@@ -1,0 +1,67 @@
+{
+ "3d-modeling": [
+  "plastid",
+  "membrane",
+  "nucleus",
+  "genome",
+  "mitosis"
+ ],
+ "all": [
+  "cytosol",
+  "nucleus",
+  "membrane",
+  "genome",
+  "enzyme",
+  "phenotype",
+  "plastid",
+  "receptor",
+  "ribosome",
+  "mitosis"
+ ],
+ "android-testing": [
+  "receptor",
+  "nucleus",
+  "enzyme",
+  "genome",
+  "mitosis"
+ ],
+ "dev-workspace": [
+  "cytosol",
+  "nucleus",
+  "membrane",
+  "genome",
+  "enzyme",
+  "phenotype",
+  "ribosome",
+  "mitosis"
+ ],
+ "headless-server": [
+  "nucleus",
+  "membrane",
+  "ribosome",
+  "genome",
+  "enzyme",
+  "phenotype",
+  "mitosis"
+ ],
+ "minimal": [
+  "mitosis",
+  "genome",
+  "enzyme"
+ ],
+ "research": [
+  "enzyme",
+  "cytosol",
+  "membrane",
+  "genome",
+  "mitosis"
+ ],
+ "web-devops": [
+  "phenotype",
+  "cytosol",
+  "membrane",
+  "nucleus",
+  "genome",
+  "mitosis"
+ ]
+}

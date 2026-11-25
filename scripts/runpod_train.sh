@@ -74,8 +74,8 @@ PY
 
 export PYTHONPATH=src
 python -m unittest discover -s tests
-python -m hela_needle build-data --catalog data/catalog/hela-stack-tools.json \
-  --cells mitosis membrane nucleus genome enzyme cytosol ribosome phenotype | tee "$RUN_DIR/build-data.log"
+python -m hela_needle build-data --catalog data/catalog/hela-stack-tools.json | tee "$RUN_DIR/build-data.log"
+python -m hela_needle coverage --catalog data/catalog/hela-stack-tools.json --out "$RUN_DIR/coverage.md"
 python -m hela_needle check-secrets data/build/train.jsonl data/build/eval.jsonl
 
 nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv,noheader | tee "$RUN_DIR/gpu.txt"

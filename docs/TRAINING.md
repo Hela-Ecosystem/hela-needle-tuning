@@ -18,7 +18,7 @@ Training uses the upstream Cactus CLI (`cactus-compute[train]`). The commands be
 ```bash
 pip install "cactus-compute[train]"      # add [gpu] for CUDA or [metal] for Apple Silicon
 
-python -m hela_needle build-data --catalog <catalog.json> --cells <active cells>
+python -m hela_needle build-data --catalog <catalog.json>
 python -m hela_needle check-secrets data/build/train.jsonl data/build/eval.jsonl
 
 cactus finetune data/build/train.jsonl --epochs 3

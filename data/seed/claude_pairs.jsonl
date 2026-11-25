@@ -1,0 +1,77 @@
+{"task": "Show me what is written in /workspace/notes.txt", "tool": "hela_membrane_read_file", "arguments": {"path": "/workspace/notes.txt"}, "split": "train", "note": "pair: read vs write"}
+{"task": "Write the words 'call back at noon' into /workspace/notes.txt", "tool": "hela_membrane_write_file", "arguments": {"path": "/workspace/notes.txt", "content": "call back at noon"}, "split": "train", "note": "pair: read vs write"}
+{"task": "What does /workspace/report.md say?", "tool": "hela_membrane_read_file", "arguments": {"path": "/workspace/report.md"}, "split": "train", "note": "pair: read vs write"}
+{"task": "Replace the content of /workspace/report.md with 'draft v2'", "tool": "hela_membrane_write_file", "arguments": {"path": "/workspace/report.md", "content": "draft v2"}, "split": "train", "note": "pair: read vs write"}
+{"task": "Create a new file called /workspace/hello.py that contains print('hi')", "tool": "hela_membrane_write_file", "arguments": {"path": "/workspace/hello.py", "content": "print('hi')"}, "split": "train", "note": "pair: file vs folder"}
+{"task": "Create a new folder called /workspace/hello", "tool": "hela_membrane_create_directory", "arguments": {"path": "/workspace/hello"}, "split": "train", "note": "pair: file vs folder"}
+{"task": "Make an empty directory /workspace/empty-dir", "tool": "hela_membrane_create_directory", "arguments": {"path": "/workspace/empty-dir"}, "split": "train", "note": "pair: file vs folder"}
+{"task": "Make a file /workspace/empty.txt with the text 'empty'", "tool": "hela_membrane_write_file", "arguments": {"path": "/workspace/empty.txt", "content": "empty"}, "split": "train", "note": "pair: file vs folder"}
+{"task": "Set up the folder structure /workspace/app/models/v2", "tool": "hela_membrane_create_directory", "arguments": {"path": "/workspace/app/models/v2", "recursive": true}, "split": "train", "note": "pair: file vs folder"}
+{"task": "Save 'done' as /workspace/app/status.txt and create any missing folders", "tool": "hela_membrane_write_file", "arguments": {"path": "/workspace/app/status.txt", "content": "done", "createDirs": true}, "split": "train", "note": "pair: file vs folder"}
+{"task": "Open the file /workspace/src", "tool": "hela_membrane_read_file", "arguments": {"path": "/workspace/src"}, "split": "train", "note": "ambiguous wording: treated as read"}
+{"task": "What is inside the folder /workspace/src?", "tool": "hela_membrane_list_directory", "arguments": {"path": "/workspace/src"}, "split": "train", "note": "pair: read vs list"}
+{"task": "Print the contents of the file /workspace/src/main.go", "tool": "hela_membrane_read_file", "arguments": {"path": "/workspace/src/main.go"}, "split": "train", "note": "pair: read vs list"}
+{"task": "Show the folder contents of /workspace/cmd", "tool": "hela_membrane_list_directory", "arguments": {"path": "/workspace/cmd"}, "split": "train", "note": "pair: read vs list"}
+{"task": "Read the first 30 lines of /workspace/build.log", "tool": "hela_membrane_read_file", "arguments": {"path": "/workspace/build.log", "limit": 30}, "split": "train", "note": "pair: read vs list"}
+{"task": "List the files in /workspace/build", "tool": "hela_membrane_list_directory", "arguments": {"path": "/workspace/build"}, "split": "train", "note": "pair: read vs list"}
+{"task": "Copy /workspace/a.cfg to /workspace/b.cfg and keep the original", "tool": "hela_membrane_copy_file", "arguments": {"source": "/workspace/a.cfg", "destination": "/workspace/b.cfg"}, "split": "train", "note": "pair: copy vs move"}
+{"task": "Move /workspace/a.cfg to /workspace/old/a.cfg so it is gone from here", "tool": "hela_membrane_move_file", "arguments": {"source": "/workspace/a.cfg", "destination": "/workspace/old/a.cfg"}, "split": "train", "note": "pair: copy vs move"}
+{"task": "Duplicate /workspace/logo.svg as /workspace/logo-dark.svg", "tool": "hela_membrane_copy_file", "arguments": {"source": "/workspace/logo.svg", "destination": "/workspace/logo-dark.svg"}, "split": "train", "note": "pair: copy vs move"}
+{"task": "Rename /workspace/logo.svg to /workspace/brand.svg", "tool": "hela_membrane_move_file", "arguments": {"source": "/workspace/logo.svg", "destination": "/workspace/brand.svg"}, "split": "train", "note": "pair: copy vs move"}
+{"task": "Back up /workspace/db.sqlite to /workspace/db.sqlite.bak", "tool": "hela_membrane_copy_file", "arguments": {"source": "/workspace/db.sqlite", "destination": "/workspace/db.sqlite.bak"}, "split": "train", "note": "pair: copy vs move"}
+{"task": "Relocate /workspace/db.sqlite into /workspace/data/", "tool": "hela_membrane_move_file", "arguments": {"source": "/workspace/db.sqlite", "destination": "/workspace/data/db.sqlite"}, "split": "train", "note": "pair: copy vs move"}
+{"task": "Are /workspace/x.txt and /workspace/y.txt identical?", "tool": "hela_membrane_compare_files", "arguments": {"file1": "/workspace/x.txt", "file2": "/workspace/y.txt"}, "split": "train", "note": "pair: compare vs read"}
+{"task": "Show me the text of /workspace/x.txt", "tool": "hela_membrane_read_file", "arguments": {"path": "/workspace/x.txt"}, "split": "train", "note": "pair: compare vs read"}
+{"task": "What is different between /workspace/old.json and /workspace/new.json?", "tool": "hela_membrane_compare_files", "arguments": {"file1": "/workspace/old.json", "file2": "/workspace/new.json"}, "split": "train", "note": "pair: compare vs read"}
+{"task": "Which file has the word 'secret': search all of /workspace", "tool": "hela_membrane_search_in_files", "arguments": {"pattern": "secret"}, "split": "train", "note": "pair: content search vs name search"}
+{"task": "Find files whose name contains 'secret'", "tool": "hela_membrane_find_files", "arguments": {"pattern": "*secret*"}, "split": "train", "note": "pair: content search vs name search"}
+{"task": "Look inside the files for the text 'localhost:3000'", "tool": "hela_membrane_search_in_files", "arguments": {"pattern": "localhost:3000"}, "split": "train", "note": "pair: content search vs name search"}
+{"task": "Locate files called index.html", "tool": "hela_membrane_find_files", "arguments": {"pattern": "index.html"}, "split": "train", "note": "pair: content search vs name search"}
+{"task": "Which source files import the lodash library?", "tool": "hela_membrane_search_in_files", "arguments": {"pattern": "lodash"}, "split": "train", "note": "pair: content search vs name search"}
+{"task": "Get every .env file in the project", "tool": "hela_membrane_find_files", "arguments": {"pattern": ".env*"}, "split": "train", "note": "pair: content search vs name search"}
+{"task": "How big is the file /workspace/archive.tar?", "tool": "hela_membrane_get_file_info", "arguments": {"path": "/workspace/archive.tar"}, "split": "train", "note": "pair: file info vs dir size"}
+{"task": "How big is the whole folder /workspace/archive?", "tool": "hela_membrane_get_directory_size", "arguments": {"path": "/workspace/archive"}, "split": "train", "note": "pair: file info vs dir size"}
+{"task": "When was /workspace/index.js last modified?", "tool": "hela_membrane_get_file_info", "arguments": {"path": "/workspace/index.js"}, "split": "train", "note": "pair: file info vs list"}
+{"task": "How much disk space does /workspace/node_modules use in total?", "tool": "hela_membrane_get_directory_size", "arguments": {"path": "/workspace/node_modules"}, "split": "train", "note": "pair: file info vs dir size"}
+{"task": "What are the permissions and owner of /workspace/deploy.sh?", "tool": "hela_membrane_get_file_info", "arguments": {"path": "/workspace/deploy.sh"}, "split": "train", "note": "pair: file info vs dir size"}
+{"task": "Delete the file /workspace/junk.txt", "tool": "hela_membrane_delete_file", "arguments": {"path": "/workspace/junk.txt"}, "split": "train", "note": "pair: delete vs move"}
+{"task": "Move /workspace/junk.txt to /workspace/trash/junk.txt instead of deleting it", "tool": "hela_membrane_move_file", "arguments": {"source": "/workspace/junk.txt", "destination": "/workspace/trash/junk.txt"}, "split": "train", "note": "pair: delete vs move"}
+{"task": "Wipe out the folder /workspace/cache and its contents", "tool": "hela_membrane_delete_file", "arguments": {"path": "/workspace/cache", "recursive": true}, "split": "train", "note": "pair: delete vs move"}
+{"task": "Zip /workspace/src into /workspace/src.zip", "tool": "hela_membrane_archive_files", "arguments": {"files": ["/workspace/src"], "archivePath": "/workspace/src.zip"}, "split": "train", "note": "pair: archive vs extract"}
+{"task": "Unzip /workspace/src.zip into /workspace/restore", "tool": "hela_membrane_extract_archive", "arguments": {"archivePath": "/workspace/src.zip", "destination": "/workspace/restore"}, "split": "train", "note": "pair: archive vs extract"}
+{"task": "Tell me when files in /workspace/content change", "tool": "hela_membrane_watch_file", "arguments": {"path": "/workspace/content"}, "split": "train", "note": "pair: watch vs stop"}
+{"task": "You can stop monitoring /workspace/content", "tool": "hela_membrane_stop_watching", "arguments": {"path": "/workspace/content"}, "split": "train", "note": "pair: watch vs stop"}
+{"task": "Using the terminal, list /workspace/tmp with ls -la", "tool": "hela_nucleus_terminal_ls", "arguments": {"path": "/workspace/tmp", "long": true}, "split": "train", "note": "pair: terminal vs filesystem"}
+{"task": "List the files in /workspace/tmp", "tool": "hela_membrane_list_directory", "arguments": {"path": "/workspace/tmp"}, "split": "train", "note": "pair: terminal vs filesystem"}
+{"task": "Run the shell command: grep -rn 'TODO' /workspace/src", "tool": "hela_nucleus_execute_command", "arguments": {"command": "grep -rn 'TODO' /workspace/src"}, "split": "train", "note": "pair: terminal vs filesystem"}
+{"task": "Search the source for 'TODO'", "tool": "hela_membrane_search_in_files", "arguments": {"pattern": "TODO"}, "split": "train", "note": "pair: terminal vs filesystem"}
+{"task": "Run `cat /etc/hostname` in the shell", "tool": "hela_nucleus_execute_command", "arguments": {"command": "cat /etc/hostname"}, "split": "train", "note": "pair: terminal vs filesystem"}
+{"task": "Read the file /workspace/hostname.txt", "tool": "hela_membrane_read_file", "arguments": {"path": "/workspace/hostname.txt"}, "split": "train", "note": "pair: terminal vs filesystem"}
+{"task": "Execute `mkdir -p /workspace/out` in bash", "tool": "hela_nucleus_execute_command", "arguments": {"command": "mkdir -p /workspace/out"}, "split": "train", "note": "pair: terminal vs filesystem"}
+{"task": "Create the directory /workspace/out2", "tool": "hela_membrane_create_directory", "arguments": {"path": "/workspace/out2"}, "split": "train", "note": "pair: terminal vs filesystem"}
+{"task": "Run a long-lived dev server in its own terminal session: npm run dev", "tool": "hela_ribosome_session_spawn", "arguments": {"command": "npm run dev"}, "split": "train", "note": "pair: one-off command vs persistent session"}
+{"task": "Just run npm run dev once and give me the output", "tool": "hela_nucleus_execute_command", "arguments": {"command": "npm run dev"}, "split": "train", "note": "pair: one-off command vs persistent session"}
+{"task": "Select all rows from the users table", "tool": "hela_genome_query_data", "arguments": {"table": "users"}, "split": "train", "note": "pair: genome read tools"}
+{"task": "Run the query: SELECT name, count(*) FROM tags GROUP BY name", "tool": "hela_genome_execute_sql", "arguments": {"query": "SELECT name, count(*) FROM tags GROUP BY name"}, "split": "train", "note": "pair: genome read tools"}
+{"task": "What do my notes say about the deployment checklist?", "tool": "hela_genome_search_nodes", "arguments": {"query": "deployment checklist"}, "split": "train", "note": "pair: genome read tools"}
+{"task": "Give me the entire knowledge graph", "tool": "hela_genome_read_graph", "split": "train", "note": "pair: genome read tools"}
+{"task": "Open the node called service:payments", "tool": "hela_genome_open_node", "arguments": {"names": ["service:payments"]}, "split": "train", "note": "pair: genome read tools"}
+{"task": "Which pages are open in the browser?", "tool": "hela_cytosol_browser_list_tabs", "split": "train", "note": "pair: browser reads"}
+{"task": "Read the visible text of the current page", "tool": "hela_cytosol_browser_get_content", "split": "train", "note": "pair: browser reads"}
+{"task": "Read the text out of the image on the page using OCR", "tool": "hela_cytosol_browser_ocr", "split": "train", "note": "pair: browser reads"}
+{"task": "List the clickable elements on the page", "tool": "hela_cytosol_browser_observe", "split": "train", "note": "pair: browser reads"}
+{"task": "Capture the page as a picture", "tool": "hela_cytosol_browser_screenshot", "split": "train", "note": "pair: browser reads"}
+{"task": "Open https://example.com/a in a new tab", "tool": "hela_cytosol_browser_new_tab", "arguments": {"url": "https://example.com/a"}, "split": "train", "note": "pair: navigate vs new tab"}
+{"task": "Load https://example.com/a in the current tab", "tool": "hela_cytosol_browser_navigate", "arguments": {"url": "https://example.com/a"}, "split": "train", "note": "pair: navigate vs new tab"}
+{"task": "Fetch and clean up the article at https://example.com/post without opening a browser page", "tool": "hela_enzyme_extract_content", "arguments": {"url": "https://example.com/post"}, "split": "train", "note": "pair: extract vs browser"}
+{"task": "Read the text of the page I already have open", "tool": "hela_cytosol_browser_get_content", "split": "train", "note": "pair: extract vs browser"}
+{"task": "Search Wikipedia for photosynthesis", "tool": "hela_enzyme_wikipedia_search", "arguments": {"query": "photosynthesis"}, "split": "train", "note": "pair: search kinds"}
+{"task": "Search the web for photosynthesis experiments for kids", "tool": "hela_enzyme_google_search", "arguments": {"q": "photosynthesis experiments for kids"}, "split": "train", "note": "pair: search kinds"}
+{"task": "Find scholarly papers on photosynthesis efficiency", "tool": "hela_enzyme_academic_search", "arguments": {"query": "photosynthesis efficiency"}, "split": "train", "note": "pair: search kinds"}
+{"task": "What is the latest news about solar power subsidies?", "tool": "hela_enzyme_news_monitor", "arguments": {"topic": "solar power subsidies"}, "split": "train", "note": "pair: search kinds"}
+{"task": "Is it true that humans only use 10 percent of their brains?", "tool": "hela_enzyme_fact_checker", "arguments": {"claim": "Humans only use 10 percent of their brains"}, "split": "train", "note": "pair: search kinds"}
+{"task": "What time is it in Lagos?", "tool": "hela_mitosis_get_current_time", "arguments": {"timezone": "Africa/Lagos"}, "split": "train", "note": "pair: time tools"}
+{"task": "When it is 6pm in Lagos what time is it in Delhi?", "tool": "hela_mitosis_convert_time", "arguments": {"source_timezone": "Africa/Lagos", "time": "18:00", "target_timezone": "Asia/Kolkata"}, "split": "train", "note": "pair: time tools"}
+{"task": "Which skills exist for code review?", "tool": "hela_mitosis_search_skills", "arguments": {"query": "code review"}, "split": "train", "note": "pair: skills"}
+{"task": "Show every skill that is installed", "tool": "hela_mitosis_list_skills", "split": "train", "note": "pair: skills"}
+{"task": "Load the skill named git-workflow", "tool": "hela_mitosis_get_skill", "arguments": {"name": "git-workflow"}, "split": "train", "note": "pair: skills"}

@@ -11,14 +11,14 @@
 {"task": "What's your favourite colour?", "tool": null, "note": "claude", "split": "train"}
 {"task": "Translate 'good morning' to French", "tool": null, "note": "claude", "split": "train"}
 {"task": "Tell me a riddle", "tool": null, "note": "claude", "split": "train"}
-{"task": "Take a photo with the phone camera", "tool": null, "note": "claude", "split": "train"}
-{"task": "Tap the back button on the Android device", "tool": null, "note": "claude", "split": "train"}
-{"task": "Install this APK on the connected phone", "tool": null, "note": "claude", "split": "train"}
-{"task": "Run adb shell to list installed packages on the device", "tool": null, "note": "claude", "split": "train"}
-{"task": "Scroll the phone's home screen to the right", "tool": null, "note": "claude", "split": "train"}
-{"task": "Create a cube mesh in Blender", "tool": null, "note": "claude", "split": "train"}
-{"task": "Render the 3D scene from the camera view", "tool": null, "note": "claude", "split": "train"}
-{"task": "Add a metallic material to the sphere in the 3D model", "tool": null, "note": "claude", "split": "train"}
-{"task": "Export the Blender scene as an FBX file", "tool": null, "note": "claude", "split": "train"}
-{"task": "Check the Android device battery level", "tool": null, "note": "claude", "split": "train"}
-{"task": "Mirror the phone screen to my laptop", "tool": null, "note": "claude", "split": "train"}
+{"task": "Take a photo with the phone camera", "tool": null, "note": "claude", "split": "train", "inactive_cell": "receptor"}
+{"task": "Tap the back button on the Android device", "tool": null, "note": "claude", "split": "train", "inactive_cell": "receptor"}
+{"task": "Install this APK on the connected phone", "tool": null, "note": "claude", "split": "train", "inactive_cell": "receptor"}
+{"task": "Run adb shell to list installed packages on the device", "tool": null, "note": "claude", "split": "train", "inactive_cell": "receptor"}
+{"task": "Scroll the phone's home screen to the right", "tool": null, "note": "claude", "split": "train", "inactive_cell": "receptor"}
+{"task": "Create a cube mesh in Blender", "tool": null, "note": "claude", "split": "train", "inactive_cell": "plastid"}
+{"task": "Render the 3D scene from the camera view", "tool": null, "note": "claude", "split": "train", "inactive_cell": "plastid"}
+{"task": "Add a metallic material to the sphere in the 3D model", "tool": null, "note": "claude", "split": "train", "inactive_cell": "plastid"}
+{"task": "Export the Blender scene as an FBX file", "tool": null, "note": "claude", "split": "train", "inactive_cell": "plastid"}
+{"task": "Check the Android device battery level", "tool": null, "note": "claude", "split": "train", "inactive_cell": "receptor"}
+{"task": "Mirror the phone screen to my laptop", "tool": null, "note": "claude", "split": "train", "inactive_cell": "receptor"}
