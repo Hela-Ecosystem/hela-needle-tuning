@@ -17,4 +17,7 @@ evaluation are described in docs/DATA.md, docs/TRAINING.md and the model card (m
 The tool-selection data was written by Claude (Anthropic), by free OpenRouter models routed through
 the Cactus data generator, and by hand; see docs/DATA.md. No real user sessions are included.
 
-This repository's source code is licensed separately (see LICENSE, if present).
+Copyright 2026 Hela-Ecosystem contributors.
+
+This repository's source code, seed data and documentation are licensed under the Apache License,
+Version 2.0 (see LICENSE), the same licence as the Needle 3 models they are used with.

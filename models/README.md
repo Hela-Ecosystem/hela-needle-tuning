@@ -29,7 +29,7 @@ An installer integration is described in [`docs/INSTALLER.md`](../docs/INSTALLER
 
 ## Licence and provenance
 
-Apache License 2.0, inherited from Needle 3 ([`LICENSE`](LICENSE), [`../NOTICE`](../NOTICE)). These are modified versions: a LoRA adapter merged into the original weights. Please keep the licence and notice when redistributing.
+Apache License 2.0, inherited from Needle 3 and used for this repository too ([`LICENSE`](LICENSE), [`../NOTICE`](../NOTICE)). These are modified versions: a LoRA adapter merged into the original weights. Please keep the licence and notice when redistributing.
 
 ## Train your own
 

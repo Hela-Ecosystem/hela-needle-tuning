@@ -48,6 +48,7 @@ Acceptance: gate passes, or the failure reasons are written down and drive M1 da
 Acceptance: a table of local-4-bit vs platform-2-bit vs baseline; pick the shipping route.
 
 ### M5: ship to one runtime, then widen
+- Licences: **resolved** (2026-11-25). This repository is Apache-2.0 too, so code, data and models share one licence.
 - Weights licence: **resolved** (2026-11-25). Needle 3's repository ships the Apache License 2.0 and its model card says `license: apache-2.0`; modified redistribution is allowed with the licence and notice (see `NOTICE`, `models/LICENSE`).
 - Point `NEEDLE_MODEL_PATH` at the tuned file on one runtime, run the end-to-end `hela.agent.run` tasks, then roll out.
 - Stage the trained models in the private runs repo, evaluate them with `scripts/eval_profiles.sh`, then publish the ones that pass with `scripts/publish_models.sh` (public release of this repo plus `models/manifest.json`). Weights never go into git.

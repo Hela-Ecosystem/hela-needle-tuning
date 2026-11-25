@@ -82,3 +82,7 @@ The catalog file is the bundled asset (292 entries, all 10 organelles). Rows are
 ## Status
 
 M0 (scaffold) is done and the first real training run has been made and gated: it failed, which is how the loop is meant to work (see `docs/PLAN.md`). M1 (data) is in progress: Claude-written samples, multi-step history rows and a frozen hand-written eval are in; a free-model generation covering all tools is running. See `docs/DATA.md` for sources and rules. The next training run happens once the generated data is imported and the baseline refreshed on the frozen eval.
+
+## Licence
+
+Apache License 2.0 for the code, seeds and docs ([`LICENSE`](LICENSE)) and for the published models, which are modified versions of Needle 3 by Cactus Compute (also Apache-2.0). See [`NOTICE`](NOTICE) for attribution and the changes made.
