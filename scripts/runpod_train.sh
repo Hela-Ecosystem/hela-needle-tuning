@@ -1,42 +1,49 @@
 #!/usr/bin/env bash
-# Run ON the rented GPU pod. Builds data, fine-tunes, exports a .cact, records
-# what it cost to do so. Nothing here talks to RunPod's API or holds an account
-# key, and it never terminates the pod: copy the results back, then terminate
-# the pod yourself (stopped pods can still bill for disk).
+# Train Needle models on a rented (or any NVIDIA) GPU machine: one dedicated model per HeLa profile.
+# Builds the data, fine-tunes, exports a .cact per profile, records timings and coverage,
+# and (optionally) uploads everything to a PRIVATE GitHub repo. It never terminates the pod:
+# copy results out, then terminate the pod yourself (stopped pods can still bill for disk).
 #
-# Not yet run. First real use should be a short dry run (EPOCHS=1) to record the
-# true hardware needs and wall time in docs/TRAINING.md.
+# One line on a fresh pod (runpod/base cuda12.9 on Ubuntu 24.04 works; any CUDA 12 image does):
 #
-# One line on a fresh pod (runpod/base cuda12.9 on Ubuntu 24.04 is what we plan to use):
-#   export GH_TOKEN=<fine-grained token: hela-needle-runs ONLY, Contents: write, 1-day expiry>; curl -fsSL https://raw.githubusercontent.com/Hela-Ecosystem/hela-needle-tuning/main/scripts/runpod_train.sh -o t.sh && bash t.sh
+#   export GH_TOKEN=<fine-grained token: your PRIVATE results repo only, Contents: write, 1-day expiry>; curl -fsSL https://raw.githubusercontent.com/Hela-Ecosystem/hela-needle-tuning/main/scripts/runpod_train.sh -o t.sh && RUNS_REPO=<you>/<private-repo> PROFILES=dev-workspace bash t.sh
 #
-# This code repo is public (no token needed to read it). The result is uploaded as a
-# release named run-<id> (model, meta, logs) to the PRIVATE repo Hela-Ecosystem/hela-needle-runs.
-# A failed run uploads its logs as run-<id>-failed so they can be read without pasting.
-# The script only terminates the pod if AUTO_TERMINATE=1, and only after a successful upload.
+# No GitHub at all? Skip the upload and copy the files yourself:
+#   curl -fsSL https://raw.githubusercontent.com/Hela-Ecosystem/hela-needle-tuning/main/scripts/runpod_train.sh -o t.sh && NO_UPLOAD=1 bash t.sh
 #
-# Env: EPOCHS (default 3), BRANCH (default main), AUTO_TERMINATE (default 0),
-#      EXTRA_FINETUNE_ARGS, EXTRA_BUILD_ARGS.
+# Env:
+#   PROFILES        space-separated profile ids, or ALL (default: dev-workspace). See data/catalog/profiles.json.
+#   RUNS_REPO       owner/name of the PRIVATE repo to upload to (default Hela-Ecosystem/hela-needle-runs).
+#   NO_UPLOAD=1     do not upload; models stay in the printed run directory.
+#   GH_TOKEN        needed only for upload; fine-grained, results repo only. Never a broad token.
+#   CODE_REPO       code repo to clone (default Hela-Ecosystem/hela-needle-tuning); BRANCH (default main).
+#   EPOCHS          default 3.   AUTO_TERMINATE=1 terminates the pod after a successful upload (unverified).
+#   EXTRA_FINETUNE_ARGS, EXTRA_BUILD_ARGS   passed through to `cactus finetune` / `cactus build`.
 set -euo pipefail
+set +x  # never trace commands that may carry the token
 
-: "${GH_TOKEN:?set GH_TOKEN (fine-grained token, hela-needle-runs only, Contents: write)}"
-set +x  # never trace commands that carry the token
+NO_UPLOAD="${NO_UPLOAD:-0}"
+if [ "$NO_UPLOAD" != "1" ]; then
+  : "${GH_TOKEN:?set GH_TOKEN (fine-grained token for your private results repo, Contents: write) or run with NO_UPLOAD=1}"
+fi
 EPOCHS="${EPOCHS:-3}"
 BRANCH="${BRANCH:-main}"
+CODE_REPO="${CODE_REPO:-Hela-Ecosystem/hela-needle-tuning}"
+RUNS_REPO="${RUNS_REPO:-Hela-Ecosystem/hela-needle-runs}"
 WORK="${WORK:-/workspace/needle-run}"
 RUN_ID="$(date -u +%Y%m%dT%H%M%SZ)"
 
 command -v nvidia-smi >/dev/null || { echo "no GPU visible (nvidia-smi missing)" >&2; exit 1; }
 mkdir -p "$WORK" && cd "$WORK"
 
-# runpod/base is a minimal Ubuntu image: make sure git, pip and venv exist.
+# Minimal images may lack git, pip or venv.
 if ! command -v git >/dev/null || ! python3 -m venv --help >/dev/null 2>&1 || ! python3 -m pip --version >/dev/null 2>&1; then
   apt-get update -qq && apt-get install -y -qq git python3-venv python3-pip
 fi
 
 # The code repo is public: clone without credentials so the token is never used for it.
 if [ ! -d repo ]; then
-  git clone --depth 1 --branch "$BRANCH" https://github.com/Hela-Ecosystem/hela-needle-tuning.git repo
+  git clone --depth 1 --branch "$BRANCH" "https://github.com/${CODE_REPO}.git" repo
 fi
 cd repo
 SHA="$(git rev-parse --short HEAD)"
@@ -48,8 +55,11 @@ finish() {
   rc=$?
   trap - EXIT
   if [ "$rc" -ne 0 ]; then
-    echo "run failed (exit $rc); uploading logs for diagnosis" >&2
-    bash scripts/upload_release.sh "$RUN_DIR" "run-${RUN_ID}-failed" || true
+    echo "run failed (exit $rc)" >&2
+    if [ "$NO_UPLOAD" != "1" ]; then
+      echo "uploading logs for diagnosis" >&2
+      REPO="$RUNS_REPO" bash scripts/upload_release.sh "$RUN_DIR" "run-${RUN_ID}-failed" || true
+    fi
   fi
   exit "$rc"
 }
@@ -73,41 +83,76 @@ if not any(d.platform in ("gpu", "cuda") for d in devices):
 PY
 
 export PYTHONPATH=src
+CATALOG=data/catalog/hela-stack-tools.json
 python -m unittest discover -s tests
-python -m hela_needle build-data --catalog data/catalog/hela-stack-tools.json | tee "$RUN_DIR/build-data.log"
-python -m hela_needle coverage --catalog data/catalog/hela-stack-tools.json --out "$RUN_DIR/coverage.md"
-python -m hela_needle check-secrets data/build/train.jsonl data/build/eval.jsonl
+
+if [ "${PROFILES:-dev-workspace}" = "ALL" ]; then
+  PROFILES="$(python -c "import json; print(' '.join(json.load(open('data/catalog/profiles.json'))))")"
+fi
+PROFILES="${PROFILES:-dev-workspace}"
+echo "profiles: $PROFILES" | tee "$RUN_DIR/profiles.txt"
 
 nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv,noheader | tee "$RUN_DIR/gpu.txt"
 
-START=$(date +%s)
-# shellcheck disable=SC2086
-cactus finetune data/build/train.jsonl --epochs "$EPOCHS" \
-  --checkpoint-dir checkpoints --out checkpoints/needle_lora.safetensors \
-  ${EXTRA_FINETUNE_ARGS:-} 2>&1 | tee "$RUN_DIR/finetune.log"
-MID=$(date +%s)
+for P in $PROFILES; do
+  echo "=== profile $P"
+  OUT="data/build/$P"
+  python -m hela_needle build-data --catalog "$CATALOG" --profile "$P" --out "$OUT" | tee "$RUN_DIR/build-data-$P.log"
+  python -m hela_needle check-secrets "$OUT/train.jsonl" "$OUT/eval.jsonl"
+  python -m hela_needle coverage --catalog "$CATALOG" --out "$RUN_DIR/coverage.md"
 
-# shellcheck disable=SC2086
-cactus build checkpoints/needle3.safetensors --lora checkpoints/needle_lora.safetensors \
-  --out "$RUN_DIR/hela-needle3.cact" ${EXTRA_BUILD_ARGS:-} 2>&1 | tee "$RUN_DIR/build.log"
-END=$(date +%s)
+  CK="checkpoints/$P"
+  mkdir -p "$CK"
+  START=$(date +%s)
+  # shellcheck disable=SC2086
+  cactus finetune "$OUT/train.jsonl" --epochs "$EPOCHS" \
+    --checkpoint-dir "$CK" --out "$CK/lora.safetensors" \
+    ${EXTRA_FINETUNE_ARGS:-} 2>&1 | tee "$RUN_DIR/finetune-$P.log"
+  MID=$(date +%s)
 
-cat > "$RUN_DIR/meta.json" <<EOF
+  # Locate the base checkpoint that finetune downloaded (not the adapter).
+  BASE=""
+  for c in "$CK/needle3.safetensors" "checkpoints/needle3.safetensors"; do
+    [ -f "$c" ] && { BASE="$c"; break; }
+  done
+  [ -n "$BASE" ] || BASE="$(find checkpoints -name '*.safetensors' ! -name '*lora*' | head -1)"
+  [ -n "$BASE" ] || { echo "could not find the base checkpoint under checkpoints/" >&2; exit 1; }
+
+  # shellcheck disable=SC2086
+  cactus build "$BASE" --lora "$CK/lora.safetensors" \
+    --out "$RUN_DIR/hela-needle3-$P.cact" ${EXTRA_BUILD_ARGS:-} 2>&1 | tee "$RUN_DIR/build-$P.log"
+  END=$(date +%s)
+
+  cat > "$RUN_DIR/meta-$P.json" <<EOF
 {
   "run_id": "$RUN_ID",
+  "profile": "$P",
   "git_sha": "$SHA",
   "epochs": $EPOCHS,
   "gpu": "$(head -1 "$RUN_DIR/gpu.txt")",
   "finetune_seconds": $((MID - START)),
   "build_seconds": $((END - MID)),
-  "train_rows": $(wc -l < data/build/train.jsonl),
-  "eval_rows": $(wc -l < data/build/eval.jsonl)
+  "train_rows": $(wc -l < "$OUT/train.jsonl"),
+  "eval_rows": $(wc -l < "$OUT/eval.jsonl")
 }
 EOF
-cat "$RUN_DIR/meta.json"
+  cat "$RUN_DIR/meta-$P.json"
+  rm -rf "$CK"  # free disk before the next profile
+done
 
 trap - EXIT
-if bash scripts/upload_release.sh "$RUN_DIR" "run-${RUN_ID}"; then
+if [ "$NO_UPLOAD" = "1" ]; then
+  cat <<MSG
+
+Done. Models are in:
+  $RUN_DIR
+Copy that folder out (scp / runpodctl send) BEFORE terminating the pod.
+Then evaluate each model on a machine with the Needle engine:  scripts/eval_profiles.sh
+MSG
+  exit 0
+fi
+
+if REPO="$RUNS_REPO" bash scripts/upload_release.sh "$RUN_DIR" "run-${RUN_ID}"; then
   if [ "${AUTO_TERMINATE:-0}" = "1" ] && command -v runpodctl >/dev/null && [ -n "${RUNPOD_POD_ID:-}" ]; then
     echo "uploaded; terminating pod ${RUNPOD_POD_ID}"
     runpodctl remove pod "$RUNPOD_POD_ID"
@@ -117,9 +162,9 @@ if bash scripts/upload_release.sh "$RUN_DIR" "run-${RUN_ID}"; then
 else
   cat <<MSG
 
-Upload failed. The model is still on this pod at:
-  $RUN_DIR/hela-needle3.cact
-Copy it out (runpodctl send / scp) BEFORE terminating the pod.
+Upload failed. The models are still on this pod at:
+  $RUN_DIR
+Copy them out (runpodctl send / scp) BEFORE terminating the pod.
 MSG
   exit 1
 fi

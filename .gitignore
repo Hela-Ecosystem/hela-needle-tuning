@@ -12,3 +12,5 @@ checkpoints/
 .env.*
 # Scores are committed only as eval/baseline.json
 eval/candidate*.json
+
+eval/candidates/

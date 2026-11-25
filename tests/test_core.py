@@ -126,6 +126,36 @@ class Rows(unittest.TestCase):
             with self.assertRaises(ValueError):
                 build_rows(p, cat, profiles=profiles)
 
+    def test_only_profile_builds_a_dedicated_dataset(self):
+        import tempfile
+        from hela_needle.examples import build_all
+        phone = Tool("hela_receptor_tap", "Tap the screen", {"type": "object", "properties": {}}, "receptor")
+        cat = CAT + [phone]
+        profiles = {"dev": ["membrane", "mitosis", "nucleus"], "android": ["receptor", "nucleus"]}
+        lines = [
+            {"task": "tap the screen", "tool": phone.name},
+            {"task": "list /x", "tool": LS.name},
+            {"task": "tap the phone icon", "tool": None, "inactive_cell": "receptor"},
+            {"task": "what time is it in Rome", "tool": TIME.name},
+            {"task": "list then read", "tool": READ.name, "history": [{"tool": phone.name, "args": {}, "result": "ok"}]},
+            {"task": "all done", "tool": "done"},
+        ]
+        with tempfile.TemporaryDirectory() as d:
+            (Path(d) / "s.jsonl").write_text("\n".join(json.dumps(x) for x in lines) + "\n")
+            dev = build_all(d, cat, 7, profiles, "dev")
+            tasks = {r["query"].split("\n")[0] for r in dev}
+            self.assertIn("Task: list /x", tasks)
+            self.assertIn("Task: tap the phone icon", tasks)  # receptor is inactive in dev: right answer is none
+            self.assertIn("Task: all done", tasks)
+            self.assertNotIn("Task: tap the screen", tasks)  # needs receptor
+            self.assertNotIn("Task: list then read", tasks)  # history uses a receptor tool
+            self.assertTrue(all(r["meta"]["profile"] == "dev" for r in dev))
+            self.assertTrue(all(t["name"] != phone.name for r in dev for t in r["tools"]))
+            android = build_all(d, cat, 7, profiles, "android")
+            self.assertNotIn("Task: tap the phone icon", {r["query"].split("\n")[0] for r in android})
+            with self.assertRaises(ValueError):
+                build_all(d, cat, 7, profiles, "nope")
+
     def test_row_randomness_is_independent_of_other_rows(self):
         import tempfile
         with tempfile.TemporaryDirectory() as d:

@@ -4,6 +4,24 @@ Data, evaluation and release gating for the Needle model that the HeLa runtime's
 
 The runtime stays unaware of this repo. It loads whatever `NEEDLE_ENGINE_PATH` / `NEEDLE_MODEL_PATH` / `NEEDLE_SYSTEM_PATH` point at, so shipping tuned weights is a configuration change, not a code change.
 
+## Train your own Needle (one line)
+
+Each HeLa profile (`dev-workspace`, `minimal`, `research`, ...) can get its own small Needle model tuned on that profile's tools. Every canonical profile includes the Mitosis cell, and the installer enables Needle for any profile with Mitosis, so all 8 profiles use one.
+
+**You need** an NVIDIA GPU machine (a rented 24 GB card is plenty; see `docs/TRAINING.md`), and either a *private* GitHub repo for the results plus a fine-grained token limited to that repo (Contents: write, 1-day expiry), or `NO_UPLOAD=1` to just keep the files. Never use a broad token on a rented machine.
+
+```bash
+export GH_TOKEN=<fine-grained token for your PRIVATE results repo>; curl -fsSL https://raw.githubusercontent.com/Hela-Ecosystem/hela-needle-tuning/main/scripts/runpod_train.sh -o t.sh && RUNS_REPO=<you>/<private-repo> PROFILES=dev-workspace bash t.sh
+```
+
+Without GitHub: `curl -fsSL https://raw.githubusercontent.com/Hela-Ecosystem/hela-needle-tuning/main/scripts/runpod_train.sh -o t.sh && NO_UPLOAD=1 PROFILES=dev-workspace bash t.sh`, then copy the printed run folder off the machine before you terminate it.
+
+`PROFILES` takes one or more profile ids (`PROFILES="dev-workspace minimal"`) or `ALL` for all 8. The script builds each profile's dataset, fine-tunes with the Cactus CLI, exports `hela-needle3-<profile>.cact`, and records timings, coverage and logs. It never terminates the machine for you: do that when it says so.
+
+**Then check the model before using it.** On a machine with the Needle engine, `ENGINE=<needle3> BASE_MODEL=<shipped needle3.cact> scripts/eval_profiles.sh <folder with the .cact files>` scores each profile's model against the untuned one on a frozen, hand-written eval and applies the release gate. A model that does not pass the gate should not be used.
+
+Status: the single-profile path ran end to end once (see `docs/TRAINING.md`); the multi-profile loop and `eval_profiles.sh` are new and untested on a GPU. The weights licence is not documented upstream, so check it before sharing any trained model. This repo publishes no weights.
+
 ## Why
 
 The untuned `needle3` is a general single-shot function caller. Against the HeLa catalog it makes selection mistakes, for example choosing `list_directory` for "what time is it in Jakarta". Fine-tuning on the catalog's own tools and prompts is the fix. Cactus reports large gains from this kind of tuning; we measure ours against a frozen eval instead of trusting that.

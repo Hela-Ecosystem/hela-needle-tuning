@@ -27,7 +27,7 @@ def _read_jsonl(path: Path) -> list[dict]:
 def cmd_build(a: argparse.Namespace) -> int:
     catalog = load_catalog(a.catalog, a.name_style, a.cells)
     profiles = load_profiles(a.profiles) if a.profiles and Path(a.profiles).exists() else None
-    rows = build_all(a.seeds, catalog, a.seed, profiles)
+    rows = build_all(a.seeds, catalog, a.seed, profiles, a.profile)
     out = Path(a.out)
     train = [r for r in rows if r["meta"]["split"] == "train"]
     held = [r for r in rows if r["meta"]["split"] == "eval"]
@@ -42,7 +42,11 @@ def cmd_coverage(a: argparse.Namespace) -> int:
     catalog = load_catalog(a.catalog, a.name_style, a.cells)
     profiles = load_profiles(a.profiles)
     rows = build_all(a.seeds, catalog, a.seed, profiles)
-    text = coverage_mod.render(coverage_mod.analyse(rows, catalog, profiles), catalog, profiles)
+    sizes = {}
+    for name in profiles:
+        sub_rows = build_all(a.seeds, catalog, a.seed, profiles, name)
+        sizes[name] = (sum(1 for r in sub_rows if r["meta"]["split"] == "train"), sum(1 for r in sub_rows if r["meta"]["split"] == "eval"))
+    text = coverage_mod.render(coverage_mod.analyse(rows, catalog, profiles), catalog, profiles, sizes)
     Path(a.out).write_text(text, encoding="utf8")
     print(f"wrote {a.out}")
     return 0
@@ -108,6 +112,7 @@ def main(argv: list[str] | None = None) -> int:
     b.add_argument("--cells", nargs="*")
     b.add_argument("--seed", type=int, default=7)
     b.add_argument("--profiles", default="data/catalog/profiles.json", help="profile -> active cells; rows draw their shortlist from one profile")
+    b.add_argument("--profile", help="build the dataset for a model dedicated to this profile (see data/catalog/profiles.json)")
     b.set_defaults(fn=cmd_build)
     cv = sub.add_parser("coverage", help="write docs/COVERAGE.md: tools, cells and profiles vs what the data teaches")
     cv.add_argument("--catalog", required=True)

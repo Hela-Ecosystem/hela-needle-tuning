@@ -154,7 +154,28 @@ def pick_profile(item: dict[str, Any], tool: Tool | None, profiles: dict[str, li
     return names[rng.randrange(len(names))]
 
 
-def build_rows(seed_path: str | Path, catalog: list[Tool], seed: int = 7, profiles: dict[str, list[str]] | None = None) -> list[dict[str, Any]]:
+def applies_to_profile(item: dict[str, Any], by_name: dict[str, Tool], cells: set[str], name: str) -> bool:
+    """Whether a seed line makes sense for a model trained only for one profile.
+
+    A line is dropped when its target tool, a tool in its history or a pinned shortlist lives in
+    a cell the profile does not activate, when it is pinned to another profile, or when it is a
+    "needs an inactive cell" negative but that cell is active here.
+    """
+    tool = item.get("tool")
+    names = [tool] if tool and tool != "done" else []
+    names += [h.get("tool") for h in item.get("history") or []] + list(item.get("shortlist") or [])
+    for n in names:
+        t = by_name.get(n)
+        if t is not None and t.cell not in cells:
+            return False
+    if item.get("profile") and item["profile"] != name:
+        return False
+    if item.get("inactive_cell") and item["inactive_cell"] in cells:
+        return False
+    return True
+
+
+def build_rows(seed_path: str | Path, catalog: list[Tool], seed: int = 7, profiles: dict[str, list[str]] | None = None, only_profile: str | None = None) -> list[dict[str, Any]]:
     """Expand a seed file (one JSON object per line) into rows with split labels.
 
     Seed fields: ``task``, ``tool`` (qualified name, or ``done``/null for no
@@ -169,6 +190,8 @@ def build_rows(seed_path: str | Path, catalog: list[Tool], seed: int = 7, profil
         item = json.loads(line)
         try:
             task, tool = item["task"], item.get("tool")
+            if only_profile and not applies_to_profile(item, {t.name: t for t in catalog}, set(profiles[only_profile]), only_profile):
+                continue
             # Each row has its own randomness, so adding or reordering other seeds never
             # changes this row's shortlist (the eval stays frozen).
             rng = random.Random(f"{seed}:{task}:{json.dumps(item.get('history'), sort_keys=True)}")
@@ -181,7 +204,7 @@ def build_rows(seed_path: str | Path, catalog: list[Tool], seed: int = 7, profil
             pool = catalog
             if profiles:
                 target = by_name.get(tool) if tool and tool != "done" else None
-                profile = pick_profile(item, target, profiles, rng)
+                profile = only_profile or pick_profile(item, target, profiles, rng)
                 pool = profile_catalog(catalog, profiles[profile])
             hist_choose = format_history(item.get("history"), by_name, 300)
             hist_args = format_history(item.get("history"), by_name, 400)
@@ -197,9 +220,15 @@ def build_rows(seed_path: str | Path, catalog: list[Tool], seed: int = 7, profil
     return rows
 
 
-def build_all(seeds_dir: str | Path, catalog: list[Tool], seed: int = 7, profiles: dict[str, list[str]] | None = None) -> list[dict[str, Any]]:
-    """Every seed file in a directory (sorted), expanded and de-duplicated."""
+def build_all(seeds_dir: str | Path, catalog: list[Tool], seed: int = 7, profiles: dict[str, list[str]] | None = None, only_profile: str | None = None) -> list[dict[str, Any]]:
+    """Every seed file in a directory (sorted), expanded and de-duplicated.
+
+    ``only_profile`` builds the dataset for a model dedicated to that profile: only lines that
+    apply to it, with every candidate shortlist drawn from its cells.
+    """
+    if only_profile and (not profiles or only_profile not in profiles):
+        raise ValueError(f"unknown profile {only_profile!r}")
     rows: list[dict[str, Any]] = []
     for path in sorted(Path(seeds_dir).glob("*.jsonl")):
-        rows += build_rows(path, catalog, seed, profiles)
+        rows += build_rows(path, catalog, seed, profiles, only_profile)
     return dedupe(rows)

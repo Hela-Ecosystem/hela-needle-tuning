@@ -47,7 +47,7 @@ def analyse(rows: list[dict[str, Any]], catalog: list[Tool], profiles: dict[str,
     return {"per_tool": per_tool, "kinds": kinds, "sources": sources, "per_profile": per_profile, "train": len(train), "eval": len(held)}
 
 
-def render(report: dict[str, Any], catalog: list[Tool], profiles: dict[str, list[str]]) -> str:
+def render(report: dict[str, Any], catalog: list[Tool], profiles: dict[str, list[str]], sizes: dict[str, tuple[int, int]] | None = None) -> str:
     per_tool = report["per_tool"]
     cat_by_cell: dict[str, list[Tool]] = collections.defaultdict(list)
     for t in catalog:
@@ -76,6 +76,11 @@ def render(report: dict[str, Any], catalog: list[Tool], profiles: dict[str, list
             "| Profile | Active cells | Tools | Covered (1+) | Train choose rows | None rows |", "|---|---|---:|---:|---:|---:|"]
     for name, info in report["per_profile"].items():
         out.append(f"| {name} | {', '.join(info['cells'])} | {info['tools']} | {info['covered']} | {info['choose_rows']} | {info['none_rows']} |")
+    if sizes:
+        out += ["", "## Per-profile models (dataset for a model dedicated to one profile)", "",
+                "| Profile | Train rows | Eval rows |", "|---|---:|---:|"]
+        for name, (tr, ev) in sizes.items():
+            out.append(f"| {name} | {tr} | {ev} |")
     out += ["", "## By source file", "", "| Source | Train | Eval |", "|---|---:|---:|"]
     for src, c in sorted(report["sources"].items()):
         out.append(f"| {src} | {c['train']} | {c['eval']} |")
