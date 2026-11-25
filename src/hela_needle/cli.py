@@ -46,6 +46,7 @@ def cmd_import(a: argparse.Namespace) -> int:
     seeds, rejected = convert(rows, catalog)
     for seed in seeds:
         seed["note"] = a.source
+        seed["split"] = "train"  # the eval stays hand-written and frozen
     _write_jsonl(Path(a.out), seeds)
     print(f"read {len(rows)} rows -> kept {len(seeds)} seed lines in {a.out}")
     for reason, n in rejected.most_common():

@@ -73,6 +73,32 @@ class Rows(unittest.TestCase):
             with self.assertRaises(ValueError):
                 build_rows(p, CAT)
 
+    def test_history_is_rendered_like_the_runtime(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "s.jsonl"
+            p.write_text(json.dumps({
+                "task": "list then read", "tool": READ.name, "arguments": {"path": "/workspace/a.txt"},
+                "history": [{"tool": LS.name, "args": {"path": "/workspace"}, "result": "ok: a.txt"},
+                            {"tool": READ.name, "args": {"path": "/x"}, "error": "ENOENT"}],
+            }) + "\n")
+            rows = build_rows(p, CAT)
+            q = rows[0]["query"]
+            self.assertIn("Recent actions:\n" + LS.name + '({"path":"/workspace"}) -> ok: a.txt\n' + READ.name + '({"path":"/x"}) -> ERROR ENOENT', q)
+            self.assertTrue(q.endswith("Call done when every requested action is complete."))
+            self.assertTrue(rows[1]["query"].rstrip().endswith("Generate the arguments for this tool call."))
+            self.assertTrue(rows[0]["meta"]["history"])
+            p.write_text(json.dumps({"task": "t", "tool": None, "history": [{"tool": "hela_nope", "args": {}}]}) + "\n")
+            with self.assertRaises(ValueError):
+                build_rows(p, CAT)
+
+    def test_dedupe_separates_same_task_with_different_history(self):
+        a = choose_row("Same task", TIME.name, CAT, random.Random(1), history="x -> y")
+        b = choose_row("Same task", TIME.name, CAT, random.Random(2), history="x -> z")
+        for r in (a, b):
+            r["meta"] = {"stage": "choose"}
+        self.assertEqual(len(dedupe([a, b])), 2)
+
     def test_seed_can_force_split(self):
         import tempfile
         with tempfile.TemporaryDirectory() as d:

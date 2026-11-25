@@ -1,0 +1,24 @@
+{"task": "Thanks, you can stop now", "tool": "done", "note": "claude", "split": "train"}
+{"task": "Perfect, nothing more to do", "tool": "done", "note": "claude", "split": "train"}
+{"task": "that's all, terima kasih", "tool": "done", "note": "claude", "split": "train"}
+{"task": "All the requested work is complete", "tool": "done", "note": "claude", "split": "train"}
+{"task": "We're done here", "tool": "done", "note": "claude", "split": "train"}
+{"task": "Cukup, sudah selesai", "tool": "done", "note": "claude", "split": "train"}
+{"task": "Why is the sky blue?", "tool": null, "note": "claude", "split": "train"}
+{"task": "Write me a haiku about Mondays", "tool": null, "note": "claude", "split": "train"}
+{"task": "Explain recursion like I'm five", "tool": null, "note": "claude", "split": "train"}
+{"task": "Siapa presiden pertama Indonesia?", "tool": null, "note": "claude", "split": "train"}
+{"task": "What's your favourite colour?", "tool": null, "note": "claude", "split": "train"}
+{"task": "Translate 'good morning' to French", "tool": null, "note": "claude", "split": "train"}
+{"task": "Tell me a riddle", "tool": null, "note": "claude", "split": "train"}
+{"task": "Take a photo with the phone camera", "tool": null, "note": "claude", "split": "train"}
+{"task": "Tap the back button on the Android device", "tool": null, "note": "claude", "split": "train"}
+{"task": "Install this APK on the connected phone", "tool": null, "note": "claude", "split": "train"}
+{"task": "Run adb shell to list installed packages on the device", "tool": null, "note": "claude", "split": "train"}
+{"task": "Scroll the phone's home screen to the right", "tool": null, "note": "claude", "split": "train"}
+{"task": "Create a cube mesh in Blender", "tool": null, "note": "claude", "split": "train"}
+{"task": "Render the 3D scene from the camera view", "tool": null, "note": "claude", "split": "train"}
+{"task": "Add a metallic material to the sphere in the 3D model", "tool": null, "note": "claude", "split": "train"}
+{"task": "Export the Blender scene as an FBX file", "tool": null, "note": "claude", "split": "train"}
+{"task": "Check the Android device battery level", "tool": null, "note": "claude", "split": "train"}
+{"task": "Mirror the phone screen to my laptop", "tool": null, "note": "claude", "split": "train"}

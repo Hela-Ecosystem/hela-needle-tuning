@@ -1,0 +1,114 @@
+{"task": "what's the time in Seoul right now", "tool": "hela_mitosis_get_current_time", "arguments": {"timezone": "Asia/Seoul"}, "note": "claude", "split": "train"}
+{"task": "Jam berapa sekarang di Jakarta?", "tool": "hela_mitosis_get_current_time", "arguments": {"timezone": "Asia/Jakarta"}, "note": "claude", "split": "train"}
+{"task": "can you tell me the current date and time for Dubai", "tool": "hela_mitosis_get_current_time", "arguments": {"timezone": "Asia/Dubai"}, "note": "claude", "split": "train"}
+{"task": "time in sao paulo?", "tool": "hela_mitosis_get_current_time", "arguments": {"timezone": "America/Sao_Paulo"}, "note": "claude", "split": "train"}
+{"task": "Convert 8:30 PM Singapore time to Los Angeles time", "tool": "hela_mitosis_convert_time", "arguments": {"source_timezone": "Asia/Singapore", "time": "20:30", "target_timezone": "America/Los_Angeles"}, "note": "claude", "split": "train"}
+{"task": "konversi jam 09.00 WIB ke waktu London", "tool": "hela_mitosis_convert_time", "arguments": {"source_timezone": "Asia/Jakarta", "time": "09:00", "target_timezone": "Europe/London"}, "note": "claude", "split": "train"}
+{"task": "If it's noon in Paris, what time is it in Tokyo?", "tool": "hela_mitosis_convert_time", "arguments": {"source_timezone": "Europe/Paris", "time": "12:00", "target_timezone": "Asia/Tokyo"}, "note": "claude", "split": "train"}
+{"task": "I need to see what's inside the config folder", "tool": "hela_membrane_list_directory", "arguments": {"path": "/workspace/config"}, "note": "claude", "split": "train"}
+{"task": "ls /workspace/packages", "tool": "hela_membrane_list_directory", "arguments": {"path": "/workspace/packages"}, "note": "claude", "split": "train"}
+{"task": "tampilkan isi folder /workspace/src", "tool": "hela_membrane_list_directory", "arguments": {"path": "/workspace/src"}, "note": "claude", "split": "train"}
+{"task": "show hidden files in /workspace too", "tool": "hela_membrane_list_directory", "arguments": {"path": "/workspace", "includeHidden": true}, "note": "claude", "split": "train"}
+{"task": "what files exist under /workspace/lib, including subfolders", "tool": "hela_membrane_list_directory", "arguments": {"path": "/workspace/lib", "recursive": true}, "note": "claude", "split": "train"}
+{"task": "cat the tsconfig for me", "tool": "hela_membrane_read_file", "arguments": {"path": "/workspace/tsconfig.json"}, "note": "claude", "split": "train"}
+{"task": "baca file /workspace/docs/setup.md", "tool": "hela_membrane_read_file", "arguments": {"path": "/workspace/docs/setup.md"}, "note": "claude", "split": "train"}
+{"task": "show me the first 50 lines of /workspace/logs/server.log", "tool": "hela_membrane_read_file", "arguments": {"path": "/workspace/logs/server.log", "limit": 50}, "note": "claude", "split": "train"}
+{"task": "what does the Dockerfile look like?", "tool": "hela_membrane_read_file", "arguments": {"path": "/workspace/Dockerfile"}, "note": "claude", "split": "train"}
+{"task": "open requirements.txt and tell me the pinned versions", "tool": "hela_membrane_read_file", "arguments": {"path": "/workspace/requirements.txt"}, "note": "claude", "split": "train"}
+{"task": "save the text 'v2.1.0' into /workspace/VERSION", "tool": "hela_membrane_write_file", "arguments": {"path": "/workspace/VERSION", "content": "v2.1.0"}, "note": "claude", "split": "train"}
+{"task": "tulis 'halo dunia' ke file /workspace/halo.txt", "tool": "hela_membrane_write_file", "arguments": {"path": "/workspace/halo.txt", "content": "halo dunia"}, "note": "claude", "split": "train"}
+{"task": "append the line 'retry=3' to /workspace/settings.ini", "tool": "hela_membrane_write_file", "arguments": {"path": "/workspace/settings.ini", "content": "retry=3", "append": true}, "note": "claude", "split": "train"}
+{"task": "create a file /workspace/scratch/todo.md that says '- ship it'", "tool": "hela_membrane_write_file", "arguments": {"path": "/workspace/scratch/todo.md", "content": "- ship it", "createDirs": true}, "note": "claude", "split": "train"}
+{"task": "make a folder named /workspace/reports/2026", "tool": "hela_membrane_create_directory", "arguments": {"path": "/workspace/reports/2026"}, "note": "claude", "split": "train"}
+{"task": "mkdir -p /workspace/a/b/c", "tool": "hela_membrane_create_directory", "arguments": {"path": "/workspace/a/b/c", "recursive": true}, "note": "claude", "split": "train"}
+{"task": "buat direktori baru /workspace/backup", "tool": "hela_membrane_create_directory", "arguments": {"path": "/workspace/backup"}, "note": "claude", "split": "train"}
+{"task": "move /workspace/draft.md into /workspace/archive/draft.md", "tool": "hela_membrane_move_file", "arguments": {"source": "/workspace/draft.md", "destination": "/workspace/archive/draft.md"}, "note": "claude", "split": "train"}
+{"task": "rename report.txt to report-final.txt in /workspace", "tool": "hela_membrane_move_file", "arguments": {"source": "/workspace/report.txt", "destination": "/workspace/report-final.txt"}, "note": "claude", "split": "train"}
+{"task": "pindahkan /workspace/a.log ke /workspace/old/a.log", "tool": "hela_membrane_move_file", "arguments": {"source": "/workspace/a.log", "destination": "/workspace/old/a.log"}, "note": "claude", "split": "train"}
+{"task": "copy /workspace/template.html to /workspace/index.html", "tool": "hela_membrane_copy_file", "arguments": {"source": "/workspace/template.html", "destination": "/workspace/index.html"}, "note": "claude", "split": "train"}
+{"task": "salin /workspace/env.sample jadi /workspace/.env", "tool": "hela_membrane_copy_file", "arguments": {"source": "/workspace/env.sample", "destination": "/workspace/.env"}, "note": "claude", "split": "train"}
+{"task": "clone the file main.py to main_backup.py in the workspace", "tool": "hela_membrane_copy_file", "arguments": {"source": "/workspace/main.py", "destination": "/workspace/main_backup.py"}, "note": "claude", "split": "train"}
+{"task": "remove the build folder and everything in it", "tool": "hela_membrane_delete_file", "arguments": {"path": "/workspace/build", "recursive": true}, "note": "claude", "split": "train"}
+{"task": "hapus file /workspace/tmp/cache.bin", "tool": "hela_membrane_delete_file", "arguments": {"path": "/workspace/tmp/cache.bin"}, "note": "claude", "split": "train"}
+{"task": "rm /workspace/debug.log", "tool": "hela_membrane_delete_file", "arguments": {"path": "/workspace/debug.log"}, "note": "claude", "split": "train"}
+{"task": "are config.old.json and config.json the same?", "tool": "hela_membrane_compare_files", "arguments": {"file1": "/workspace/config.old.json", "file2": "/workspace/config.json"}, "note": "claude", "split": "train"}
+{"task": "diff /workspace/v1.txt /workspace/v2.txt", "tool": "hela_membrane_compare_files", "arguments": {"file1": "/workspace/v1.txt", "file2": "/workspace/v2.txt"}, "note": "claude", "split": "train"}
+{"task": "how large is /workspace/data/dump.sql and when was it changed", "tool": "hela_membrane_get_file_info", "arguments": {"path": "/workspace/data/dump.sql"}, "note": "claude", "split": "train"}
+{"task": "check the permissions on /workspace/run.sh", "tool": "hela_membrane_get_file_info", "arguments": {"path": "/workspace/run.sh"}, "note": "claude", "split": "train"}
+{"task": "total size of the /workspace/assets directory?", "tool": "hela_membrane_get_directory_size", "arguments": {"path": "/workspace/assets"}, "note": "claude", "split": "train"}
+{"task": "berapa ukuran folder /workspace/uploads", "tool": "hela_membrane_get_directory_size", "arguments": {"path": "/workspace/uploads"}, "note": "claude", "split": "train"}
+{"task": "locate every python file", "tool": "hela_membrane_find_files", "arguments": {"pattern": "*.py"}, "note": "claude", "split": "train"}
+{"task": "cari semua file .md di /workspace/docs", "tool": "hela_membrane_find_files", "arguments": {"pattern": "*.md", "directory": "/workspace/docs"}, "note": "claude", "split": "train"}
+{"task": "where is the file named package-lock.json", "tool": "hela_membrane_find_files", "arguments": {"pattern": "package-lock.json"}, "note": "claude", "split": "train"}
+{"task": "grep the repo for 'API_KEY'", "tool": "hela_membrane_search_in_files", "arguments": {"pattern": "API_KEY"}, "note": "claude", "split": "train"}
+{"task": "find where the function parseConfig is used", "tool": "hela_membrane_search_in_files", "arguments": {"pattern": "parseConfig"}, "note": "claude", "split": "train"}
+{"task": "cari kata 'timeout' di semua file source", "tool": "hela_membrane_search_in_files", "arguments": {"pattern": "timeout"}, "note": "claude", "split": "train"}
+{"task": "bundle /workspace/a.txt and /workspace/b.txt into /workspace/ab.zip", "tool": "hela_membrane_archive_files", "arguments": {"files": ["/workspace/a.txt", "/workspace/b.txt"], "archivePath": "/workspace/ab.zip"}, "note": "claude", "split": "train"}
+{"task": "unpack /workspace/release.zip into /workspace/release", "tool": "hela_membrane_extract_archive", "arguments": {"archivePath": "/workspace/release.zip", "destination": "/workspace/release"}, "note": "claude", "split": "train"}
+{"task": "keep an eye on /workspace/src for changes", "tool": "hela_membrane_watch_file", "arguments": {"path": "/workspace/src"}, "note": "claude", "split": "train"}
+{"task": "stop watching /workspace/src now", "tool": "hela_membrane_stop_watching", "arguments": {"path": "/workspace/src"}, "note": "claude", "split": "train"}
+{"task": "how much memory is free on this machine", "tool": "hela_nucleus_execute_command", "arguments": {"command": "free -h"}, "note": "claude", "split": "train"}
+{"task": "cek penggunaan disk", "tool": "hela_nucleus_execute_command", "arguments": {"command": "df -h"}, "note": "claude", "split": "train"}
+{"task": "install the npm dependencies", "tool": "hela_nucleus_execute_command", "arguments": {"command": "npm install"}, "note": "claude", "split": "train"}
+{"task": "run the unit tests with pytest", "tool": "hela_nucleus_execute_command", "arguments": {"command": "pytest"}, "note": "claude", "split": "train"}
+{"task": "what branch am I on?", "tool": "hela_nucleus_execute_command", "arguments": {"command": "git branch --show-current"}, "note": "claude", "split": "train"}
+{"task": "build the project", "tool": "hela_nucleus_execute_command", "arguments": {"command": "npm run build"}, "note": "claude", "split": "train"}
+{"task": "which processes are using the most cpu", "tool": "hela_nucleus_execute_command", "arguments": {"command": "ps aux --sort=-%cpu | head -10"}, "note": "claude", "split": "train"}
+{"task": "ping google to see if the network is up", "tool": "hela_nucleus_execute_command", "arguments": {"command": "ping -c 3 google.com"}, "note": "claude", "split": "train"}
+{"task": "jalankan perintah uname -a", "tool": "hela_nucleus_execute_command", "arguments": {"command": "uname -a"}, "note": "claude", "split": "train"}
+{"task": "grep for ERROR inside /workspace/logs using the terminal", "tool": "hela_nucleus_terminal_grep", "arguments": {"pattern": "ERROR", "path": "/workspace/logs"}, "note": "claude", "split": "train"}
+{"task": "terminal listing of /workspace/scripts with sizes", "tool": "hela_nucleus_terminal_ls", "arguments": {"path": "/workspace/scripts", "long": true}, "note": "claude", "split": "train"}
+{"task": "what shell sessions do I have going", "tool": "hela_nucleus_terminal_session_list", "note": "claude", "split": "train"}
+{"task": "what do we already know about the checkout flow", "tool": "hela_genome_search_nodes", "arguments": {"query": "checkout flow"}, "note": "claude", "split": "train"}
+{"task": "cari catatan tentang migrasi database", "tool": "hela_genome_search_nodes", "arguments": {"query": "migrasi database"}, "note": "claude", "split": "train"}
+{"task": "look up anything stored about our auth bug", "tool": "hela_genome_search_nodes", "arguments": {"query": "auth bug"}, "note": "claude", "split": "train"}
+{"task": "dump the whole memory graph", "tool": "hela_genome_read_graph", "note": "claude", "split": "train"}
+{"task": "show me the stored context for src/server.ts", "tool": "hela_genome_get_file_context", "arguments": {"filePath": "src/server.ts"}, "note": "claude", "split": "train"}
+{"task": "what's the history of changes in memory lately", "tool": "hela_genome_get_timeline", "note": "claude", "split": "train"}
+{"task": "summarise what happened in the last working session", "tool": "hela_genome_get_session_context", "note": "claude", "split": "train"}
+{"task": "what changed in git since the last commit", "tool": "hela_genome_analyze_git_changes", "note": "claude", "split": "train"}
+{"task": "select everything from the missions table", "tool": "hela_genome_query_data", "arguments": {"table": "missions"}, "note": "claude", "split": "train"}
+{"task": "run this sql: SELECT count(*) FROM entities", "tool": "hela_genome_execute_sql", "arguments": {"query": "SELECT count(*) FROM entities"}, "note": "claude", "split": "train"}
+{"task": "scan the project for leaked secrets", "tool": "hela_genome_security_scan", "arguments": {"action": "secrets"}, "note": "claude", "split": "train"}
+{"task": "sync the project memory to the central store", "tool": "hela_genome_sync_central_memory", "note": "claude", "split": "train"}
+{"task": "go to https://news.ycombinator.com", "tool": "hela_cytosol_browser_navigate", "arguments": {"url": "https://news.ycombinator.com"}, "note": "claude", "split": "train"}
+{"task": "buka situs https://www.wikipedia.org di browser", "tool": "hela_cytosol_browser_navigate", "arguments": {"url": "https://www.wikipedia.org"}, "note": "claude", "split": "train"}
+{"task": "take a screenshot please", "tool": "hela_cytosol_browser_screenshot", "note": "claude", "split": "train"}
+{"task": "what text is on this page?", "tool": "hela_cytosol_browser_get_content", "note": "claude", "split": "train"}
+{"task": "click the login button", "tool": "hela_cytosol_browser_click", "arguments": {"text": "Login"}, "note": "claude", "split": "train"}
+{"task": "type 'hello@example.com' into the #email field", "tool": "hela_cytosol_browser_type", "arguments": {"selector": "#email", "text": "hello@example.com"}, "note": "claude", "split": "train"}
+{"task": "hit the Enter key", "tool": "hela_cytosol_browser_press", "arguments": {"key": "Enter"}, "note": "claude", "split": "train"}
+{"task": "scroll down a bit", "tool": "hela_cytosol_browser_scroll", "note": "claude", "split": "train"}
+{"task": "refresh the page", "tool": "hela_cytosol_browser_reload", "note": "claude", "split": "train"}
+{"task": "which browser tabs are open", "tool": "hela_cytosol_browser_list_tabs", "note": "claude", "split": "train"}
+{"task": "open a new tab with https://example.net", "tool": "hela_cytosol_browser_new_tab", "arguments": {"url": "https://example.net"}, "note": "claude", "split": "train"}
+{"task": "pick 'Indonesia' in the #country dropdown", "tool": "hela_cytosol_browser_select", "arguments": {"selector": "#country", "value": "Indonesia"}, "note": "claude", "split": "train"}
+{"task": "tick the 'remember me' checkbox", "tool": "hela_cytosol_browser_check", "arguments": {"selector": "#remember"}, "note": "claude", "split": "train"}
+{"task": "save this page as a pdf", "tool": "hela_cytosol_browser_print_to_pdf", "note": "claude", "split": "train"}
+{"task": "any console errors on the page?", "tool": "hela_cytosol_browser_console_messages", "note": "claude", "split": "train"}
+{"task": "show me the interactive elements on this page", "tool": "hela_cytosol_browser_observe", "note": "claude", "split": "train"}
+{"task": "look up what Wikipedia says about the Rosetta Stone", "tool": "hela_enzyme_wikipedia_search", "arguments": {"query": "Rosetta Stone"}, "note": "claude", "split": "train"}
+{"task": "cari di wikipedia tentang Candi Borobudur", "tool": "hela_enzyme_wikipedia_search", "arguments": {"query": "Candi Borobudur"}, "note": "claude", "split": "train"}
+{"task": "google: best way to profile a node.js app", "tool": "hela_enzyme_google_search", "arguments": {"q": "best way to profile a node.js app"}, "note": "claude", "split": "train"}
+{"task": "cari di google cara membuat docker compose", "tool": "hela_enzyme_google_search", "arguments": {"q": "cara membuat docker compose"}, "note": "claude", "split": "train"}
+{"task": "find research papers on diffusion models for audio", "tool": "hela_enzyme_academic_search", "arguments": {"query": "diffusion models for audio"}, "note": "claude", "split": "train"}
+{"task": "latest headlines about electric vehicles", "tool": "hela_enzyme_news_monitor", "arguments": {"topic": "electric vehicles"}, "note": "claude", "split": "train"}
+{"task": "is it true that the Great Wall is visible from space", "tool": "hela_enzyme_fact_checker", "arguments": {"claim": "The Great Wall of China is visible from space"}, "note": "claude", "split": "train"}
+{"task": "pull the main text out of https://example.com/blog/post-1", "tool": "hela_enzyme_extract_content", "arguments": {"url": "https://example.com/blog/post-1"}, "note": "claude", "split": "train"}
+{"task": "get the title and description of https://example.com/about", "tool": "hela_enzyme_url_metadata_extractor", "arguments": {"url": "https://example.com/about"}, "note": "claude", "split": "train"}
+{"task": "what are the keywords in this paragraph: Solar panels convert sunlight into electricity using photovoltaic cells", "tool": "hela_enzyme_keyword_extraction", "arguments": {"text": "Solar panels convert sunlight into electricity using photovoltaic cells"}, "note": "claude", "split": "train"}
+{"task": "is this review positive or negative: the battery life is awful but the screen is great", "tool": "hela_enzyme_content_sentiment_analysis", "arguments": {"text": "the battery life is awful but the screen is great"}, "note": "claude", "split": "train"}
+{"task": "was example.org archived on the wayback machine", "tool": "hela_enzyme_archive_org_search", "arguments": {"url": "example.org"}, "note": "claude", "split": "train"}
+{"task": "give me a quick research brief on solid-state batteries", "tool": "hela_enzyme_research_brief", "arguments": {"query": "solid-state batteries"}, "note": "claude", "split": "train"}
+{"task": "start a persistent bash terminal", "tool": "hela_ribosome_session_spawn", "arguments": {"command": "bash"}, "note": "claude", "split": "train"}
+{"task": "send 'npm start' to session sess-2", "tool": "hela_ribosome_session_write", "arguments": {"sessionId": "sess-2", "payload": "npm start"}, "note": "claude", "split": "train"}
+{"task": "show the output of session sess-2", "tool": "hela_ribosome_session_read", "arguments": {"sessionId": "sess-2"}, "note": "claude", "split": "train"}
+{"task": "shut down terminal session sess-4", "tool": "hela_ribosome_session_close", "arguments": {"sessionId": "sess-4"}, "note": "claude", "split": "train"}
+{"task": "list the agents that are running", "tool": "hela_ribosome_agent_list", "note": "claude", "split": "train"}
+{"task": "is the opencode server up", "tool": "hela_ribosome_opencode_status", "note": "claude", "split": "train"}
+{"task": "find a skill that helps with writing commit messages", "tool": "hela_mitosis_search_skills", "arguments": {"query": "commit messages"}, "note": "claude", "split": "train"}
+{"task": "what skills do we have", "tool": "hela_mitosis_list_skills", "note": "claude", "split": "train"}
+{"task": "summarise this text in a few words: The quarterly report shows revenue growth of twelve percent driven by new subscriptions", "tool": "hela_mitosis_llm_summarize", "arguments": {"content": "The quarterly report shows revenue growth of twelve percent driven by new subscriptions"}, "note": "claude", "split": "train"}
+{"task": "brainstorm ideas for a team offsite", "tool": "hela_mitosis_brainstorming", "arguments": {"topic": "team offsite"}, "note": "claude", "split": "train"}
+{"task": "break the task 'migrate the database to postgres' into steps", "tool": "hela_mitosis_llm_decompose_task", "arguments": {"task": "migrate the database to postgres"}, "note": "claude", "split": "train"}
+{"task": "which mcp servers are available", "tool": "hela_mitosis_list_mcp_servers", "note": "claude", "split": "train"}

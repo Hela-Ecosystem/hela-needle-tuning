@@ -51,6 +51,18 @@ def arguments_prompt(task: str, tool: str, workspace: str = DEFAULT_WORKSPACE, h
     return "\n".join(p for p in parts if p)
 
 
+def format_history(history: list[dict[str, Any]] | None, by_name: dict[str, Tool], result_limit: int) -> str:
+    """Render prior steps exactly as the runtime does: last 4, ``tool(args) -> result | ERROR msg``."""
+    lines = []
+    for step in (history or [])[-4:]:
+        name = step["tool"]
+        if name not in by_name:
+            raise KeyError(f"unknown tool {name!r} in history")
+        outcome = f"ERROR {step['error']}" if step.get("error") else str(step.get("result", ""))[:result_limit]
+        lines.append(f"{name}({json.dumps(step.get('args', {}), separators=(',', ':'))}) -> {outcome}")
+    return "\n".join(lines)
+
+
 def shortlist(target: Tool | None, catalog: list[Tool], rng: random.Random, size: int = SHORTLIST) -> list[Tool]:
     """The target plus distractors, same cell first (what retrieval tends to return)."""
     pool = [t for t in catalog if target is None or t.name != target.name]
@@ -102,12 +114,14 @@ def arguments_row(task: str, target: str, arguments: dict[str, Any], catalog: li
 
 def dedupe(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Keep the first row for each (task, stage); earlier seed files win."""
-    seen: set[tuple[str, str, bool]] = set()
+    seen: set[tuple[str, str, bool, str]] = set()
     out: list[dict[str, Any]] = []
     for row in rows:
         task = row["query"].split("\n", 1)[0].lower()
         # A pinned shortlist replays a specific failure, so it is never a duplicate of an unpinned row.
-        key = (task, row["meta"]["stage"], bool(row["meta"].get("pinned")))
+        # The same task after a different history is a different example.
+        recent = row["query"].split("Recent actions:\n", 1)[1].split("\n", 1)[0] if "Recent actions:\n" in row["query"] else ""
+        key = (task, row["meta"]["stage"], bool(row["meta"].get("pinned")), recent)
         if key not in seen:
             seen.add(key)
             out.append(row)
@@ -134,13 +148,16 @@ def build_rows(seed_path: str | Path, catalog: list[Tool], seed: int = 7) -> lis
             forced = item.get("split")
             if forced not in (None, "train", "eval"):
                 raise ValueError(f"split must be 'train' or 'eval', got {forced!r}")
-            stage = [("choose", choose_row(task, tool, catalog, rng, pin=item.get("shortlist")))]
+            by_name = {t.name: t for t in catalog}
+            hist_choose = format_history(item.get("history"), by_name, 300)
+            hist_args = format_history(item.get("history"), by_name, 400)
+            stage = [("choose", choose_row(task, tool, catalog, rng, pin=item.get("shortlist"), **({"history": hist_choose} if hist_choose else {})))]
             if item.get("arguments") is not None:
-                stage.append(("arguments", arguments_row(task, tool, item["arguments"], catalog)))
+                stage.append(("arguments", arguments_row(task, tool, item["arguments"], catalog, **({"history": hist_args} if hist_args else {}))))
         except (KeyError, ValueError) as exc:
             raise ValueError(f"{seed_path}:{line_no}: {exc}") from exc
         for kind, row in stage:
             row = scrub_value(row)
-            row["meta"] = {"stage": kind, "split": forced or split_of(task, regression), "regression": regression, "pinned": bool(item.get("shortlist")) and kind == "choose", "source": Path(seed_path).name}
+            row["meta"] = {"stage": kind, "split": forced or split_of(task, regression), "regression": regression, "pinned": bool(item.get("shortlist")) and kind == "choose", "history": bool(item.get("history")), "source": Path(seed_path).name}
             rows.append(row)
     return rows
