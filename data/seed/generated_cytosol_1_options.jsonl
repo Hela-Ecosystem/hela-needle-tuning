@@ -1,0 +1,14 @@
+{"task": "spin up a new agent page under the /workspace project for parallel browser tasks", "tool": "hela_cytosol_browser_agent_create", "arguments": {"name": "agent-sess-1"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "list all agent pages currently active in the session", "tool": "hela_cytosol_browser_agent_list", "note": "openrouter-free-styled", "split": "train"}
+{"task": "close the agent page agent-sess-1 to free up resources", "tool": "hela_cytosol_browser_agent_remove", "arguments": {"name": "agent-sess-1"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "switch focus to agent page agent-sess-2 for the next workflow", "tool": "hela_cytosol_browser_agent_switch", "arguments": {"name": "agent-sess-2"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "assert the current URL matches the expected pattern example.org/login", "tool": "hela_cytosol_browser_assert", "arguments": {"type": "url", "target": "example.org/login", "expected": "login"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "go back to the previous page, returning to the /workspace documentation", "tool": "hela_cytosol_browser_back", "note": "openrouter-free-styled", "split": "train"}
+{"task": "answer a quick two-question quiz about the tool, then proceed to the next page on example.com", "tool": "hela_cytosol_browser_batch_answer_quiz", "arguments": {"answers": [{"q": 0, "option": 1}, {"q": 1, "options": [0, 2]}], "submitAfter": false, "nextSelector": ".next-button", "submitSelector": ".submit-button"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "display the current action selector cache hit rate and entry counts", "tool": "hela_cytosol_browser_cache_stats", "note": "openrouter-free-styled", "split": "train"}
+{"task": "select the remember me checkbox on the login form at example.com", "tool": "hela_cytosol_browser_check", "arguments": {"selector": "#remember-me"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "clear the text input field in the /workspace search form", "tool": "hela_cytosol_browser_clear", "arguments": {"selector": ".search-input"}, "note": "openrouter-free-styled", "split": "train"}
+{"task": "drop all request intercepts to restore normal network behavior", "tool": "hela_cytosol_browser_clear_intercepts", "note": "openrouter-free-styled", "split": "train"}
+{"task": "remove all network mock routes so real API calls can flow", "tool": "hela_cytosol_browser_clear_mocks", "note": "openrouter-free-styled", "split": "train"}
+{"task": "what's the meaning of life", "tool": null, "note": "openrouter-free-styled", "split": "train"}
+{"task": "recommend a good browser extension", "tool": null, "note": "openrouter-free-styled", "split": "train"}
