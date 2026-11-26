@@ -8,7 +8,7 @@ from pathlib import Path
 
 from . import evalrun, gate
 from .catalog import load_catalog
-from .examples import build_all
+from .examples import build_all, cap_none
 from . import coverage as coverage_mod
 from .profiles import load_profiles
 from .agentcat import visible_names, is_visible, load_exclusions
@@ -36,6 +36,9 @@ def cmd_build(a: argparse.Namespace) -> int:
     rows = build_all(a.seeds, catalog, a.seed, profiles, a.profile, visible, stats)
     for reason, n in stats.items():
         print(f"  skipped {n} seed line(s): {reason}")
+    rows, dropped = cap_none(rows, a.max_none)
+    if dropped:
+        print(f"  capped {dropped} 'none' training row(s) to {a.max_none:.0%} of the choose rows")
     out = Path(a.out)
     train = [r for r in rows if r["meta"]["split"] == "train"]
     held = [r for r in rows if r["meta"]["split"] == "eval"]
@@ -167,6 +170,7 @@ def main(argv: list[str] | None = None) -> int:
     b.add_argument("--seed", type=int, default=7)
     b.add_argument("--profiles", default="data/catalog/profiles.json", help="profile -> active cells; rows draw their shortlist from one profile")
     b.add_argument("--exclusions", default="data/catalog/agent-exclusions.json", help="tools the agent never offers to Needle (not trained)")
+    b.add_argument("--max-none", type=float, default=0.12, help="cap 'none' training rows at this share of the choose rows (0 disables)")
     b.add_argument("--profile", help="build the dataset for a model dedicated to this profile (see data/catalog/profiles.json)")
     b.set_defaults(fn=cmd_build)
     cv = sub.add_parser("coverage", help="write docs/COVERAGE.md: tools, cells and profiles vs what the data teaches")

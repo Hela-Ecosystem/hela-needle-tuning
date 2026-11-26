@@ -101,6 +101,26 @@ class Rows(unittest.TestCase):
         b["meta"]["profile"] = "android"
         self.assertEqual(len(dedupe([a, b])), 1)
 
+    def test_cap_none_limits_refusals_and_keeps_eval(self):
+        from hela_needle.examples import cap_none
+        def row(task, kind, split="train"):
+            return {"query": f"Task: {task}\nx", "meta": {"stage": "choose", "split": split, "kind": kind, "profile": "p"}}
+        rows = [row(f"t{i}", "tool") for i in range(10)] + [row(f"n{i}", "none") for i in range(10)] + [row("e", "none", "eval")]
+        kept, dropped = cap_none(rows, 0.2)  # 10 positives allow 2 nones
+        self.assertEqual(dropped, 8)
+        self.assertEqual(sum(1 for r in kept if r["meta"]["kind"] == "none" and r["meta"]["split"] == "train"), 2)
+        self.assertEqual(sum(1 for r in kept if r["meta"]["split"] == "eval"), 1)
+        again, _ = cap_none(rows, 0.2)
+        self.assertEqual([r["query"] for r in kept], [r["query"] for r in again])  # deterministic
+        self.assertEqual(cap_none(rows, 0)[1], 0)
+
+    def test_dedupe_separates_histories_that_share_their_first_step(self):
+        one = choose_row("Do A then B", TIME.name, CAT, random.Random(1), history="a() -> ok")
+        two = choose_row("Do A then B", TIME.name, CAT, random.Random(1), history="a() -> ok\nb() -> ok")
+        for r in (one, two):
+            r["meta"] = {"stage": "choose"}
+        self.assertEqual(len(dedupe([one, two])), 2)
+
     def test_dedupe_separates_same_task_with_different_history(self):
         a = choose_row("Same task", TIME.name, CAT, random.Random(1), history="x -> y")
         b = choose_row("Same task", TIME.name, CAT, random.Random(2), history="x -> z")

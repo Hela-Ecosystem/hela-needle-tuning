@@ -122,7 +122,8 @@ def dedupe(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
         task = row["query"].split("\n", 1)[0].lower()
         # A pinned shortlist replays a specific failure, so it is never a duplicate of an unpinned row.
         # The same task after a different history is a different example.
-        recent = row["query"].split("Recent actions:\n", 1)[1].split("\n", 1)[0] if "Recent actions:\n" in row["query"] else ""
+        # The whole history block (everything between "Recent actions:" and the closing instruction line).
+        recent = row["query"].split("Recent actions:\n", 1)[1].rsplit("\n", 1)[0] if "Recent actions:\n" in row["query"] else ""
         # The same task can have a different right answer under another profile (an inactive cell means "none").
         key = (task, row["meta"]["stage"], bool(row["meta"].get("pinned")), recent, row["meta"].get("profile"))
         if key not in seen:
@@ -259,3 +260,27 @@ def build_all(
     for path in sorted(Path(seeds_dir).glob("*.jsonl")):
         rows += build_rows(path, catalog, seed, profiles, only_profile, visible, stats)
     return dedupe(rows)
+
+
+def cap_none(rows: list[dict[str, Any]], max_fraction: float) -> tuple[list[dict[str, Any]], int]:
+    """Keep "none" training rows to at most ``max_fraction`` of the training choose-rows.
+
+    A small profile has few positives but the same inactive-cell negatives, which would teach the model
+    to refuse too often. Which rows survive is decided by a hash of the task, so it is stable. Eval rows
+    are never touched. Returns (rows, dropped).
+    """
+    if max_fraction <= 0 or max_fraction >= 1:
+        return rows, 0
+    import hashlib
+
+    def is_none(r: dict[str, Any]) -> bool:
+        return r["meta"]["split"] == "train" and r["meta"]["stage"] == "choose" and r["meta"].get("kind") == "none"
+
+    choose_other = sum(1 for r in rows if r["meta"]["split"] == "train" and r["meta"]["stage"] == "choose" and not is_none(r))
+    allowed = int(max_fraction / (1 - max_fraction) * choose_other)
+    nones = [r for r in rows if is_none(r)]
+    if len(nones) <= allowed:
+        return rows, 0
+    ranked = sorted(nones, key=lambda r: hashlib.sha256((r["query"].split("\n", 1)[0] + str(r["meta"].get("profile"))).encode()).hexdigest())
+    drop = {id(r) for r in ranked[allowed:]}
+    return [r for r in rows if id(r) not in drop], len(drop)
