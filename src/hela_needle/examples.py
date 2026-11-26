@@ -16,6 +16,7 @@ from __future__ import annotations
 import collections
 import json
 import random
+import re
 from pathlib import Path
 from typing import Any
 
@@ -26,6 +27,7 @@ from .scrub import scrub_value
 from .splits import split_of
 
 SHORTLIST = 4
+DONE_COPIES = 4
 DEFAULT_WORKSPACE = "/workspace"
 
 
@@ -78,6 +80,39 @@ def shortlist(target: Tool | None, catalog: list[Tool], rng: random.Random, size
     return chosen
 
 
+_WORD = re.compile(r"[a-z]+")
+
+
+def _tokens(tool: Tool) -> set[str]:
+    """Words that identify what a tool does: its own name (minus the cell prefix) and the start of its description."""
+    name = tool.name.lower().replace("hela_", "", 1)
+    words = set(_WORD.findall(name)) | set(_WORD.findall(" ".join(tool.description.lower().split()[:24])))
+    return {w for w in words if len(w) > 2}
+
+
+def similar_tools(target: Tool, pool: list[Tool], k: int = 6) -> list[Tool]:
+    """The tools most easily mistaken for ``target``: shared words in name and description, same cell first."""
+    mine = _tokens(target)
+
+    def score(t: Tool) -> float:
+        theirs = _tokens(t)
+        jaccard = len(mine & theirs) / max(1, len(mine | theirs))
+        return jaccard + (0.35 if t.cell == target.cell else 0.0)
+
+    ranked = sorted((t for t in pool if t.name != target.name), key=lambda t: (-score(t), t.name))
+    return ranked[:k]
+
+
+def hard_shortlist(anchor: Tool, pool: list[Tool], rng: random.Random, size: int = SHORTLIST) -> list[str]:
+    """``anchor`` plus its look-alikes. Random same-cell distractors rarely include the real sibling, so a
+    model trained only on them never has to tell ``read_file`` from ``get_file_info``."""
+    near = similar_tools(anchor, pool, 6)
+    picked = rng.sample(near, min(size - 1, len(near)))
+    names = [anchor.name] + [t.name for t in picked]
+    rng.shuffle(names)
+    return names
+
+
 def choose_row(task: str, target: str | None, catalog: list[Tool], rng: random.Random, pin: list[str] | None = None, **kw: Any) -> dict[str, Any]:
     """``target=None`` or ``'done'`` trains the done / nothing-applies answer.
 
@@ -125,7 +160,7 @@ def dedupe(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
         # The whole history block (everything between "Recent actions:" and the closing instruction line).
         recent = row["query"].split("Recent actions:\n", 1)[1].rsplit("\n", 1)[0] if "Recent actions:\n" in row["query"] else ""
         # The same task can have a different right answer under another profile (an inactive cell means "none").
-        key = (task, row["meta"]["stage"], bool(row["meta"].get("pinned")), recent, row["meta"].get("profile"))
+        key = (task, row["meta"]["stage"], bool(row["meta"].get("pinned")), row["meta"].get("variant"), recent, row["meta"].get("profile"))
         if key not in seen:
             seen.add(key)
             out.append(row)
@@ -186,6 +221,7 @@ def build_rows(
     only_profile: str | None = None,
     visible: set[str] | None = None,
     stats: "collections.Counter | None" = None,
+    hard: bool = False,
 ) -> list[dict[str, Any]]:
     """Expand a seed file (one JSON object per line) into rows with split labels.
 
@@ -228,14 +264,30 @@ def build_rows(
                     pool = [t for t in pool if t.name in visible]
             hist_choose = format_history(item.get("history"), by_name, 300)
             hist_args = format_history(item.get("history"), by_name, 400)
-            stage = [("choose", choose_row(task, tool, pool, rng, pin=item.get("shortlist"), **({"history": hist_choose} if hist_choose else {})))]
+            stage = [("choose", None, choose_row(task, tool, pool, rng, pin=item.get("shortlist"), **({"history": hist_choose} if hist_choose else {})))]
             if item.get("arguments") is not None:
-                stage.append(("arguments", arguments_row(task, tool, item["arguments"], catalog, **({"history": hist_args} if hist_args else {}))))
+                stage.append(("arguments", None, arguments_row(task, tool, item["arguments"], catalog, **({"history": hist_args} if hist_args else {}))))
+            # Training rows only: the eval keeps its frozen shortlists. A second copy of the choose
+            # row whose shortlist holds the target's (or, for "done", the last tool's) look-alikes.
+            if hard and (forced or split_of(task, regression)) == "train" and not item.get("shortlist") and tool is not None:
+                anchor = tool if tool != "done" else ((item.get("history") or [{}])[-1].get("tool"))
+                pool_by_name = {t.name: t for t in pool}
+                if anchor in pool_by_name and len(pool) > SHORTLIST:
+                    # "done" after real steps is the weakest class, so those rows get more copies,
+                    # each tempting the model with a different set of look-alikes.
+                    copies = DONE_COPIES if tool == "done" and item.get("history") else 1
+                    for n in range(copies):
+                        label = "hard" if n == 0 else f"hard{n + 1}"
+                        hard_rng = random.Random(f"{label}:{seed}:{task}:{json.dumps(item.get('history'), sort_keys=True)}")
+                        names = hard_shortlist(pool_by_name[anchor], pool, hard_rng)
+                        stage.append(("choose", label, choose_row(task, tool, pool, hard_rng, pin=names, **({"history": hist_choose} if hist_choose else {}))))
         except (KeyError, ValueError) as exc:
             raise ValueError(f"{seed_path}:{line_no}: {exc}") from exc
-        for kind, row in stage:
+        for kind, variant, row in stage:
             row = scrub_value(row)
             row["meta"] = {"stage": kind, "split": forced or split_of(task, regression), "regression": regression, "pinned": bool(item.get("shortlist")) and kind == "choose", "history": bool(item.get("history")), "profile": profile, "kind": ("none" if tool is None else "done" if tool == "done" else "tool"), "source": Path(seed_path).name}
+            if variant:
+                row["meta"]["variant"] = variant
             rows.append(row)
     return rows
 
@@ -248,6 +300,7 @@ def build_all(
     only_profile: str | None = None,
     visible: set[str] | None = None,
     stats: "collections.Counter | None" = None,
+    hard: bool = False,
 ) -> list[dict[str, Any]]:
     """Every seed file in a directory (sorted), expanded and de-duplicated.
 
@@ -258,7 +311,7 @@ def build_all(
         raise ValueError(f"unknown profile {only_profile!r}")
     rows: list[dict[str, Any]] = []
     for path in sorted(Path(seeds_dir).glob("*.jsonl")):
-        rows += build_rows(path, catalog, seed, profiles, only_profile, visible, stats)
+        rows += build_rows(path, catalog, seed, profiles, only_profile, visible, stats, hard)
     return dedupe(rows)
 
 

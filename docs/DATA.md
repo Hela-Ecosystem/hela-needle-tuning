@@ -49,3 +49,18 @@ Two seed files are generated from the validated seeds by `python -m hela_needle 
 ## Automatic import
 
 `scripts/sync_generated.sh <raw dir>` imports finished generation chunks, rebuilds, and pushes, but only if the frozen eval still hashes to `eval/frozen.sha256`, the secret check is clean and the tests pass. When the eval is changed on purpose, regenerate the baseline and update `eval/frozen.sha256` in the same commit.
+
+## Look-alike shortlists and contrast rows
+
+The first per-profile model (issue #8) confused sibling tools (`read_file` vs `get_file_info`, `write_file` vs
+`archive_files`) and almost never chose `done`. Two changes target that:
+
+- **Hard copies.** `build-data` adds a second copy of every *training* choose row whose shortlist holds the
+  target's look-alikes (`similar_tools`: shared words in name and description, same cell first) instead of random
+  same-cell tools. For `done` after real steps the look-alikes are those of the last tool called, and each such
+  row gets `DONE_COPIES` (4) copies with different shortlists. Eval rows are never copied, so `eval/frozen.sha256`
+  does not change. `--no-hard` turns this off.
+- **Contrast seeds.** `scripts/gen_contrast_seeds.py` writes `data/seed/contrast_siblings.jsonl`: look-alike file
+  tools, local vs remote shell tools, memory search vs git analysis, city names mapped to full IANA zones,
+  `convert_time` source/target order, and paths with no extension. It skips any task, or tool plus arguments,
+  that an eval row has, wherever that eval row comes from.

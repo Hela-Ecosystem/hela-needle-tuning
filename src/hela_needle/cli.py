@@ -33,7 +33,7 @@ def cmd_build(a: argparse.Namespace) -> int:
     profiles = load_profiles(a.profiles) if a.profiles and Path(a.profiles).exists() else None
     visible = visible_names(catalog, a.exclusions)
     stats: collections.Counter = collections.Counter()
-    rows = build_all(a.seeds, catalog, a.seed, profiles, a.profile, visible, stats)
+    rows = build_all(a.seeds, catalog, a.seed, profiles, a.profile, visible, stats, hard=not a.no_hard)
     for reason, n in stats.items():
         print(f"  skipped {n} seed line(s): {reason}")
     rows, dropped = cap_none(rows, a.max_none)
@@ -170,6 +170,7 @@ def main(argv: list[str] | None = None) -> int:
     b.add_argument("--seed", type=int, default=7)
     b.add_argument("--profiles", default="data/catalog/profiles.json", help="profile -> active cells; rows draw their shortlist from one profile")
     b.add_argument("--exclusions", default="data/catalog/agent-exclusions.json", help="tools the agent never offers to Needle (not trained)")
+    b.add_argument("--no-hard", action="store_true", help="skip the extra look-alike-shortlist copy of each training choose row")
     b.add_argument("--max-none", type=float, default=0.12, help="cap 'none' training rows at this share of the choose rows (0 disables)")
     b.add_argument("--profile", help="build the dataset for a model dedicated to this profile (see data/catalog/profiles.json)")
     b.set_defaults(fn=cmd_build)

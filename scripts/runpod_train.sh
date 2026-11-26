@@ -18,6 +18,8 @@
 #   GH_TOKEN        needed only for upload; fine-grained, results repo only. Never a broad token.
 #   CODE_REPO       code repo to clone (default Hela-Ecosystem/hela-needle-tuning); BRANCH (default main).
 #   EPOCHS          default 3.   AUTO_TERMINATE=1 terminates the pod after a successful upload (unverified).
+#   LORA_RANK       default 32 (alpha = 2 x rank). VAL_SPLIT default 0.03: the frozen eval is the real test,
+#                   so only a sliver of the rows is held out for the loss curve.
 #   EXTRA_FINETUNE_ARGS, EXTRA_BUILD_ARGS   passed through to `cactus finetune` / `cactus build`.
 set -euo pipefail
 set +x  # never trace commands that may carry the token
@@ -27,6 +29,9 @@ if [ "$NO_UPLOAD" != "1" ]; then
   : "${GH_TOKEN:?set GH_TOKEN (fine-grained token for your private results repo, Contents: write) or run with NO_UPLOAD=1}"
 fi
 EPOCHS="${EPOCHS:-3}"
+LORA_RANK="${LORA_RANK:-32}"
+LORA_ALPHA="${LORA_ALPHA:-$((LORA_RANK * 2))}"
+VAL_SPLIT="${VAL_SPLIT:-0.03}"
 BRANCH="${BRANCH:-main}"
 CODE_REPO="${CODE_REPO:-Hela-Ecosystem/hela-needle-tuning}"
 RUNS_REPO="${RUNS_REPO:-Hela-Ecosystem/hela-needle-runs}"
@@ -106,6 +111,7 @@ for P in $PROFILES; do
   START=$(date +%s)
   # shellcheck disable=SC2086
   cactus finetune "$OUT/train.jsonl" --epochs "$EPOCHS" \
+    --lora-rank "$LORA_RANK" --lora-alpha "$LORA_ALPHA" --val-split "$VAL_SPLIT" \
     --checkpoint-dir "$CK" --out "$CK/lora.safetensors" \
     ${EXTRA_FINETUNE_ARGS:-} 2>&1 | tee "$RUN_DIR/finetune-$P.log"
   MID=$(date +%s)

@@ -72,3 +72,9 @@ Official RunPod images (Docker Hub `runpod/base` and `runpod/pytorch`; build fil
 ## Catalog drift
 
 The catalog changes when cells add or rename tools (the bundled asset already lists cells the live runtime does not load). `build-data` fails on any seed that names a missing tool, which is the signal to update the seeds and retrain.
+
+## Settings
+
+`scripts/runpod_train.sh` fine-tunes with LoRA rank 32 (`LORA_RANK`, alpha defaults to twice the rank) and holds out
+3% of the rows for the loss curve (`VAL_SPLIT=0.03`). The frozen eval, not that holdout, decides whether a model
+ships. Both can be overridden by environment variable; `EXTRA_FINETUNE_ARGS` is appended last and wins.
