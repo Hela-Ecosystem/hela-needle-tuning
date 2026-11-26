@@ -116,14 +116,15 @@ def arguments_row(task: str, target: str, arguments: dict[str, Any], catalog: li
 
 def dedupe(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Keep the first row for each (task, stage); earlier seed files win."""
-    seen: set[tuple[str, str, bool, str]] = set()
+    seen: set[tuple] = set()
     out: list[dict[str, Any]] = []
     for row in rows:
         task = row["query"].split("\n", 1)[0].lower()
         # A pinned shortlist replays a specific failure, so it is never a duplicate of an unpinned row.
         # The same task after a different history is a different example.
         recent = row["query"].split("Recent actions:\n", 1)[1].split("\n", 1)[0] if "Recent actions:\n" in row["query"] else ""
-        key = (task, row["meta"]["stage"], bool(row["meta"].get("pinned")), recent)
+        # The same task can have a different right answer under another profile (an inactive cell means "none").
+        key = (task, row["meta"]["stage"], bool(row["meta"].get("pinned")), recent, row["meta"].get("profile"))
         if key not in seen:
             seen.add(key)
             out.append(row)

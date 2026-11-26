@@ -1,0 +1,180 @@
+{"task": "Stop the recording on device MY-PHONE and pull it to /home/user/videos/test.mp4", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Start a scrcpy session for device X-Y-Z with 60 FPS and max size 1920", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Rotate the device", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Find a button with content description 'Back' and class 'android.widget.Button'.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Close all the open panels on device 101010.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Expand the notification panel on device SER123.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Bisa tolong list semua third-party apps yang terinstall di device sess-123?", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Open a video stream on port 8080 for device DEV-S1", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Expand the notification panel on device 443322.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Tolong matiin layarnya device dengan serial SN-99283 sekarang.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Open the quick settings on device 778899.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Wake up the screen for device 777-888", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "List all third-party apps on device ABC555 that have 'mail' in the name.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Uninstall the package com.old.legacy.app on the device sess-12.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Start a high-quality scrcpy session for device SN-9921 with a maximum size of 1920 pixels.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Eh, tutupin semua panel yang lagi kebuka di screen (notification/settings) dong.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Swipe from (100, 500) to (100, 100) on device xyz.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Check which application is currently running on the foreground for device sess-44.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Show me only the third-party apps installed on the phone.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Rotate the screen on device 112233", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Bisa nggak ya expand panel notifikasi di HP-nya?", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Force stop com.android.settings on device 123", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Tolong tap element yang punya class 'android.widget.Button' dengan text 'OK' di index ke-1.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Press the home button on my device.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Stop the video stream for device 123.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Press the home button on device 12345XYZ", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Install the new update from /workspace/updates/app_v2.apk on device serial sess-99.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Lagi buka aplikasi apa sih sekarang di device sess-001?", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Uninstall com.example.testapp from the device", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Turn off the screen for the device with serial number SN-404.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Search for an element with class 'android.widget.EditText' and content description 'Search Input'.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Remove com.example.junkapp from the device 998877.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Connect to device 778899 via WiFi on port 5560.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Force-stop the Spotify app (com.spotify.music) on my phone.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Scroll down by 500 pixels at 500, 500 on device ABC", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "What app is currently running on the foreground of device 777?", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Collapse all panels on the device", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Uninstall com.facebook.orca from device SN123.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Turn off the screen on device 777.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Which app is currently open on device AX11?", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "On device 123-XYZ, swipe from 100,200 to 100,800 over 500ms", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Start a video stream on port 8080 for device 999.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Wake up the screen for device 998877", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Start a screen recording on device serial 998877 for 60 seconds", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Tap on the button that says 'Submit' on my device.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Check the UI state for device 12345ABC.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Launch the app com.android.settings on device 123456789.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Wake up the device emulator-5554.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Start a high-speed scrcpy session for device 555 on port 8080.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Drag an item from (100, 200) to (500, 600) on device SN001 over 1 second.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Bisa tolong launch aplikasi com.android.settings lewat ADB?", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Connect to the device via wifi on port 5555 for serial 1234", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Start a video stream on port 8080 for device DEV001", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Wait up to 30 seconds for the element with text 'Login Successful' to appear on device XYZ.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Aktifin WiFi ADB di device sess-888 pake port 5555 ya.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Stop the video stream for device 112233", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Stop the active scrcpy session on device DEV002", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Saya mau tau info detail device ini, kayak versi Android sama battery levelnya.", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Give me the full UI XML dump for the device SN-772", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Find all buttons with the text 'Submit' on device 123", "tool": null, "inactive_cell": "receptor", "split": "train", "note": "inactive-cell negative"}
+{"task": "Save this file as 'project_v01.blend'.", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "The textures are missing from my render, can you check if there are broken links in the file?", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "Cek dong file .blend ini, ada library yang missing atau link yang rusak nggak?", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "I want to check the linked libraries in this scene.", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "Save the current progress directly to /workspace/projects/final_render.blend", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "Bring the focus back to the Light_Source_01 object in the scene.", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "Focus on the 'Main_Character' object.", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "Get me the documentation for bpy.types.Mesh.", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "What are the missing files in this blend file?", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "What are all the available helper functions in this Blender environment?", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "Save a duplicate of this setup to /workspace/temp/test_run.blend", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "Show me the technical documentation for the bpy.types.Mesh class.", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "Simpan file langsung ke /workspace/autosave_01.blend.", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "Render viewport sekarang, saya mau lihat hasilnya.", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "I'm trying to build a high-end coffee machine model but I don't know where to start with the stages.", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "Render the current viewport to 'renders/view.png'.", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "Give me a full snapshot of the current scene, including collections and the active object.", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "I need to see the whole scene map, including all collections and what's currently selected.", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "Check if there are any missing files in this blend file.", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "Focus on the object named 'Main_Character'.", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "Find out everything about the object named 'Cube.001', including its mesh and any modifiers it has.", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "I need to see the documentation for bpy.types.Mesh to understand how to manipulate vertices.", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "Zoom in and center the view on the HighPoly_Mesh_04 object.", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "Bikin copy file ini ke /workspace/backup/v1.blend.", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "Coba fokusin ke object 'Camera_Rig_02'.", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "Save file ini ke /workspace/project_final.blend sebagai copy ya.", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "Save a copy of this file to '/projects/backup/model_v01.blend'.", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "I need to figure out how the `bpy.ops.mesh.primitive_uv_sphere_add` function is structured.", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "Focus on the 'Cube' object.", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "Check the details of the object named 'Suzanne_Head' to see its modifiers and mesh info.", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "Buatin thumbnail buat scene ini, simpan di /workspace/thumbs/render_01.png.", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "Search the Blender API for everything in the 'bpy.ops' module.", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "I need to see the documentation for bpy.types.Scene to understand how to manipulate scenes via script.", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "Save a copy of this work to '/projects/render_v01.blend'.", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "Render a thumbnail of the current view.", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "Saya butuh instruksi khusus buat role 'critic' biar bisa nge-review model saya dengan tajam.", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "Render a high-quality thumbnail of the current view and save it to 'render_thumb.png'.", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "The render looks okay but the proportions are slightly off, please apply the necessary geometric adjustments.", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "Can you render the viewport and send the file to /workspace/renders/check.png?", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "I'd like to render a thumbnail and save it specifically to /workspace/exports/thumbs/preview.png", "tool": null, "inactive_cell": "plastid", "split": "train", "note": "inactive-cell negative"}
+{"task": "What are all the available design systems and hybrid combinations I can use?", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Give me an entrance animation snippet using animejs for a minimal style.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "I want to export a complete project scaffold for a dashboard using the glass style and a dark palette.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Coba validasi kombinasi style 'modern-minimal' sama palette 'ocean-breeze' ini, oke gak?", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Render the logo at 'path/to/logo.svg' with a black background and output it to 'exports/logo.png'.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Find me the 'design-tokens' reference file.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Show me a React component for a card using the Material design system.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Generate a Tailwind config for a minimal design system using a dark palette.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "What are the design rules for icons?", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Fetch the Ellis UI template called 'backup_gameboy', specifically the letter.html page.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Can you get me the DESIGN.md file for Stripe?", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Create a demo page showing all 8 states for a select component.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Generate a Tailwind config for a 'glass' style using a 'vibrant' palette.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Coba cek dong rules buat accessibility di design system kita, pake format string ya.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Show me the index of all 24 Ellis UI design templates.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Generate CSS tokens for the 'Obsidian' theme in SCSS format.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Show me a demo of all 8 states for a 'toggle' component.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "What are the general design rules for accessibility?", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "I want to validate if the 'Brutalist' style with the 'Neon-Cyber' palette works well together.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Get me 10 trending color palettes in Tailwind format.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Export a project scaffold with a glass style, vibrant palette, and a marketing hero archetype.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "List all the available Ellis UI designs.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "I need an anime.js stagger animation snippet for a 'glass' style layout.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Build me a full HTML starter page for a marketing hero using the apple-hig style and a pastel palette.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Give me an anime.js entrance animation snippet for a neo-brutalism style.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Can you tell me what the design philosophy is for the Stripe website?", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Turn this palette [\"#FFFFFF\", \"#000000\"] into Figma format.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Can you fetch the 'design-tokens' reference document?", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "I have a JSON array of colors and I need to turn them into Tailwind CSS classes.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Generate high-contrast variants for the color #000000.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Could you list all the specific design systems and hybrid options I can choose from?", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Search for a logo with a 'minimal' mood and 'geometric' geometry in the industry 'tech'.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "List all available design systems and palettes.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Fetch the 'letter.html' page from the 'backup_gameboy' design system.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "I need a React component for a modal using the Apple HIG design system.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "I need to get the source code for the 'backup_gameboy' design system to start my implementation.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Generate an entrance animation snippet using anime.js for a glass style.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Generate design rules for the 'apple-hig' style with a 'pastel' palette and include Tailwind CSS.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Generate a starter HTML page using 'm3' style, 'pastel' palette, and 'settings' archetype.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Generate a custom design theme with a paper lightness of 95 and an accent hue of 210.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Give me a demo of an 8-state input component.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Show me the 'backup_gameboy' Ellis UI design template.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Validate the combination of 'Minimal' style and 'Monochrome' palette.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Generate a Vue 3 component for a 'navbar' using the 'apple-hig' style.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Generate a demo page showing all 8 states of a toggle component.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Search the logo library for minimalist geometric marks in the blue color family.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Create a full HTML starter for a dashboard using the 'swiss' design system and 'mono' palette.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Coba dong spill list brand yang ada di kategori fintech, mau liat referensi.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Render a logo 'master.svg' into a square PNG of 512px with a black background and name it 'brand-logo'.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "Saya butuh file design.md dari template backup_gameboy, tolong di-fetch ya.", "tool": null, "inactive_cell": "phenotype", "split": "train", "note": "inactive-cell negative"}
+{"task": "What is the status of my opencode installation and what agents are defined?", "tool": null, "inactive_cell": "ribosome", "split": "train", "note": "inactive-cell negative"}
+{"task": "Inspect the opencode database", "tool": null, "inactive_cell": "ribosome", "split": "train", "note": "inactive-cell negative"}
+{"task": "Run a read-only query on the opencode session database", "tool": null, "inactive_cell": "ribosome", "split": "train", "note": "inactive-cell negative"}
+{"task": "Check the status of the opencode CLI.", "tool": null, "inactive_cell": "ribosome", "split": "train", "note": "inactive-cell negative"}
+{"task": "Start an opencode server", "tool": null, "inactive_cell": "ribosome", "split": "train", "note": "inactive-cell negative"}
+{"task": "Delete the opencode session with ID 'op_445'.", "tool": null, "inactive_cell": "ribosome", "split": "train", "note": "inactive-cell negative"}
+{"task": "Coba cek dong list provider yang sudah terautentikasi di opencode.", "tool": null, "inactive_cell": "ribosome", "split": "train", "note": "inactive-cell negative"}
+{"task": "Delete the opencode session ses_88", "tool": null, "inactive_cell": "ribosome", "split": "train", "note": "inactive-cell negative"}
+{"task": "Start an opencode server in 'web' mode on port 8080 with the name 'dev-server'.", "tool": null, "inactive_cell": "ribosome", "split": "train", "note": "inactive-cell negative"}
+{"task": "Statistik penggunaan opencode 30 hari terakhir", "tool": null, "inactive_cell": "ribosome", "split": "train", "note": "inactive-cell negative"}
+{"task": "Restore an opencode session from the file /workspace/old-session.json", "tool": null, "inactive_cell": "ribosome", "split": "train", "note": "inactive-cell negative"}
+{"task": "Delete the opencode session sess_000.", "tool": null, "inactive_cell": "ribosome", "split": "train", "note": "inactive-cell negative"}
+{"task": "Impor sesi opencode dari /workspace/sesi.json", "tool": null, "inactive_cell": "ribosome", "split": "train", "note": "inactive-cell negative"}
+{"task": "How much did opencode cost over the last 7 days?", "tool": null, "inactive_cell": "ribosome", "split": "train", "note": "inactive-cell negative"}
+{"task": "Show opencode credentials status", "tool": null, "inactive_cell": "ribosome", "split": "train", "note": "inactive-cell negative"}
+{"task": "Load opencode session data from /workspace/backup/ses.json", "tool": null, "inactive_cell": "ribosome", "split": "train", "note": "inactive-cell negative"}
+{"task": "Ekspor sesi opencode ses_3", "tool": null, "inactive_cell": "ribosome", "split": "train", "note": "inactive-cell negative"}
+{"task": "Hapus sesi opencode ses_12", "tool": null, "inactive_cell": "ribosome", "split": "train", "note": "inactive-cell negative"}
+{"task": "is the opencode server up", "tool": null, "inactive_cell": "ribosome", "split": "train", "note": "inactive-cell negative"}
+{"task": "Refresh the opencode model list", "tool": null, "inactive_cell": "ribosome", "split": "train", "note": "inactive-cell negative"}
+{"task": "What is the status of the opencode CLI?", "tool": null, "inactive_cell": "ribosome", "split": "train", "note": "inactive-cell negative"}
+{"task": "Export opencode session ses_42 as JSON", "tool": null, "inactive_cell": "ribosome", "split": "train", "note": "inactive-cell negative"}
+{"task": "Save opencode session ses_19 to a JSON export", "tool": null, "inactive_cell": "ribosome", "split": "train", "note": "inactive-cell negative"}
+{"task": "Show opencode MCP connection status", "tool": null, "inactive_cell": "ribosome", "split": "train", "note": "inactive-cell negative"}
+{"task": "Start a web mode opencode server on port 8080.", "tool": null, "inactive_cell": "ribosome", "split": "train", "note": "inactive-cell negative"}
+{"task": "Show me the opencode token costs and usage for the last 14 days, focusing on the top 3 most used models.", "tool": null, "inactive_cell": "ribosome", "split": "train", "note": "inactive-cell negative"}
+{"task": "Which models can opencode use?", "tool": null, "inactive_cell": "ribosome", "split": "train", "note": "inactive-cell negative"}
+{"task": "Which AI providers am I logged in to in opencode?", "tool": null, "inactive_cell": "ribosome", "split": "train", "note": "inactive-cell negative"}
+{"task": "List the MCP servers known to opencode", "tool": null, "inactive_cell": "ribosome", "split": "train", "note": "inactive-cell negative"}
+{"task": "Spawn opencode in ACP mode", "tool": null, "inactive_cell": "ribosome", "split": "train", "note": "inactive-cell negative"}

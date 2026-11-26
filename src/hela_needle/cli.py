@@ -14,6 +14,7 @@ from .profiles import load_profiles
 from .agentcat import visible_names, is_visible, load_exclusions
 import collections
 from . import publish as publish_mod
+from . import derive as derive_mod
 from .generated import convert
 from .scrub import findings
 
@@ -88,6 +89,20 @@ def cmd_manifest_apply(a: argparse.Namespace) -> int:
     plan = json.loads(Path(a.plan).read_text(encoding="utf8"))
     manifest = publish_mod.apply_manifest(Path(a.manifest), plan)
     print(f"manifest now lists {len(manifest['models'])} profile(s): {', '.join(manifest['models'])}")
+    return 0
+
+
+def cmd_derive(a: argparse.Namespace) -> int:
+    catalog = load_catalog(a.catalog, "qualified", None)
+    visible = visible_names(catalog, a.exclusions)
+    # Chains are built only from the short hand-written tasks; generated ones are too uneven to splice together.
+    pool = derive_mod.load_pool(a.seeds, catalog, visible, handwritten_only=(a.kind == "chains"))
+    if a.kind == "chains":
+        lines = derive_mod.build_chains(pool, a.count, a.seed)
+    else:
+        lines = derive_mod.build_negatives(pool, a.seed)
+    _write_jsonl(Path(a.out), lines)
+    print(f"{a.kind}: {len(pool)} building blocks -> {len(lines)} seed lines in {a.out}")
     return 0
 
 
@@ -191,6 +206,15 @@ def main(argv: list[str] | None = None) -> int:
     ma.add_argument("--plan", required=True)
     ma.add_argument("--manifest", default="models/manifest.json")
     ma.set_defaults(fn=cmd_manifest_apply)
+    dv = sub.add_parser("derive", help="derive new seeds from validated ones: compound-task chains with history, or inactive-cell negatives")
+    dv.add_argument("kind", choices=["chains", "negatives"])
+    dv.add_argument("--catalog", default="data/catalog/hela-stack-tools.json")
+    dv.add_argument("--seeds", default="data/seed")
+    dv.add_argument("--exclusions", default="data/catalog/agent-exclusions.json")
+    dv.add_argument("--count", type=int, default=160, help="chains: number of compound tasks")
+    dv.add_argument("--seed", type=int, default=11)
+    dv.add_argument("--out", required=True)
+    dv.set_defaults(fn=cmd_derive)
     s = sub.add_parser("check-secrets", help="fail if any file contains something that must be scrubbed")
     s.add_argument("files", nargs="+")
     s.set_defaults(fn=cmd_secrets)

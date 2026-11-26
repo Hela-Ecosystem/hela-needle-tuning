@@ -26,6 +26,13 @@ Needle is not offered every MCP tool. The runtime builds the agent's catalog fro
 
 `docs/COVERAGE.md` counts and names every tool of the agent catalog that still has no training row. **`publish_models.sh` refuses a profile while any tool active in it has none** (override with `--allow-uncovered`, which the manifest records). When the runtime's exclusion list changes, re-copy it and re-run the coverage report.
 
+## Derived data
+
+Two seed files are generated from the validated seeds by `python -m hela_needle derive` (deterministic, regenerable; re-run after the seeds change):
+
+- `chains.jsonl` (`derive chains`): about 160 compound tasks ("do A, then B, then C") built from the short hand-written tasks, one language per chain. Each task yields a row per step with the executed steps in the history, plus a final `done` row once every step has run. Results in the history are plausible JSON, not real output. This teaches the next tool, arguments after a result, and when to stop.
+- `negatives_inactive.jsonl` (`derive negatives`): 180 tasks that only make sense in a cell some profiles lack (phone, Blender, design, opencode), answered with "none" under those profiles. Cell-specific wording only, so "none" is never wrong in a profile that has another way to do it.
+
 ## Coverage tracking and profiles
 
 - `docs/COVERAGE.md` (generated, committed) lists, per cell, profile and source file, how many tools have training rows, and names every tool with none or fewer than 3. Regenerate it with `python -m hela_needle coverage` whenever seeds or the catalog change, and read it before each training run. Each pod run also stores its own `coverage.md` next to the model.

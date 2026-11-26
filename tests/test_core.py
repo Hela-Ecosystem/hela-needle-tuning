@@ -92,6 +92,15 @@ class Rows(unittest.TestCase):
             with self.assertRaises(ValueError):
                 build_rows(p, CAT)
 
+    def test_dedupe_keeps_the_same_task_under_different_profiles(self):
+        a = choose_row("tap the icon", TIME.name, CAT, random.Random(1))
+        b = choose_row("tap the icon", None, CAT, random.Random(2))
+        a["meta"] = {"stage": "choose", "profile": "android"}
+        b["meta"] = {"stage": "choose", "profile": "dev"}
+        self.assertEqual(len(dedupe([a, b])), 2)
+        b["meta"]["profile"] = "android"
+        self.assertEqual(len(dedupe([a, b])), 1)
+
     def test_dedupe_separates_same_task_with_different_history(self):
         a = choose_row("Same task", TIME.name, CAT, random.Random(1), history="x -> y")
         b = choose_row("Same task", TIME.name, CAT, random.Random(2), history="x -> z")
