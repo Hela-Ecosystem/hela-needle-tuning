@@ -167,12 +167,24 @@ def main() -> int:
         jobs = jobs[: a.limit]
     print(f"{len(jobs)} call(s) planned", flush=True)
 
-    def run(job):
-        raw, group, style = job
+    def ask(group, style, n):
+        """One request; a 400 (usually a free model with a small context window) retries with half the tools."""
         desc, examples = STYLES[style]
         tools_json = json.dumps([{"name": t.name, "description": t.description[:200], "parameters": slim(t.parameters)} for t in group])
-        prompt = TEMPLATE.format(tools=tools_json, n=a.rows_per_call, nones=max(1, a.rows_per_call // 7), style=desc, example=examples[0])
-        rows = parse_rows(call(a.model, key, prompt))
+        prompt = TEMPLATE.format(tools=tools_json, n=n, nones=max(1, n // 7), style=desc, example=examples[0])
+        try:
+            return parse_rows(call(a.model, key, prompt))
+        except urllib.error.HTTPError as e:
+            if e.code == 400 and len(group) > 1:
+                half = len(group) // 2
+                return ask(group[:half], style, max(4, n // 2)) + ask(group[half:], style, max(4, n // 2))
+            return []
+        except Exception:
+            return []
+
+    def run(job):
+        raw, group, style = job
+        rows = ask(group, style, a.rows_per_call)
         if rows:
             raw.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows), encoding="utf8")
         return raw.name, len(rows)
@@ -180,7 +192,10 @@ def main() -> int:
     total = 0
     with ThreadPoolExecutor(max_workers=a.workers) as pool:
         for fut in as_completed([pool.submit(run, j) for j in jobs]):
-            name, n = fut.result()
+            try:
+                name, n = fut.result()
+            except Exception as exc:  # never let one call end the run
+                name, n = f"<failed: {type(exc).__name__}>", 0
             total += n
             print(f"{'done' if n else 'empty'}  {name}: {n} rows", flush=True)
     print(f"total raw rows: {total}")
